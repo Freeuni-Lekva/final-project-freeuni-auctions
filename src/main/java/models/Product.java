@@ -5,24 +5,24 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Product {
-    private UUID id, account_id, category_id;
+    private UUID id, account_id, category_id, bid_id;
     private String name;
     private String description;
-    private Bid currBid;
+    private BigDecimal currPrice;
     private boolean isAvailable;
     private Date datePosted;
     private Date endDate;
 
     // this constructor is used by productDAO only to get a product from a database.
     public Product(UUID id, UUID account_id, UUID category_id, String name,
-                   String description, Bid currBid, boolean isAvailable,
+                   String description, UUID bid_id, BigDecimal currPrice, boolean isAvailable,
                    Date datePosted, Date endDate) {
         this.id = id;
         this.account_id = account_id;
         this.category_id = category_id;
         this.name = name;
         this.description = description;
-        this.currBid = currBid;
+        this.currPrice = currPrice;
         this.isAvailable = isAvailable;
         this.datePosted = datePosted;
         this.endDate = endDate;
@@ -33,7 +33,7 @@ public class Product {
         this.account_id = account_id;
         this.category_id = category_id;
         this.name = name;
-        this.currBid = new Bid(null, null, null, price, null);
+        this.currPrice = price;
         this.isAvailable = true;
         this.datePosted = new Date();
         this.endDate = endDate;
@@ -42,7 +42,5 @@ public class Product {
     public void addDescription(String description) {
         this.description = description;
     }
-
-    
 
 }
