@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static java.util.UUID.randomUUID;
+
 public class BidDAO {
     private static final String TABLE_NAME = "bids";
     private Connection conn;
@@ -23,7 +25,7 @@ public class BidDAO {
     }
 
     public List<Bid> getAllForUser(UUID user_id) throws SQLException {
-        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE bidder_id = " + user_id);
+        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE bidder_id = " + user_id + " ORDER BY time DESC");
         List<Bid> result = new ArrayList<Bid>();
         while (rs.next()) {
             result.add(createBidFromRow(rs));
@@ -32,7 +34,7 @@ public class BidDAO {
     }
 
     public List<Bid> getAllForProduct(UUID product_id) throws SQLException {
-        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE product_id = " + product_id);
+        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE product_id = " + product_id + " ORDER BY time DESC");
         List<Bid> result = new ArrayList<Bid>();
         while (rs.next()) {
             result.add(createBidFromRow(rs));
@@ -49,4 +51,18 @@ public class BidDAO {
         return new Bid(id, bidder_id, product_id, amount, time);
     }
 
+    public void addNewBid(UUID bidder_id, UUID product_id, BigDecimal amount) throws SQLException {
+        conn.createStatement().executeQuery("INSERT INTO " + TABLE_NAME + " VALUES (" + SQLWrapUUID(null) + ", "
+                + SQLWrapUUID(bidder_id) + ", " + SQLWrapUUID(product_id) + ", " + amount);
+    }
+
+    private String SQLWrapUUID(UUID id) {
+        String uuid;
+        if (id == null) {
+            uuid = "uuid()";
+        } else {
+            uuid = id.toString();
+        }
+        return "unhex(replace(" + uuid + ",'-',''))";
+    }
 }
