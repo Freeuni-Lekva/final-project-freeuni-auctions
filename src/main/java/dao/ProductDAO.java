@@ -42,7 +42,7 @@ public class ProductDAO implements DAO{
             throw new RuntimeException(e);
         }
     }
-    
+
 
 
     private Product getSingleProduct(ResultSet rs) {
