@@ -1,6 +1,7 @@
 package dao;
 import models.Category;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.UUID;
 
@@ -18,4 +19,9 @@ public class CategoryDAO {
         String name = rs.getString("name");
         return new Category(category_id, name);
     }
+
+    public void addNewCategory(String name) throws SQLException {
+        conn.createStatement().executeQuery("INSERT INTO " + TABLE_NAME + " VALUES (unhex(replace(uuid(),'-','')), " + name + ")");
+    }
+
 }
