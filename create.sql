@@ -22,7 +22,7 @@ CREATE TABLE bids (
     bidder_id BINARY(16) NOT NULL foreign key,
     product_id BINARY(16) NOT NULL foreign key,
     amount DECIMAL(10, 2),
-    bid_time TIMESTAMP
+    bid_time TIMESTAMP DEFAULT SYSDATE NOT NULL
 );
 
 
