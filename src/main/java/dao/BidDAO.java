@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class BidDAO {
+public class BidDAO extends DAO{
     private static final String TABLE_NAME = "bids";
     private Connection conn;
 
@@ -52,15 +52,5 @@ public class BidDAO {
     public void addNewBid(UUID bidder_id, UUID product_id, BigDecimal amount) throws SQLException {
         conn.createStatement().executeQuery("INSERT INTO " + TABLE_NAME + " VALUES (" + SQLWrapUUID(null) + ", "
                 + SQLWrapUUID(bidder_id) + ", " + SQLWrapUUID(product_id) + ", " + amount);
-    }
-
-    private String SQLWrapUUID(UUID id) {
-        String uuid;
-        if (id == null) {
-            uuid = "uuid()";
-        } else {
-            uuid = id.toString();
-        }
-        return "unhex(replace(" + uuid + ",'-',''))";
     }
 }
