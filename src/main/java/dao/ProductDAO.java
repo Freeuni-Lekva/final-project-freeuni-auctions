@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class ProductDAO implements DAO{
+public class ProductDAO extends DAO{
     private static final String TABLE_NAME = "products";
     private Connection conn;
 
@@ -22,6 +22,7 @@ public class ProductDAO implements DAO{
             stmt.setString(1, product_id.toString());
             ResultSet rs = stmt.executeQuery();
             rs.next();
+            stmt.close();
             return getSingleProduct(rs);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -37,12 +38,34 @@ public class ProductDAO implements DAO{
             while(rs.next()) {
                 res.add(getSingleProduct(rs));
             }
+            stmt.close();
             return res;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    private void addProduct(Product p) {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
+                    "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
+            stmt.setString(1, SQLWrapUUID(p.getId()));
+            stmt.setString(2, p.getName());
+            stmt.setString(3, p.getAccountId().toString());
+            stmt.setString(4, p.getDescription());
+            stmt.setString(5, p.getCategoryId().toString());
+            stmt.setString(6, p.getBidId().toString());
+            stmt.setBigDecimal(7, p.getCurrPrice());
+            stmt.setString(8, p.getStatus());
+            stmt.setDate(9, (Date) p.getDatePosted());
+            stmt.setDate(10, (Date) p.getEndDate());
+            stmt.executeQuery();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
 
     private Product getSingleProduct(ResultSet rs) {

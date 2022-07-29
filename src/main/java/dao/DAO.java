@@ -2,6 +2,15 @@ package dao;
 
 import java.util.UUID;
 
-public interface DAO {
-    public Object getFromID(UUID id);
+public class DAO {
+
+    public static String SQLWrapUUID(UUID id) {
+        String uuid;
+        if (id == null) {
+            uuid = "uuid()";
+        } else {
+            uuid = id.toString();
+        }
+        return "unhex(replace(" + uuid + ",'-',''))";
+    }
 }

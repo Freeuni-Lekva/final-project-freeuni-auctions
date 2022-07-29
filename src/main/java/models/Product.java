@@ -39,8 +39,51 @@ public class Product {
         this.endDate = endDate;
     }
 
-    public void addDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
+    public UUID getId() {
+        return id;
+    }
+
+    public UUID getAccountId() {
+        return account_id;
+    }
+
+    public UUID getCategoryId() {
+        return category_id;
+    }
+
+    public UUID getBidId() {
+        return bid_id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public BigDecimal getCurrPrice() {
+        return currPrice;
+    }
+
+    public String getStatus() {
+        if (isAvailable) {
+            return "AVAILABLE";
+        }   else {
+            return "SOLD";
+        }
+    }
+
+    public Date getDatePosted() {
+        return datePosted;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
 }
