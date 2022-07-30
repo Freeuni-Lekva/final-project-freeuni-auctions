@@ -1,21 +1,20 @@
 <%--
   Created by IntelliJ IDEA.
   User: admin
-  Date: 22.07.2022
-  Time: 17:45
+  Date: 30.07.2022
+  Time: 15:13
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Sign Up</title>
+    <title>Invalid Login</title>
 </head>
 <body>
-    <h1>Create New Account</h1>
+    <h1>Username or password is incorrect.</h1>
+    <p>please try again</p>
 
-    <form action="create_acc" method="post">
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email"><br>
+    <form action="login" method="post">
         <label for="user">User name:</label>
         <input type="text" id="user" name="user"><br>
         <label for="password">Password:</label>
@@ -23,6 +22,6 @@
         <input type="submit" value="Login"><br><br>
     </form>
 
-    <a href="login">Already have an account?</a>
+    <a href="create_acc">Create new Account</a>
 </body>
 </html>

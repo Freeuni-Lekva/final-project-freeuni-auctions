@@ -13,5 +13,14 @@
 <body>
     <h1>Enter Your Username And Password</h1>
 
+    <form action="login" method="post">
+        <label for="user">User name:</label>
+        <input type="text" id="user" name="user"><br>
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="password">
+        <input type="submit" value="Login"><br><br>
+    </form>
+
+    <a href="create_acc">Create new Account</a>
 </body>
 </html>

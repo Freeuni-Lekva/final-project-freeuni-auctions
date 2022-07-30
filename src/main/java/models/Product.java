@@ -22,6 +22,7 @@ public class Product {
         this.category_id = category_id;
         this.name = name;
         this.description = description;
+        this.bid_id = bid_id;
         this.currPrice = currPrice;
         this.isAvailable = isAvailable;
         this.datePosted = datePosted;
@@ -73,9 +74,9 @@ public class Product {
 
     public String getStatus() {
         if (isAvailable) {
-            return "AVAILABLE";
+            return "available";
         }   else {
-            return "SOLD";
+            return "sold";
         }
     }
 
