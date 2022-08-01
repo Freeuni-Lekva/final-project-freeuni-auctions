@@ -2,6 +2,7 @@ package dao;
 import models.*;
 
 import java.math.BigDecimal;
+import java.nio.ByteBuffer;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class BidDAO extends DAO{
     }
 
     public List<Bid> getAllForUser(UUID user_id) throws SQLException {
-        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE bidder_id = " + user_id + " ORDER BY time DESC");
+        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE bidder_id = " + SQLWrapUUID(user_id) + " ORDER BY bid_time DESC");
         List<Bid> result = new ArrayList<Bid>();
         while (rs.next()) {
             result.add(createBidFromRow(rs));
@@ -43,16 +44,17 @@ public class BidDAO extends DAO{
     }
 
     private Bid createBidFromRow(ResultSet rs) throws SQLException {
-        UUID id = UUID.fromString(rs.getString("id"));
-        UUID bidder_id = UUID.fromString(rs.getString("bidder_id"));
-        UUID product_id = UUID.fromString(rs.getString("product_id"));
+        UUID id = binaryToUUID(rs.getBytes("id"));
+        UUID bidder_id = binaryToUUID(rs.getBytes("bidder_id"));
+        UUID product_id = binaryToUUID(rs.getBytes("product_id"));
         BigDecimal amount = rs.getBigDecimal("amount");
         Date time = rs.getDate("date");
         return new Bid(id, bidder_id, product_id, amount, time);
     }
 
     public void addNewBid(UUID bidder_id, UUID product_id, BigDecimal amount) throws SQLException {
-        conn.createStatement().executeQuery("INSERT INTO " + TABLE_NAME + " VALUES (" + SQLWrapUUID(null) + ", "
-                + SQLWrapUUID(bidder_id) + ", " + SQLWrapUUID(product_id) + ", " + amount);
+        String sql = "INSERT INTO " + TABLE_NAME + "(id, bidder_id, product_id, amount) VALUES (" + SQLWrapUUID(null) + ", "
+                + SQLWrapUUID(bidder_id) + ", " + SQLWrapUUID(product_id) + ", " + amount + ")";
+        conn.createStatement().executeUpdate(sql);
     }
 }
