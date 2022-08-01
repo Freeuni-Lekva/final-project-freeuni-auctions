@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS bids;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS sales;
 
 CREATE TABLE users (
     id BINARY(16) PRIMARY KEY NOT NULL,
@@ -39,6 +40,13 @@ CREATE TABLE bids (
     CONSTRAINT productIdFK FOREIGN KEY (product_id)
                   REFERENCES products(id)
                   ON DELETE CASCADE
+);
+
+CREATE TABLE sales
+(
+    id          BINARY(16) PRIMARY KEY NOT NULL,
+    product_id  BINARY(16) NOT NULL,
+    user_id     BINARY(16) NOT NULL
 );
 
 
