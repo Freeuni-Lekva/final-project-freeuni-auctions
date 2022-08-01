@@ -19,11 +19,18 @@ public class BidDAOTest extends DAOTest {
         con.createStatement().executeUpdate("INSERT INTO users(id, email) VALUES (unhex(replace('" + dummyUUID + "', '-', '')), 'bla@mail.com')");
         con.createStatement().executeUpdate("INSERT INTO products(id) VALUES (unhex(replace('" + dummyUUID + "', '-', '')))");
 
-        dao.addNewBid(dummyUUID, dummyUUID, new BigDecimal(100.0));
+        dao.addNewBid(dummyUUID, dummyUUID, new BigDecimal(100.00));
         List<Bid> bids = dao.getAllForUser(dummyUUID);
+        List<Bid> bids2 = dao.getAllForProduct(dummyUUID);
         assertTrue(!bids.isEmpty());
+        assertEquals(bids.size(), bids.size());
         Bid b = bids.get(0);
-        assertEquals(new BigDecimal(100.0), b.getAmount());
-        assertEquals(dummyUUID, b.getId());
+        Bid b2 = bids2.get(0);
+        assertEquals(100.0, b.getAmount().doubleValue());
+        assertEquals(b.getAmount().doubleValue(), b2.getAmount().doubleValue());
+        assertEquals(dummyUUID, b.getBidderId());
+        assertEquals(b.getBidderId(), b2.getBidderId());
+        assertEquals(dummyUUID, b.getProductId());
+        assertEquals(b.getProductId(), b2.getProductId());
     }
 }
