@@ -22,11 +22,11 @@ public class Bid {
         return id;
     }
 
-    public UUID getBidder_id() {
+    public UUID getBidderId() {
         return bidder_id;
     }
 
-    public UUID getItem_id() {
+    public UUID getProductId() {
         return product_id;
     }
 
