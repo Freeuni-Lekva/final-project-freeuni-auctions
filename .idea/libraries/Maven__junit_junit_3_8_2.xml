@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Maven: junit:junit:3.8.2">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/junit/junit/3.8.2/junit-3.8.2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/mysql-connector-java-8.0.29/mysql-connector-java-8.0.29.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/junit/junit/3.8.2/junit-3.8.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/junit/junit/3.8.2/junit-3.8.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
