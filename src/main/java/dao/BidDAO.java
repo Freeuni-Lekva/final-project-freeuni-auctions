@@ -17,7 +17,7 @@ public class BidDAO extends DAO{
     }
 
     public Bid getFromID(UUID bid_id) throws SQLException {
-        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = " + bid_id);
+        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = " + SQLWrapUUID(bid_id));
         if (rs.next()) {
             return createBidFromRow(rs);
         } else return null;
@@ -33,7 +33,7 @@ public class BidDAO extends DAO{
     }
 
     public List<Bid> getAllForProduct(UUID product_id) throws SQLException {
-        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE product_id = " + product_id + " ORDER BY time DESC");
+        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE product_id = " + SQLWrapUUID(product_id) + " ORDER BY bid_time DESC");
         List<Bid> result = new ArrayList<Bid>();
         while (rs.next()) {
             result.add(createBidFromRow(rs));
