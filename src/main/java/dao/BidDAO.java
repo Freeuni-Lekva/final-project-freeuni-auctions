@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static java.util.UUID.randomUUID;
-
 public class BidDAO extends DAO{
     private static final String TABLE_NAME = "bids";
     private Connection conn;
@@ -47,8 +45,8 @@ public class BidDAO extends DAO{
         UUID bidder_id = UUID.fromString(rs.getString("bidder_id"));
         UUID product_id = UUID.fromString(rs.getString("product_id"));
         BigDecimal amount = rs.getBigDecimal("amount");
-        Date time = rs.getDate("date");
-        return new Bid(id, bidder_id, product_id, amount, time);
+        Timestamp bid_time = rs.getTimestamp("bid_time");
+        return new Bid(id, bidder_id, product_id, amount, bid_time);
     }
 
     public void addNewBid(UUID bidder_id, UUID product_id, BigDecimal amount) throws SQLException {

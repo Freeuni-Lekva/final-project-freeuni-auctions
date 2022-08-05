@@ -2,19 +2,20 @@ package models;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 public class Bid {
     private final UUID id, bidder_id, product_id;
     private final BigDecimal amount;
-    private final Date time;
+    private final Timestamp bid_time;
 
-    public Bid(UUID id, UUID bidder_id, UUID product_id, BigDecimal amount, Date time) {
+    public Bid(UUID id, UUID bidder_id, UUID product_id, BigDecimal amount, Timestamp bid_time) {
         this.id = id;
         this.bidder_id = bidder_id;
         this.product_id = product_id;
         this.amount = amount;
-        this.time = time;
+        this.bid_time = bid_time;
     }
 
     public UUID getId() {
@@ -33,7 +34,7 @@ public class Bid {
         return amount;
     }
 
-    public Date getTime() {
-        return time;
+    public Timestamp getTime() {
+        return bid_time;
     }
 }
