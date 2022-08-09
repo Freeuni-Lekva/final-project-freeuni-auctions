@@ -45,6 +45,44 @@ public class ProductDAO extends DAO{
         }
     }
 
+    public List<Product> getProductsByUser(UUID user_id) {
+        List<Product> res = new ArrayList<>();
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE user_id = ? ORDER BY date_posted desc");
+            stmt.setString(1, user_id.toString());
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                res.add(getSingleProduct(rs));
+            }
+            stmt.close();
+            return res;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Product> getProductsByStatus(boolean isAvailable) {
+        List<Product> res = new ArrayList<>();
+        String status;
+        if (isAvailable) {
+            status = "available";
+        }   else {
+            status = "sold";
+        }
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE status = ? ORDER BY date_posted desc");
+            stmt.setString(1, status);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                res.add(getSingleProduct(rs));
+            }
+            stmt.close();
+            return res;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void addProduct(Product p) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
