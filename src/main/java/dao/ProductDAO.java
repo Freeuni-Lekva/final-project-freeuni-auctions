@@ -10,6 +10,7 @@ import java.util.UUID;
 
 public class ProductDAO extends DAO{
     private static final String TABLE_NAME = "products";
+    private static final String ATTRIBUTE = "productDAO";
     private Connection conn;
 
     public ProductDAO(Connection conn) {
