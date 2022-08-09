@@ -70,8 +70,8 @@ public class ProductDAO extends DAO{
 
     private Product getSingleProduct(ResultSet rs) {
         try {
-            UUID product_id = UUID.fromString(rs.getString("product_id"));
-            String name = rs.getString("name");
+            UUID product_id = UUID.fromString(rs.getString("id"));
+            String name = rs.getString("product_name");
             UUID account_id = UUID.fromString(rs.getString("account_id"));
             UUID category_id = UUID.fromString(rs.getString("category_id"));
             UUID bid_id = UUID.fromString(rs.getString("bid_id"));
