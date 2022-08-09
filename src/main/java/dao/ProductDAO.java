@@ -1,6 +1,7 @@
 package dao;
 
 import models.Product;
+import models.Status;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -62,17 +63,11 @@ public class ProductDAO extends DAO{
         }
     }
 
-    public List<Product> getProductsByStatus(boolean isAvailable) {
+    public List<Product> getProductsByStatus(Status status) {
         List<Product> res = new ArrayList<>();
-        String status;
-        if (isAvailable) {
-            status = "available";
-        }   else {
-            status = "sold";
-        }
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE status = ? ORDER BY date_posted desc");
-            stmt.setString(1, status);
+            stmt.setString(1, status.getStatusString());
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 res.add(getSingleProduct(rs));
