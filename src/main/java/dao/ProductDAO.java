@@ -90,7 +90,7 @@ public class ProductDAO extends DAO{
             stmt.setString(5, p.getCategoryId().toString());
             stmt.setString(6, p.getBidId().toString());
             stmt.setBigDecimal(7, p.getCurrPrice());
-            stmt.setString(8, p.getStatus());
+            stmt.setString(8, p.getStatus().toString());
             stmt.setDate(9, (Date) p.getDatePosted());
             stmt.setDate(10, (Date) p.getEndDate());
             stmt.executeQuery();
@@ -111,13 +111,12 @@ public class ProductDAO extends DAO{
             UUID bid_id = UUID.fromString(rs.getString("bid_id"));
             BigDecimal currPrice = BigDecimal.valueOf(rs.getDouble("price"));
             String description = rs.getString("description");
-            String status = rs.getString("status");
-            boolean isAvailable = status.equals("available");
+            Status status = Status.valueOf(rs.getString("status"));
             Date datePosted = rs.getDate("date_posted");
             Date endDate = rs.getDate("end_date");
 
             return new Product(product_id, account_id, category_id, name,
-                    description, bid_id, currPrice, isAvailable, datePosted, endDate);
+                    description, bid_id, currPrice, status, datePosted, endDate);
         }   catch (SQLException e) {
             throw new RuntimeException(e);
         }
