@@ -1,6 +1,7 @@
 package dao;
 
 import models.Product;
+import models.Status;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -10,6 +11,7 @@ import java.util.UUID;
 
 public class ProductDAO extends DAO{
     private static final String TABLE_NAME = "products";
+    private static final String ATTRIBUTE = "productDAO";
     private Connection conn;
 
     public ProductDAO(Connection conn) {
@@ -34,6 +36,38 @@ public class ProductDAO extends DAO{
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE category_id = ? ORDER BY date_posted desc");
             stmt.setString(1, category_id.toString());
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                res.add(getSingleProduct(rs));
+            }
+            stmt.close();
+            return res;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Product> getProductsByUser(UUID user_id) {
+        List<Product> res = new ArrayList<>();
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE user_id = ? ORDER BY date_posted desc");
+            stmt.setString(1, user_id.toString());
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                res.add(getSingleProduct(rs));
+            }
+            stmt.close();
+            return res;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Product> getProductsByStatus(Status status) {
+        List<Product> res = new ArrayList<>();
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE status = ? ORDER BY date_posted desc");
+            stmt.setString(1, status.toString());
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 res.add(getSingleProduct(rs));
