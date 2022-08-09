@@ -67,7 +67,7 @@ public class ProductDAO extends DAO{
         List<Product> res = new ArrayList<>();
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE status = ? ORDER BY date_posted desc");
-            stmt.setString(1, status.getStatusString());
+            stmt.setString(1, status.toString());
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 res.add(getSingleProduct(rs));
