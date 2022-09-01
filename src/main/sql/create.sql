@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS bids;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS sales;
 
 CREATE TABLE users (
     id BINARY(16) PRIMARY KEY NOT NULL,
@@ -18,25 +19,25 @@ CREATE TABLE users (
 );
 
 CREATE TABLE products (
-      id BINARY(16) PRIMARY KEY NOT NULL,
-      product_name VARCHAR(30),
-      account_id BINARY(16) NOT NULL,
-      description VARCHAR(300),
-      category_id BINARY(16) NOT NULL,
-      bid_id BINARY(16),
-      price NUMERIC,
-      status VARCHAR(30), /* "available", "sold" */
-      date_posted DATE,
-      end_date DATE,
-      CONSTRAINT accountIdFK FOREIGN KEY (account_id)
-          REFERENCES users(id)
-          ON DELETE CASCADE,
-      CONSTRAINT categoryIdFK FOREIGN KEY (category_id)
-          REFERENCES categories(id)
-          ON DELETE CASCADE,
-      CONSTRAINT bidIdFK FOREIGN KEY (bid_id)
-          REFERENCES bids(id)
-          ON DELETE CASCADE
+    id BINARY(16) PRIMARY KEY NOT NULL,
+    product_name VARCHAR(30),
+    account_id BINARY(16) NOT NULL,
+    description VARCHAR(300),
+    category_id BINARY(16) NOT NULL,
+    bid_id BINARY(16),
+    price NUMERIC,
+    status VARCHAR(30), /* "available", "sold" */
+    date_posted DATE,
+    end_date DATE,
+    CONSTRAINT accountIdFK FOREIGN KEY (account_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE,
+    CONSTRAINT categoryIdFK FOREIGN KEY (category_id)
+        REFERENCES categories(id)
+        ON DELETE CASCADE,
+    CONSTRAINT bidIdFK FOREIGN KEY (bid_id)
+        REFERENCES bids(id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE categories (
@@ -56,6 +57,13 @@ CREATE TABLE bids (
     CONSTRAINT productIdFK FOREIGN KEY (product_id)
                   REFERENCES products(id)
                   ON DELETE CASCADE
+);
+
+CREATE TABLE sales
+(
+    id          BINARY(16) PRIMARY KEY NOT NULL,
+    product_id  BINARY(16) NOT NULL,
+    user_id     BINARY(16) NOT NULL
 );
 
 
