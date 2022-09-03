@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("create_acc")
+@WebServlet(name = "Create", value = "/create_acc")
 public class CreateAccountServlet extends HttpServlet {
 
     @Override

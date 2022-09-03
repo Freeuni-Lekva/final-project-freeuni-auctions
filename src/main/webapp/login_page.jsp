@@ -9,18 +9,47 @@
 <html>
 <head>
     <title>Login</title>
+    <style>
+        body {
+            background-image: url("images/bg.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+        .no-background {
+            background-image: url("images/bg.jpg");
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Enter Your Username And Password</h1>
+    <h1 class ="no-background" style="color: #A67079">Enter Your Email and Password</h1>
 
     <form action="login" method="post">
-        <label for="user">User name:</label>
-        <input type="text" id="user" name="user"><br>
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" style="background-color:#FFE7EB; margin: 10px" > <br>
+        <div class="space">
+        </div>
         <label for="password">Password:</label>
-        <input type="text" id="password" name="password">
+        <input type="text" id="password" name="password" style="background-color:#FFE7EB; margin: 10px" >
         <input type="submit" value="Login"><br><br>
     </form>
 
     <a href="create_acc">Create new Account</a>
 </body>
+<%--<body>--%>
+<%--<div class="background-image"></div>--%>
+<%--</body>--%>
+<%--<style>--%>
+<%--    *{--%>
+<%--        margin: 0;--%>
+<%--        padding: 0;--%>
+<%--    }--%>
+<%--    .background-image{--%>
+<%--        background-image: url("images/bg.jpg");--%>
+<%--        /*background-size: cover;*/--%>
+<%--        /*background-repeat: no-repeat;*/--%>
+<%--        /*height: 100vh;*/--%>
+<%--    }--%>
+
 </html>
