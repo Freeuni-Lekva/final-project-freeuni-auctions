@@ -9,12 +9,24 @@
 <html>
 <head>
     <title>Freeuni Auctions</title>
+    <style>
+        body {
+            background-image: url("images/img.png");
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+        .no-background {
+            background-image: url("images/img.png");
+        }
+    </style>
 </head>
 <body>
-    <h1>Freeuni Auctions</h1>
-    <a href="login_page.jsp">Login</a><br>
-    <a href="signup_page.jsp">Sign Up</a><br>
-    <a href="guest_page">Enter as Guest</a>
-
+    <h1 class="no-background" style="color: #A67079; margin: 30px; text-align: center">Freeuni Auctions</h1>
+    <div style="text-align: center">
+        <a href="login_page.jsp">Login</a><br>
+        <a href="signup_page.jsp" >Sign Up</a><br>
+        <a href="guest_page">Enter as Guest</a>
+    </div>
 </body>
 </html>
