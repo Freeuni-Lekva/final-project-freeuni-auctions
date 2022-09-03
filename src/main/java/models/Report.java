@@ -3,7 +3,7 @@ import java.util.UUID;
 
 public class Report{
     private long id, reporter_id, reported_id;
-    String comment;
+    private String comment;
 
 
     // to get report from table
