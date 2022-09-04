@@ -3,6 +3,7 @@ package dao;
 import models.*;
 
 import java.math.BigDecimal;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,13 +11,13 @@ import java.util.UUID;
 
 public class UserDAO{
     private static final String TABLE_NAME = "users";
-    private static final String ATTRIBUTE = "UserDAO";
+    public static final String ATTRIBUTE = "UserDAO";
     private Connection conn;
 
     public UserDAO(Connection conn) {
         this.conn = conn;
     }
-    public User getUserByID(long id) throws SQLException{
+    public User getUserByID(long id) throws SQLException, NoSuchAlgorithmException {
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE id = ?");
         stmt.setLong(1,id);
         ResultSet rs = stmt.executeQuery();
@@ -25,7 +26,7 @@ public class UserDAO{
         return getUser(rs);
 
     }
-    private User getUser(ResultSet rs) throws SQLException {
+    private User getUser(ResultSet rs) throws SQLException, NoSuchAlgorithmException {
         long id = Long.parseLong(rs.getString("id"));
         String firstName = rs.getString("first_name");
         String lastName = rs.getString("last_name");
@@ -40,7 +41,7 @@ public class UserDAO{
         }
         return null;
     }
-    public List<User> getUserByNameAndLastName(String firstName, String lastName) throws SQLException {
+    public List<User> getUserByNameAndLastName(String firstName, String lastName) throws SQLException, NoSuchAlgorithmException {
         List<User> res = new ArrayList<>();
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE first_name = ? and last_name = ?");
         stmt.setString(1,firstName);
@@ -52,8 +53,7 @@ public class UserDAO{
         stmt.close();
         return res;
     }
-    public User getUserByEmail(String email) throws SQLException {
-
+    public User getUserByEmail(String email) throws SQLException, NoSuchAlgorithmException {
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE email = ?");
         stmt.setString(1,email);
         ResultSet rs = stmt.executeQuery();
@@ -74,5 +74,13 @@ public class UserDAO{
         stmt.setString(7, user.getEmail());
         stmt.executeQuery();
         stmt.close();
+    }
+    public boolean correct(String email, String password) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE email = ?");
+        stmt.setString(1,email);
+        ResultSet rs = stmt.executeQuery();
+        boolean empty = rs.next();
+        stmt.close();
+        return empty;
     }
 }
