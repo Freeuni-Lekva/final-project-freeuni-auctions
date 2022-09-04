@@ -121,4 +121,10 @@ public class ProductDAO extends DAO{
             throw new RuntimeException(e);
         }
     }
+
+
+    public ArrayList<Product> getProductsByName(String phrase) {
+        //TODO
+        return new ArrayList<>();
+    }
 }
