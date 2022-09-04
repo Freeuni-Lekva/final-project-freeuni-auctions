@@ -57,12 +57,11 @@ public class ReviewDAO extends DAO{
 
     public void addReview(Review rev) throws SQLException {
         PreparedStatement stm = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
-                "VALUES ( ?, ?, ?, ?, ? )");
-        stm.setLong(1, rev.getId());
-        stm.setLong(2, rev.getAccount_id());
-        stm.setLong(3, rev.getProduct_id());
-        stm.setLong(4, rev.getCostumer_id());
-        stm.setString(5, rev.getReviewText());
+                "VALUES ( ?, ?, ?, ? )");
+        stm.setLong(1, rev.getAccount_id());
+        stm.setLong(2, rev.getProduct_id());
+        stm.setLong(3, rev.getCostumer_id());
+        stm.setString(4, rev.getReviewText());
         stm.executeQuery();
         stm.close();
     }
