@@ -27,7 +27,7 @@ public class CreateAccountServlet extends HttpServlet {
             } else {
                 User user = new RegularUser(req.getParameter("firtName"), req.getParameter("password"), req.getParameter("lastName"), 0, req.getParameter("email"));
                 users.addUser(user);
-                RequestDispatcher disp = req.getRequestDispatcher("profiile.jsp");
+                RequestDispatcher disp = req.getRequestDispatcher("profile.jsp");
                 disp.forward(req,resp);
             }
         } catch (SQLException | NoSuchAlgorithmException e) {
