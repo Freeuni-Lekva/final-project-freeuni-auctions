@@ -35,11 +35,11 @@ public class SearchServlet extends HttpServlet {
         }
         if (phrase != null) {
             results = productDAO.getProductsByName(phrase);
-            if (category_name != null) {
+            if (category != null) {
                 final Category finalCategory = category;
                 results = results.stream().filter(p -> !p.getCategoryId().equals(finalCategory.getId())).collect(Collectors.toCollection(ArrayList::new));
             }
-        } else if (category_name != null) {
+        } else if (category != null) {
             results = new ArrayList<>(productDAO.getProductsByCategory(category.getId()));
         }
         req.setAttribute("items_to_display", results);
