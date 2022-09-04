@@ -38,4 +38,9 @@ public class LoginServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    protected void doGet(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
+        super.doGet(httpServletRequest, httpServletResponse);
+    }
 }

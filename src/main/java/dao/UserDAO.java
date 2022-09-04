@@ -1,12 +1,14 @@
 package dao;
 
 import models.*;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.sql.DataSource;
 import java.util.UUID;
 
 public class UserDAO{
@@ -16,6 +18,9 @@ public class UserDAO{
 
     public UserDAO(Connection conn) {
         this.conn = conn;
+    }
+    public UserDAO() {
+
     }
     public User getUserByID(long id) throws SQLException, NoSuchAlgorithmException {
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE id = ?");
@@ -64,8 +69,7 @@ public class UserDAO{
     //id, firstName, LastName, Passwrod, Role, Premium, Email
     public void addUser(User user) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
-                "VALUES ( ?, ?, ?, ?, ?, ?, ?)");
-        stmt.setLong(1, user.getId());
+                "VALUES ( ?, ?, ?, ?, ?, ? )");
         stmt.setString(2, user.getFirstName());
         stmt.setString(3, user.getLastName());
         stmt.setString(4, user.getPassword());
@@ -75,9 +79,18 @@ public class UserDAO{
         stmt.executeQuery();
         stmt.close();
     }
-    public boolean correct(String email, String password) throws SQLException {
+    public boolean contains(String email) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE email = ?");
         stmt.setString(1,email);
+        ResultSet rs = stmt.executeQuery();
+        boolean empty = rs.next();
+        stmt.close();
+        return empty;
+    }
+    public boolean correct(String email, String password) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE email = ? and password = ?");
+        stmt.setString(1,email);
+        stmt.setString(2,password);
         ResultSet rs = stmt.executeQuery();
         boolean empty = rs.next();
         stmt.close();
