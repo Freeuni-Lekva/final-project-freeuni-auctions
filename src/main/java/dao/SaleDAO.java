@@ -2,13 +2,9 @@ package dao;
 
 import models.Sale;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class SaleDAO extends DAO {
     private static final String TABLE_NAME = "sales";
@@ -73,7 +69,9 @@ public class SaleDAO extends DAO {
             long sale_id = resultSet.getLong("id");
             long product_id = resultSet.getLong("product_id");
             long user_id = resultSet.getLong("user_id");
-            return new Sale(sale_id, product_id, user_id);
+            Timestamp date = resultSet.getTimestamp("date");
+            double price = resultSet.getDouble("price");
+            return new Sale(sale_id, product_id, user_id, date, price);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
