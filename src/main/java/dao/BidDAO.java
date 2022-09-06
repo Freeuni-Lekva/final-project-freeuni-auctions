@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BidDAO extends DAO{
+    public static final String ATTRIBUTE = "BidDAO";
     private static final String TABLE_NAME = "bids";
     private Connection conn;
 
