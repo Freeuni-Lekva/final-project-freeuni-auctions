@@ -5,15 +5,14 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public abstract class User {
-    private final String firstName;
+    private String username;
     private String password;
-    private final String lastName;
     private final String email;
     private final long id;
-    public User(String firstName, String password, String lastName, long id, String email) throws NoSuchAlgorithmException {
-        this.firstName = firstName;
+
+    public User(String username, String password, String email, long id) throws NoSuchAlgorithmException {
+        this.username = username;
         this.password = hashPassword(password);
-        this.lastName = lastName;
         this.email = email;
         this.id = id;
     }
@@ -34,12 +33,9 @@ public abstract class User {
         String res = hexToString(digest);
         return str;
     }
-    public String getFirstName() {
-        return firstName;
-    }
 
-    public String getLastName() {
-        return lastName;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
