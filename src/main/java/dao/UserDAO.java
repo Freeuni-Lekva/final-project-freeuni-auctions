@@ -35,12 +35,13 @@ public class UserDAO{
         String username = rs.getString("username");
         String password = rs.getString("password");
         String email = rs.getString("email");
+        String image = rs.getString("image");
         Role role = Role.valueOf(rs.getString("role"));
         switch(role) {
             case Administator:
-                return new Administrator(username, password, email, id);
+                return new Administrator(id, username, password, email, image);
             case Regular:
-                return new RegularUser(username, password, email, id);
+                return new RegularUser(id, username, password, email, image);
         }
         return null;
     }
@@ -66,12 +67,13 @@ public class UserDAO{
     //id, firstName, LastName, Passwrod, Role, Premium, Email
     public void addUser(User user) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
-                "VALUES ( ?, ?, ?, ?, ?)");
+                "VALUES ( ?, ?, ?, ?, ?, ?)");
         stmt.setString(1, user.getUsername());
         stmt.setString(2, user.getPassword());
         stmt.setString(3, user.getRole().toString());
         stmt.setBoolean(4, user.isPremium());
         stmt.setString(5, user.getEmail());
+        stmt.setString(6, user.getImage());
         stmt.executeQuery();
         stmt.close();
     }

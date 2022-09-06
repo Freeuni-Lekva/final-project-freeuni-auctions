@@ -5,17 +5,20 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public abstract class User {
+    private final long id;
     private String username;
     private String password;
     private final String email;
-    private final long id;
+    private String image;
+
     public static final String ATTRIBUTE = "User";
 
-    public User(String username, String password, String email, long id) throws NoSuchAlgorithmException {
+    public User(long id, String username, String password, String email, String image) throws NoSuchAlgorithmException {
+        this.id = id;
         this.username = username;
         this.password = hashPassword(password);
         this.email = email;
-        this.id = id;
+        this.image = image;
     }
 
     private static String hexToString(byte[] bytes) {
@@ -49,6 +52,15 @@ public abstract class User {
     public String getEmail() {
         return email;
     }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public abstract Role getRole();
     public abstract boolean isPremium();
     public abstract void makeChanges();
