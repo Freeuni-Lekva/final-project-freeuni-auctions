@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.UUID;
 
 public class CategoryDAO {
-    public static final String ATTRIBUTE = "categoryDAO";
+    public static final String ATTRIBUTE = "CategoryDAO";
     private static final String TABLE_NAME = "categories";
     private Connection conn;
 
@@ -21,7 +21,7 @@ public class CategoryDAO {
     }
 
     public void addNewCategory(String name) throws SQLException {
-        conn.createStatement().executeQuery("INSERT INTO " + TABLE_NAME + " VALUES (unhex(replace(uuid(),'-','')), " + name + ")");
+        conn.createStatement().executeQuery("INSERT INTO " + TABLE_NAME + " VALUES (" + name + ")");
     }
 
     public Category getFromName(String name) throws SQLException {
