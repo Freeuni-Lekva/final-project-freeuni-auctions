@@ -12,9 +12,10 @@ import java.util.UUID;
 
 public class SaleDAO extends DAO {
     private static final String TABLE_NAME = "sales";
+    public static final String ATTRIBUTE = "SaleDAO";
     private Connection conn;
 
-    public SaleDAO(Connection conn) {
+    public SaleDAO() {
         this.conn = DBConnection.getInstance();
     }
 
@@ -22,7 +23,7 @@ public class SaleDAO extends DAO {
         try {
             conn.createStatement().executeQuery("INSERT INTO " + TABLE_NAME + " VALUES (" + sale.getId() + ", "
                     + sale.getProduct_id() + ", " + sale.getUser_id() + ")");
-        }catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
