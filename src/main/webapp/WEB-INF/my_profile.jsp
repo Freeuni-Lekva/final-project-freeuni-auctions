@@ -25,6 +25,8 @@
     <% User user = (User)request.getAttribute(User.ATTRIBUTE); %>
     <h1><%=user.getFirstName()%></h1> <%-- this must be user.getUserName() --%>
     <img src="../images/blank-profile-picture.png" alt="profile picture" width="200" height="300">
-
+    <h3><%=user.getEmail()%></h3>
+    <h2>Balance: $<%=user.getBalance()%></h2>
+    <p></p>
 </body>
 </html>
