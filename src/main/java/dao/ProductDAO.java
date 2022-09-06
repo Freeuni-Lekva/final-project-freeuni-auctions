@@ -114,9 +114,9 @@ public class ProductDAO extends DAO{
             Status status = Status.valueOf(rs.getString("status"));
             Date datePosted = rs.getDate("date_posted");
             Date endDate = rs.getDate("end_date");
-
+            String image = rs.getString("image");
             return new Product(product_id, account_id, category_id, name,
-                    description, bid_id, currPrice, status, datePosted, endDate);
+                    description, bid_id, currPrice, status, datePosted, endDate, image);
         }   catch (SQLException e) {
             throw new RuntimeException(e);
         }
