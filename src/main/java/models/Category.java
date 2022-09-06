@@ -3,15 +3,15 @@ package models;
 import java.util.UUID;
 
 public class Category {
-    private final UUID id;
+    private final long id;
     private final String name;
 
-    public Category(UUID id, String name) {
+    public Category(long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 

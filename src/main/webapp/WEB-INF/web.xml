@@ -11,12 +11,36 @@
     <servlet-class>servlets.CreateAccountServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>makeBid</servlet-name>
+    <servlet-class>servlets.makeBidServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>servlets.LoginServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>logout</servlet-name>
+    <servlet-class>servlets.logoutServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>profile</servlet-name>
+    <servlet-class>servlets.getProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>profile</servlet-name>
+    <url-pattern>/profile</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>logout</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
     <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>makeBid</servlet-name>
+    <url-pattern>/makeBid</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>Create</servlet-name>

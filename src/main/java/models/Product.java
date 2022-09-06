@@ -5,18 +5,19 @@ import java.util.Date;
 import java.util.UUID;
 
 public class Product {
-    private UUID id, account_id, category_id, bid_id;
+    private long id, account_id, category_id, bid_id;
     private String name;
     private String description;
     private BigDecimal currPrice;
     private Status status;
     private Date datePosted;
     private Date endDate;
+    private String image;
 
     // this constructor is used by productDAO only to get a product from a database.
-    public Product(UUID id, UUID account_id, UUID category_id, String name,
-                   String description, UUID bid_id, BigDecimal currPrice, Status status,
-                   Date datePosted, Date endDate) {
+    public Product(long id, long account_id, long category_id, String name,
+                   String description, long bid_id, BigDecimal currPrice, Status status,
+                   Date datePosted, Date endDate, String image) {
         this.id = id;
         this.account_id = account_id;
         this.category_id = category_id;
@@ -27,10 +28,15 @@ public class Product {
         this.status = status;
         this.datePosted = datePosted;
         this.endDate = endDate;
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     // used when creating a new product. CURRENT TIME of creating this constructor gets assigned to datePosted.
-    public Product(UUID account_id, UUID category_id, String name, BigDecimal price, Date endDate) {
+    public Product(long account_id, long category_id, String name, BigDecimal price, Date endDate) {
         this.account_id = account_id;
         this.category_id = category_id;
         this.name = name;
@@ -44,23 +50,23 @@ public class Product {
         this.description = description;
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 
-    public UUID getAccountId() {
+    public long getAccountId() {
         return account_id;
     }
 
-    public UUID getCategoryId() {
+    public long getCategoryId() {
         return category_id;
     }
 
-    public UUID getBidId() {
+    public long getBidId() {
         return bid_id;
     }
 
-    public void setBidId(UUID bid_id) {
+    public void setBidId(long bid_id) {
         this.bid_id = bid_id;
     }
 
@@ -91,4 +97,5 @@ public class Product {
     public Date getEndDate() {
         return endDate;
     }
+
 }

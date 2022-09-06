@@ -13,7 +13,7 @@ public class CategoryDAO {
         this.conn = conn;
     }
 
-    public Category getFromID(UUID category_id) throws SQLException {
+    public Category getFromID(long category_id) throws SQLException {
         ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = " + category_id);
         rs.next();
         String name = rs.getString("name");

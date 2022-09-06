@@ -18,10 +18,10 @@ public class ProductDAO extends DAO{
         this.conn = conn;
     }
 
-    public Product getFromID(UUID product_id) {
+    public Product getFromID(long product_id) {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE id = ?");
-            stmt.setString(1, product_id.toString());
+            stmt.setLong(1, product_id);
             ResultSet rs = stmt.executeQuery();
             rs.next();
             stmt.close();
@@ -83,12 +83,12 @@ public class ProductDAO extends DAO{
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
                     "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
-            stmt.setString(1, SQLWrapUUID(p.getId()));
+            stmt.setLong(1, p.getId());
             stmt.setString(2, p.getName());
-            stmt.setString(3, p.getAccountId().toString());
+            stmt.setLong(3, p.getAccountId());
             stmt.setString(4, p.getDescription());
-            stmt.setString(5, p.getCategoryId().toString());
-            stmt.setString(6, p.getBidId().toString());
+            stmt.setLong(5, p.getCategoryId());
+            stmt.setLong(6, p.getBidId());
             stmt.setBigDecimal(7, p.getCurrPrice());
             stmt.setString(8, p.getStatus().toString());
             stmt.setDate(9, (Date) p.getDatePosted());
@@ -114,9 +114,9 @@ public class ProductDAO extends DAO{
             Status status = Status.valueOf(rs.getString("status"));
             Date datePosted = rs.getDate("date_posted");
             Date endDate = rs.getDate("end_date");
-
+            String image = rs.getString("image");
             return new Product(product_id, account_id, category_id, name,
-                    description, bid_id, currPrice, status, datePosted, endDate);
+                    description, bid_id, currPrice, status, datePosted, endDate, image);
         }   catch (SQLException e) {
             throw new RuntimeException(e);
         }
