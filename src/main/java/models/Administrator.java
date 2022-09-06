@@ -4,8 +4,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class Administrator extends User {
 
-    public Administrator(String username, String password, String email, long id) throws NoSuchAlgorithmException {
-        super(username, password, email, id);
+    public Administrator(long id, String username, String password, String email, String image) throws NoSuchAlgorithmException {
+        super(id, username, password, email, image);
     }
 
     @Override
