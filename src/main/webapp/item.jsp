@@ -33,7 +33,7 @@
     </style>
 </head>
 <body>
-<form action="logout" method="post">
+<form action="logout" method="get">
 <div>
     <button type='button'>logout</button>
 </div>
