@@ -24,8 +24,12 @@ public class CreateAccountServlet extends HttpServlet {
             if(users.contains(req.getParameter("email"))){
                 RequestDispatcher disp = req.getRequestDispatcher("email_in_use.jsp");
                 disp.forward(req,resp);
-            } else {
-                User user = new RegularUser(req.getParameter("firtName"), req.getParameter("password"), req.getParameter("lastName"), 0, req.getParameter("email"));
+            } else if(users.containsUsername(req.getParameter("username"))){
+                RequestDispatcher disp = req.getRequestDispatcher("username_in_use.jsp");
+                disp.forward(req,resp);
+            }
+            else {
+                User user = new RegularUser(req.getParameter("username"), req.getParameter("password"), req.getParameter("email"), 0);
                 users.addUser(user);
                 RequestDispatcher disp = req.getRequestDispatcher("profile.jsp");
                 disp.forward(req,resp);

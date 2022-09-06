@@ -16,10 +16,8 @@
     <form action="create_acc" method="post">
         <label for="email">Email:</label>
         <input type="text" id="email" name="email"><br>
-        <label for="firstName">First Name:</label>
-        <input type="text" id="firstName" name="firstName"><br>
-        <label for="lastName">Last Name:</label>
-        <input type="text" id="lastName" name="lastName"><br>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br>
         <label for="password">Password:</label>
         <input type="text" id="password" name="password">
         <input type="submit" value="Login"><br><br>
