@@ -16,8 +16,8 @@
     <form action="create_acc" method="post">
         <label for="email">Email:</label>
         <input type="text" id="email" name="email"><br>
-        <label for="user">User name:</label>
-        <input type="text" id="user" name="user"><br>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username"><br>
         <label for="password">Password:</label>
         <input type="text" id="password" name="password">
         <input type="submit" value="Login"><br><br>
