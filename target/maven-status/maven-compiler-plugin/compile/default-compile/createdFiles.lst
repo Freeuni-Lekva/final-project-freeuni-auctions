@@ -1,9 +1,7 @@
 dao\UserDAO$1.class
-dao\ReviewDAO.class
 models\PremiumUser.class
 dao\DAO.class
 servlets\LoginServlet.class
-servlets\SearchServlet.class
 models\Administrator.class
 models\User.class
 dao\CategoryDAO.class
@@ -11,14 +9,10 @@ models\Category.class
 models\Status.class
 models\Role.class
 models\Bid.class
-dao\ReportDAO.class
 servlets\InitListener.class
-dao\DBConnection.class
 models\Product.class
 models\RegularUser.class
 dao\UserDAO.class
-models\Report.class
 dao\BidDAO.class
 dao\ProductDAO.class
 servlets\CreateAccountServlet.class
-models\Review.class

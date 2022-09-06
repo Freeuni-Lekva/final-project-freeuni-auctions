@@ -9,6 +9,7 @@ public abstract class User {
     private String password;
     private final String email;
     private final long id;
+    public static final String ATTRIBUTE = "User";
 
     public User(String username, String password, String email, long id) throws NoSuchAlgorithmException {
         this.username = username;
