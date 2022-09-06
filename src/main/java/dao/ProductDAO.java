@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class ProductDAO extends DAO{
     private static final String TABLE_NAME = "products";
@@ -31,11 +30,11 @@ public class ProductDAO extends DAO{
         }
     }
 
-    public List<Product> getProductsByCategory(UUID category_id) {
+    public List<Product> getProductsByCategory(long category_id) {
         List<Product> res = new ArrayList<>();
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE category_id = ? ORDER BY date_posted desc");
-            stmt.setString(1, category_id.toString());
+            stmt.setLong(1, category_id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 res.add(getSingleProduct(rs));
@@ -47,11 +46,11 @@ public class ProductDAO extends DAO{
         }
     }
 
-    public List<Product> getProductsByUser(UUID user_id) {
+    public List<Product> getProductsByUser(long user_id) {
         List<Product> res = new ArrayList<>();
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE user_id = ? ORDER BY date_posted desc");
-            stmt.setString(1, user_id.toString());
+            stmt.setLong(1, user_id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 res.add(getSingleProduct(rs));
@@ -82,7 +81,7 @@ public class ProductDAO extends DAO{
     private void addProduct(Product p) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
-                    "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
+                    " VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setLong(1, p.getId());
             stmt.setString(2, p.getName());
             stmt.setLong(3, p.getAccountId());
@@ -104,11 +103,11 @@ public class ProductDAO extends DAO{
 
     private Product getSingleProduct(ResultSet rs) {
         try {
-            UUID product_id = UUID.fromString(rs.getString("id"));
+            long product_id = rs.getLong("id");
             String name = rs.getString("product_name");
-            UUID account_id = UUID.fromString(rs.getString("account_id"));
-            UUID category_id = UUID.fromString(rs.getString("category_id"));
-            UUID bid_id = UUID.fromString(rs.getString("bid_id"));
+            long account_id = rs.getLong("account_id");
+            long category_id = rs.getLong("category_id");
+            long bid_id = rs.getLong("bid_id");
             BigDecimal currPrice = BigDecimal.valueOf(rs.getDouble("price"));
             String description = rs.getString("description");
             Status status = Status.valueOf(rs.getString("status"));
