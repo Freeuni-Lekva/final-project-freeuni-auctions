@@ -1,7 +1,6 @@
 package dao;
 
 import models.*;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
