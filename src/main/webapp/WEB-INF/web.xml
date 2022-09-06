@@ -23,7 +23,7 @@
     <url-pattern>/create_acc</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
-    <welcome-file>homepage.jsp</welcome-file>
+    <welcome-file>frontpage.jsp</welcome-file>
   </welcome-file-list>
 
 
