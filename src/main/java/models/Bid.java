@@ -6,11 +6,11 @@ import java.sql.Timestamp;
 import java.util.UUID;
 
 public class Bid {
-    private final UUID id, bidder_id, product_id;
+    private final long id, bidder_id, product_id;
     private final BigDecimal amount;
     private final Timestamp bid_time;
 
-    public Bid(UUID id, UUID bidder_id, UUID product_id, BigDecimal amount, Timestamp bid_time) {
+    public Bid(long id, long bidder_id, long product_id, BigDecimal amount, Timestamp bid_time) {
         this.id = id;
         this.bidder_id = bidder_id;
         this.product_id = product_id;
@@ -18,15 +18,15 @@ public class Bid {
         this.bid_time = bid_time;
     }
 
-    public UUID getId() {
+    public long getId() {
         return id;
     }
 
-    public UUID getBidder_id() {
+    public long getBidder_id() {
         return bidder_id;
     }
 
-    public UUID getItem_id() {
+    public long getItem_id() {
         return product_id;
     }
 
