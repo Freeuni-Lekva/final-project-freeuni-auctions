@@ -32,7 +32,7 @@ CREATE TABLE products
     account_id BIGINT(20) NOT NULL,
     description VARCHAR(300),
     category_id BIGINT(20) NOT NULL,
-    bid_id BIGINT(20),
+    bid_id BIGINT(20) DEFAULT NULL,
     price NUMERIC,
     status VARCHAR(30), /* "available", "sold" */
     date_posted DATE,
