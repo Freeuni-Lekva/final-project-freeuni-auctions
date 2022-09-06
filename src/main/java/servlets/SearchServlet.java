@@ -37,7 +37,7 @@ public class SearchServlet extends HttpServlet {
             results = productDAO.getProductsByName(phrase);
             if (category != null) {
                 final Category finalCategory = category;
-                results = results.stream().filter(p -> p.getCategoryId().equals(finalCategory.getId())).collect(Collectors.toCollection(ArrayList::new));
+                results = results.stream().filter(p -> p.getCategoryId() == finalCategory.getId()).collect(Collectors.toCollection(ArrayList::new));
             }
         } else if (category != null) {
             results = new ArrayList<>(productDAO.getProductsByCategory(category.getId()));
