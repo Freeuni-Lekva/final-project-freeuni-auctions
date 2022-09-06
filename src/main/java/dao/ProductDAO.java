@@ -18,10 +18,10 @@ public class ProductDAO extends DAO{
         this.conn = conn;
     }
 
-    public Product getFromID(UUID product_id) {
+    public Product getFromID(long product_id) {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE id = ?");
-            stmt.setString(1, product_id.toString());
+            stmt.setLong(1, product_id);
             ResultSet rs = stmt.executeQuery();
             rs.next();
             stmt.close();
@@ -31,11 +31,11 @@ public class ProductDAO extends DAO{
         }
     }
 
-    public List<Product> getProductsByCategory(UUID category_id) {
+    public List<Product> getProductsByCategory(long category_id) {
         List<Product> res = new ArrayList<>();
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE category_id = ? ORDER BY date_posted desc");
-            stmt.setString(1, category_id.toString());
+            stmt.setLong(1, category_id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 res.add(getSingleProduct(rs));
@@ -47,11 +47,11 @@ public class ProductDAO extends DAO{
         }
     }
 
-    public List<Product> getProductsByUser(UUID user_id) {
+    public List<Product> getProductsByUser(long user_id) {
         List<Product> res = new ArrayList<>();
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE user_id = ? ORDER BY date_posted desc");
-            stmt.setString(1, user_id.toString());
+            stmt.setLong(1, user_id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 res.add(getSingleProduct(rs));
@@ -83,12 +83,12 @@ public class ProductDAO extends DAO{
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
                     "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
-            stmt.setString(1, SQLWrapUUID(p.getId()));
+            stmt.setLong(1, p.getId());
             stmt.setString(2, p.getName());
-            stmt.setString(3, p.getAccountId().toString());
+            stmt.setLong(3, p.getAccountId());
             stmt.setString(4, p.getDescription());
-            stmt.setString(5, p.getCategoryId().toString());
-            stmt.setString(6, p.getBidId().toString());
+            stmt.setLong(5, p.getCategoryId());
+            stmt.setLong(6, p.getBidId());
             stmt.setBigDecimal(7, p.getCurrPrice());
             stmt.setString(8, p.getStatus().toString());
             stmt.setDate(9, (Date) p.getDatePosted());
@@ -104,11 +104,11 @@ public class ProductDAO extends DAO{
 
     private Product getSingleProduct(ResultSet rs) {
         try {
-            UUID product_id = UUID.fromString(rs.getString("id"));
+            long product_id = rs.getLong("id");
             String name = rs.getString("product_name");
-            UUID account_id = UUID.fromString(rs.getString("account_id"));
-            UUID category_id = UUID.fromString(rs.getString("category_id"));
-            UUID bid_id = UUID.fromString(rs.getString("bid_id"));
+            long account_id = rs.getLong("account_id");
+            long category_id = rs.getLong("category_id");
+            long bid_id = rs.getLong("bid_id");
             BigDecimal currPrice = BigDecimal.valueOf(rs.getDouble("price"));
             String description = rs.getString("description");
             Status status = Status.valueOf(rs.getString("status"));
