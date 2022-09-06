@@ -13,3 +13,6 @@
 0:0:0:0:0:0:0:1 - - [06/Sep/2022:17:08:41 +0400] "GET /create_acc HTTP/1.1" 405 1065 http-bio-8088-exec-2 1
 0:0:0:0:0:0:0:1 - - [06/Sep/2022:17:08:45 +0400] "GET /signup_page.jsp HTTP/1.1" 200 591 http-bio-8088-exec-6 69
 0:0:0:0:0:0:0:1 - - [06/Sep/2022:17:08:49 +0400] "GET /guest_page HTTP/1.1" 404 971 http-bio-8088-exec-7 1
+0:0:0:0:0:0:0:1 - - [06/Sep/2022:19:28:41 +0400] "GET / HTTP/1.1" 200 708 http-bio-8088-exec-1 455
+0:0:0:0:0:0:0:1 - - [06/Sep/2022:19:28:43 +0400] "GET /signup_page.jsp HTTP/1.1" 200 602 http-bio-8088-exec-3 49
+0:0:0:0:0:0:0:1 - - [06/Sep/2022:19:28:47 +0400] "GET /login_page.jsp HTTP/1.1" 200 1018 http-bio-8088-exec-4 69
