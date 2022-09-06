@@ -1,4 +1,4 @@
-<%--
+<%@ page import="models.User" %><%--
   Created by IntelliJ IDEA.
   User: admin
   Date: 04.09.2022
@@ -22,6 +22,9 @@
     </style>
 </head>
 <body>
+    <% User user = (User)request.getAttribute(User.ATTRIBUTE); %>
+    <h1><%=user.getFirstName()%></h1> <%-- this must be user.getUserName() --%>
+    <img src="../images/blank-profile-picture.png" alt="profile picture" width="200" height="300">
 
 </body>
 </html>

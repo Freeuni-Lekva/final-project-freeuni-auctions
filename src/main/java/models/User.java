@@ -10,6 +10,7 @@ public abstract class User {
     private final String lastName;
     private final String email;
     private final long id;
+    public static final String ATTRIBUTE = "User";
     public User(String firstName, String password, String lastName, long id, String email) throws NoSuchAlgorithmException {
         this.firstName = firstName;
         this.password = hashPassword(password);
