@@ -3,8 +3,8 @@ package models;
 import java.security.NoSuchAlgorithmException;
 
 public class RegularUser extends User {
-    public RegularUser(String username, String password, String email, long id) throws NoSuchAlgorithmException {
-        super(username, password, email, id);
+    public RegularUser(long id, String username, String password, String email, String image) throws NoSuchAlgorithmException {
+        super(id, username, password, email, image);
     }
 
     @Override
