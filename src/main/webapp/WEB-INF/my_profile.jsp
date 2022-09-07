@@ -3,7 +3,10 @@
 <%@ page import="models.Product" %>
 <%@ page import="java.util.List" %>
 <%@ page import="models.RegularUser" %>
-<%@ page import="java.security.NoSuchAlgorithmException" %><%--
+<%@ page import="java.security.NoSuchAlgorithmException" %>
+<%@ page import="dao.ReviewDAO" %>
+<%@ page import="models.Review" %>
+<%@ page import="java.sql.SQLException" %><%--
   Created by IntelliJ IDEA.
   User: admin
   Date: 04.09.2022
@@ -53,6 +56,41 @@
         .topnav-right {
             float: right;
         }
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
     </style>
 </head>
 <body>
@@ -77,18 +115,47 @@
         <input type="submit" value="Update Balance">
     </form>
     <p></p>
-    <ul>
-        <%
-            ProductDAO productDAO = (ProductDAO)application.getAttribute(ProductDAO.ATTRIBUTE);
-            List<Product> products = productDAO.getProductsByUser(user.getId());
-            for(Product p : products) {
+    <div class="tab">
+        <button class="tablinks" onclick="openTab('Products')">Products</button>
+        <button class="tablinks" onclick=openTab('Reviews')>Reviews</button>
+    </div>
+    <div id="Products" class="tabcontent">
+        <ul>
+            <h3>Products</h3>
+            <%
+                ProductDAO productDAO = (ProductDAO)application.getAttribute(ProductDAO.ATTRIBUTE);
+                List<Product> products = productDAO.getProductsByUser(user.getId());
+                for(Product p : products) {
 
-        %>
-        <li><a href="product?productId=<%=p.getId()%>"><%=p.getName()%></a></li>
-        <%
+            %>
+            <li><a href="product?productId=<%=p.getId()%>"><%=p.getName()%></a></li>
+            <%
+                }
+            %>
+        </ul>
+    </div>
+    <div id="Reviews" class="tabcontent">
+        <h3>Reviews</h3>
+    </div>
+
+
+
+    <script>
+        function openTab(tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
             }
-        %>
-    </ul>
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+
 
 </body>
 </html>
