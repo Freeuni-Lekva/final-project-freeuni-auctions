@@ -10,6 +10,7 @@ models\RegularUser.class
 dao\UserDAO.class
 servlets\CreateAccountServlet.class
 dao\UserDAO$1.class
+<<<<<<< HEAD
 models\Sale.class
 dao\DAO.class
 servlets\LoginServlet.class
@@ -19,5 +20,13 @@ models\Role.class
 servlets\makeBidServlet.class
 models\Product.class
 servlets\LogoutServlet.class
+=======
+dao\DAO.class
+servlets\LoginServlet.class
+models\Administrator.class
+models\Role.class
+models\ForeignUser.class
+models\Product.class
+>>>>>>> 1383b6251ec31119956c5a16846f859505d625f7
 dao\BidDAO.class
 dao\ProductDAO.class

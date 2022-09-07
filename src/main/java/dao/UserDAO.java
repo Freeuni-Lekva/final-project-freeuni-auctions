@@ -45,16 +45,13 @@ public class UserDAO{
         }
         return null;
     }
-    public List<User> getUserByUsername(String username) throws SQLException, NoSuchAlgorithmException {
-        List<User> res = new ArrayList<>();
+    public User getUserByUsername(String username) throws SQLException, NoSuchAlgorithmException {
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE username = ?");
         stmt.setString(1,username);
         ResultSet rs = stmt.executeQuery();
-        while(rs.next()) {
-            res.add(getUser(rs));
-        }
+        rs.next();
         stmt.close();
-        return res;
+        return getUser(rs);
     }
     public User getUserByEmail(String email) throws SQLException, NoSuchAlgorithmException {
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE email = ?");

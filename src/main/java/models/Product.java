@@ -18,6 +18,7 @@ public class Product {
     public Product(long id, long account_id, long category_id, String name,
                    String description, long bid_id, BigDecimal currPrice, Status status,
                    Date datePosted, Date endDate, String image) {
+
         this.id = id;
         this.account_id = account_id;
         this.category_id = category_id;
