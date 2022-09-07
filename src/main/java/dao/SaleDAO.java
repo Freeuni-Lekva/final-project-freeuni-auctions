@@ -17,8 +17,8 @@ public class SaleDAO extends DAO {
 
     public void addSale(Sale sale) {
         try {
-            conn.createStatement().executeQuery("INSERT INTO " + TABLE_NAME + " VALUES (" + sale.getId() + ", "
-                    + sale.getProduct_id() + ", " + sale.getUser_id() + ")");
+            conn.createStatement().executeQuery("INSERT INTO " + TABLE_NAME + " (product_id, user_id, sale_date, price) VALUES ("
+                    + sale.getProduct_id() + ", " + sale.getUser_id() + ", " + sale.getDate() +  ", " + sale.getPrice()+")");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

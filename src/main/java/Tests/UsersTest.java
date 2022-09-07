@@ -4,7 +4,7 @@ package Tests;
 import dao.UserDAO;
 import models.RegularUser;
 import models.User;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
