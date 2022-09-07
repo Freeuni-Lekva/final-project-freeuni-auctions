@@ -1,12 +1,15 @@
 package servlets;
 
 import dao.*;
+import models.RegularUser;
+import models.User;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -39,7 +42,12 @@ public class InitListener implements ServletContextListener, HttpSessionListener
 
     @Override
     public void sessionCreated(HttpSessionEvent httpSessionEvent) {
-
+        // FOLLOWING BLOCK FOR TESTING(creates a user object as main profile user)
+        try {
+            httpSessionEvent.getSession().setAttribute(User.ATTRIBUTE, new RegularUser(9, "sandro", "sandro", "sandro@gm.com", "sandro", 12));
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

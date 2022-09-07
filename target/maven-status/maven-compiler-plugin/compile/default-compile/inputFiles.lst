@@ -1,13 +1,16 @@
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\dao\ReviewDAO.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\models\Sale.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\models\Status.java
-C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\servlets\getProfileServlet.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\models\Administrator.java
+C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\servlets\ProductServlet.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\models\User.java
+C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\servlets\GetForeignProfileServlet.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\models\PremiumUser.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\models\Review.java
+C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\servlets\GetMyProfileServlet.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\servlets\InitListener.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\servlets\makeBidServlet.java
+C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\servlets\BalanceServlet.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\models\Product.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\servlets\CreateAccountServlet.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\dao\CategoryDAO.java
@@ -26,3 +29,4 @@ C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\models\
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\servlets\LoginServlet.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\models\Report.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\dao\ReportDAO.java
+C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\models\ForeignUser.java

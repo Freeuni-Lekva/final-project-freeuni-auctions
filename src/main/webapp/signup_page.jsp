@@ -34,6 +34,7 @@
         <input type="submit" value="Login"><br><br>
     </form>
 
-    <a href="login_page.jsp">Already have an account?</a>
+    <a href="login_page.jsp">Already have an account?</a><br>
+    <a href="profile">Enter as Guest</a> <%-- "profile is set here for testing purposes--%>
 </body>
 </html>

@@ -21,7 +21,7 @@ public class CreateAccountServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserDAO users = (UserDAO) getServletContext().getAttribute(UserDAO.ATTRIBUTE);
         try {
-            if(users.contains(req.getParameter("email"))){
+            if(users.containsEmail(req.getParameter("email"))){
                 RequestDispatcher disp = req.getRequestDispatcher("email_in_use.jsp");
                 disp.forward(req,resp);
             } else if(users.containsUsername(req.getParameter("username"))){
@@ -29,7 +29,7 @@ public class CreateAccountServlet extends HttpServlet {
                 disp.forward(req,resp);
             }
             else {
-                User user = new RegularUser(0,req.getParameter("username"), req.getParameter("password"), req.getParameter("email"),req.getParameter("image"));
+                User user = new RegularUser(0,req.getParameter("username"), req.getParameter("password"), req.getParameter("email"),req.getParameter("image"), 0);
                 users.addUser(user);
                 RequestDispatcher disp = req.getRequestDispatcher("profile.jsp");
                 disp.forward(req,resp);

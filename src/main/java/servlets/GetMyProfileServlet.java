@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(name = "profile", value = "/profile")
-public class getProfileServlet extends HttpServlet {
+public class GetMyProfileServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws ServletException, IOException {
-        super.doPost(httpServletRequest, httpServletResponse);
+    protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        req.getRequestDispatcher("/WEB-INF/my_profile.jsp").forward(req, res);
     }
 }

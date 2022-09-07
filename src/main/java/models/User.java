@@ -10,15 +10,17 @@ public abstract class User {
     private String password;
     private final String email;
     private String image;
+    private long balance;
 
     public static final String ATTRIBUTE = "User";
 
-    public User(long id, String username, String password, String email, String image) throws NoSuchAlgorithmException {
+    public User(long id, String username, String password, String email, String image, long balance) throws NoSuchAlgorithmException {
         this.id = id;
         this.username = username;
         this.password = hashPassword(password);
         this.email = email;
         this.image = image;
+        this.balance = balance;
     }
 
     private static String hexToString(byte[] bytes) {
@@ -32,6 +34,9 @@ public abstract class User {
         return buff.toString();
     }
     public static String hashPassword(String str) throws NoSuchAlgorithmException {
+        if (str == null) {
+            return null;
+        }
         MessageDigest dsg = MessageDigest.getInstance("SHA");
         byte[] digest = dsg.digest(str.getBytes());
         String res = hexToString(digest);
@@ -45,6 +50,7 @@ public abstract class User {
     public String getPassword() {
         return password;
     }
+
     public long getId() {
         return id;
     }
@@ -59,6 +65,13 @@ public abstract class User {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public  long getBalance() {
+        return this.balance;
+    }
+    public  void setBalance(long amount) {
+        this.balance = amount;
     }
 
     public abstract Role getRole();

@@ -35,7 +35,8 @@
         <input type="submit" value="Login"><br><br>
     </form>
 
-    <a href="signup_page.jsp">Create new Account</a>
+    <a href="signup_page.jsp">Create new Account</a><br>
+    <a href="profile">Enter as Guest</a> <%-- "profile is set here for testing purposes--%>
 </body>
 <%--<body>--%>
 <%--<div class="background-image"></div>--%>

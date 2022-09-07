@@ -26,7 +26,7 @@
     <div style="text-align: center">
         <a href="login_page.jsp">Login</a><br>
         <a href="signup_page.jsp" >Sign Up</a><br>
-        <a href="guest_page">Enter as Guest</a>
+        <a href="profile">Enter as Guest</a> <%-- "profile is set here for testing purposes--%>
     </div>
 </body>
 </html>
