@@ -9,6 +9,7 @@ import java.util.UUID;
 
 public class BidDAO extends DAO{
     private static final String TABLE_NAME = "bids";
+    public static final String ATTRIBUTE = "bidDAO";
     private Connection conn;
 
     public BidDAO(Connection conn) {

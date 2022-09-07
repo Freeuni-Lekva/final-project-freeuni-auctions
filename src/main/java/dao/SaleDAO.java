@@ -11,8 +11,8 @@ public class SaleDAO extends DAO {
     public static final String ATTRIBUTE = "SaleDAO";
     private Connection conn;
 
-    public SaleDAO() {
-        this.conn = DBConnection.getInstance();
+    public SaleDAO(Connection conn) {
+        this.conn = conn;
     }
 
     public void addSale(Sale sale) {

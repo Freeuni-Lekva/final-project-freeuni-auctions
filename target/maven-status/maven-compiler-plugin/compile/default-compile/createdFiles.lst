@@ -4,16 +4,29 @@ dao\CategoryDAO.class
 models\Category.class
 models\Status.class
 models\Bid.class
+servlets\getProfileServlet.class
 servlets\InitListener.class
 models\RegularUser.class
 dao\UserDAO.class
 servlets\CreateAccountServlet.class
 dao\UserDAO$1.class
+<<<<<<< HEAD
+models\Sale.class
+dao\DAO.class
+servlets\LoginServlet.class
+models\Administrator.class
+dao\SaleDAO.class
+models\Role.class
+servlets\makeBidServlet.class
+models\Product.class
+servlets\LogoutServlet.class
+=======
 dao\DAO.class
 servlets\LoginServlet.class
 models\Administrator.class
 models\Role.class
 models\ForeignUser.class
 models\Product.class
+>>>>>>> 1383b6251ec31119956c5a16846f859505d625f7
 dao\BidDAO.class
 dao\ProductDAO.class
