@@ -57,7 +57,7 @@ public class ReportDAO extends DAO{
 
     public void addReport(Report rep) throws SQLException {
         PreparedStatement stm = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
-                "VALUES ( ?, ?, ? )");
+                " VALUES ( ?, ?, ? )");
         stm.setLong(1, rep.getReporterId());
         stm.setLong(2, rep.getReportedId());
         stm.setString(3, rep.getComment());

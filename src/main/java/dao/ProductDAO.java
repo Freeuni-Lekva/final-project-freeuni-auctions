@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class ProductDAO extends DAO{
     private static final String TABLE_NAME = "products";
@@ -82,7 +81,7 @@ public class ProductDAO extends DAO{
     private void addProduct(Product p) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
-                    "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?");
+                    " VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setLong(1, p.getId());
             stmt.setString(2, p.getName());
             stmt.setLong(3, p.getAccountId());

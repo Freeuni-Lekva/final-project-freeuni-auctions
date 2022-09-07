@@ -63,7 +63,7 @@ public class UserDAO{
     //id, firstName, LastName, Passwrod, Role, Premium, Email
     public void addUser(User user) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
-                "VALUES ( ?, ?, ?, ?, ?, ?)");
+                " VALUES ( ?, ?, ?, ?, ?, ?)");
         stmt.setString(1, user.getUsername());
         stmt.setString(2, user.getPassword());
         stmt.setString(3, user.getRole().toString());

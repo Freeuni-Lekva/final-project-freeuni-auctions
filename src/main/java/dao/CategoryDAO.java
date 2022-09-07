@@ -5,7 +5,7 @@ import java.sql.*;
 import java.util.UUID;
 
 public class CategoryDAO {
-    public static final String ATTRIBUTE = "categoryDAO";
+    public static final String ATTRIBUTE = "CategoryDAO";
     private static final String TABLE_NAME = "categories";
     private Connection conn;
 
@@ -15,17 +15,21 @@ public class CategoryDAO {
 
     public Category getFromID(long category_id) throws SQLException {
         ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = " + category_id);
-        rs.next();
-        String name = rs.getString("name");
-        return new Category(category_id, name);
+        if (rs.next()) {
+            return new Category(rs.getLong("id"), rs.getString("name"));
+        }
+        return null;
     }
 
     public void addNewCategory(String name) throws SQLException {
-        conn.createStatement().executeQuery("INSERT INTO " + TABLE_NAME + " VALUES (unhex(replace(uuid(),'-','')), " + name + ")");
+        conn.createStatement().executeUpdate("INSERT INTO " + TABLE_NAME + " VALUES (" + name + ")");
     }
 
     public Category getFromName(String name) throws SQLException {
-        // TODO
+        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE name = " + name);
+        if (rs.next()) {
+            return new Category(rs.getLong("id"), rs.getString("name"));
+        }
         return null;
     }
 }
