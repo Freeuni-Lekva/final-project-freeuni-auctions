@@ -64,8 +64,9 @@
     <% User user = (User)(request.getSession().getAttribute(User.ATTRIBUTE)); %>
     <h1>Your balance is: $<%=user.getBalance()%></h1><br>
     <form method="post" action="balance">
+        <label for="amount">Amount: </label>
         <input type="number" id="amount" name="amount">
-        <input type="button" value="update balance">
+        <input type="submit" value="update balance">
     </form>
 </body>
 </html>

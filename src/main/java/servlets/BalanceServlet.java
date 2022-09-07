@@ -1,5 +1,7 @@
 package servlets;
 
+import models.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +18,9 @@ public class BalanceServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        super.doPost(req, res);
+        long newBalance = Long.parseLong(req.getParameter("amount"));
+        User user = (User)(req.getSession().getAttribute(User.ATTRIBUTE));
+        user.setBalance(newBalance);
+        req.getRequestDispatcher("/WEB-INF/balance.jsp").forward(req, res);
     }
 }
