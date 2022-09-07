@@ -31,11 +31,11 @@ public class ProductDAO extends DAO{
         }
     }
 
-    public List<Product> getProductsByCategory(UUID category_id) {
+    public List<Product> getProductsByCategory(long category_id) {
         List<Product> res = new ArrayList<>();
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE category_id = ? ORDER BY date_posted desc");
-            stmt.setString(1, category_id.toString());
+            stmt.setLong(1, category_id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 res.add(getSingleProduct(rs));
@@ -47,11 +47,11 @@ public class ProductDAO extends DAO{
         }
     }
 
-    public List<Product> getProductsByUser(UUID user_id) {
+    public List<Product> getProductsByUser(long user_id) {
         List<Product> res = new ArrayList<>();
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE user_id = ? ORDER BY date_posted desc");
-            stmt.setString(1, user_id.toString());
+            stmt.setLong(1, user_id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
                 res.add(getSingleProduct(rs));
