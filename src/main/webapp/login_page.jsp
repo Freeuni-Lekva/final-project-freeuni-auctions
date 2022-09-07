@@ -35,7 +35,7 @@
         <input type="submit" value="Login"><br><br>
     </form>
 
-    <a href="create_acc">Create new Account</a>
+    <a href="signup_page.jsp">Create new Account</a>
 </body>
 <%--<body>--%>
 <%--<div class="background-image"></div>--%>
