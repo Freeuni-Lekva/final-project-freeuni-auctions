@@ -34,6 +34,9 @@ public abstract class User {
         return buff.toString();
     }
     public static String hashPassword(String str) throws NoSuchAlgorithmException {
+        if (str == null) {
+            return null;
+        }
         MessageDigest dsg = MessageDigest.getInstance("SHA");
         byte[] digest = dsg.digest(str.getBytes());
         String res = hexToString(digest);

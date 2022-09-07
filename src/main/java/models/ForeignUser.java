@@ -3,10 +3,12 @@ package models;
 import java.security.NoSuchAlgorithmException;
 
 public class ForeignUser extends User {
-
+    public static final String ATTRIBUTE = "foreignUser";
     public ForeignUser(String username, String email, String image) throws NoSuchAlgorithmException {
         super(-1, username, null, email, image, -1);
     }
+
+
 
     @Override
     public Role getRole() {

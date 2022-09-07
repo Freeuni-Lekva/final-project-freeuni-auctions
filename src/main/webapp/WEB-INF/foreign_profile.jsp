@@ -1,22 +1,17 @@
-<%@ page import="models.User" %>
+<%@ page import="models.ForeignUser" %>
 <%@ page import="dao.ProductDAO" %>
 <%@ page import="models.Product" %>
-<%@ page import="java.util.List" %>
-<%@ page import="models.RegularUser" %>
-<%@ page import="java.security.NoSuchAlgorithmException" %>
-<%@ page import="dao.ReviewDAO" %>
-<%@ page import="models.Review" %>
-<%@ page import="java.sql.SQLException" %><%--
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: admin
-  Date: 04.09.2022
-  Time: 18:17
+  Date: 07.09.2022
+  Time: 19:35
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>My Profile</title>
+    <title>${username}</title>
     <style>
         body {
             background-image: url("../images/bg.jpg");
@@ -95,21 +90,16 @@
 </head>
 <body>
     <div class="topnav">
+        <a href="profile">My Profile</a>
         <div class="topnav-right">
             <a href="homepage.jsp">Home</a>
             <a href="logout">Log out</a>
         </div>
     </div>
-    <% User user = (User) request.getSession().getAttribute(User.ATTRIBUTE); %>
-
+    <% ForeignUser user = (ForeignUser) request.getAttribute(ForeignUser.ATTRIBUTE); %>
     <h1><%=user.getUsername()%></h1>
     <img src="../images/blank-profile-picture.png" alt="profile picture" width="150" height="200">
     <h3><%=user.getEmail()%></h3>
-    <h2>Balance: $<%=user.getBalance()%></h2>
-    <form action="balance" method="get">
-        <input type="submit" value="Update Balance">
-    </form>
-    <p></p>
     <div class="tab">
         <button class="tablinks" onclick="openTab('Products')">Products</button>
         <button class="tablinks" onclick=openTab('Reviews')>Reviews</button>
@@ -133,6 +123,8 @@
         <h3>Reviews</h3>
     </div>
 
+
+
     <script>
         function openTab(tabName) {
             var i, tabcontent, tablinks;
@@ -148,7 +140,5 @@
             evt.currentTarget.className += " active";
         }
     </script>
-
-
 </body>
 </html>

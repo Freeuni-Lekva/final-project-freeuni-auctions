@@ -24,7 +24,7 @@
   </servlet>
   <servlet>
     <servlet-name>profile</servlet-name>
-    <servlet-class>servlets.getProfileServlet</servlet-class>
+    <servlet-class>servlets.GetMyProfileServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>profile</servlet-name>

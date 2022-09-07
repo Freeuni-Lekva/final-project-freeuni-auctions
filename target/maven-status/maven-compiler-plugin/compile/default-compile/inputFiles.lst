@@ -1,12 +1,13 @@
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\dao\ReviewDAO.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\models\Sale.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\models\Status.java
-C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\servlets\getProfileServlet.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\models\Administrator.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\servlets\ProductServlet.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\models\User.java
+C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\servlets\GetForeignProfileServlet.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\models\PremiumUser.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\models\Review.java
+C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\servlets\GetMyProfileServlet.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\servlets\InitListener.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\servlets\makeBidServlet.java
 C:\Users\admin\IdeaProjects\final-project-freeuni-auctions\src\main\java\servlets\BalanceServlet.java
