@@ -20,7 +20,7 @@
   </servlet>
   <servlet>
     <servlet-name>logout</servlet-name>
-    <servlet-class>servlets.logoutServlet</servlet-class>
+    <servlet-class>servlets.LogoutServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>profile</servlet-name>

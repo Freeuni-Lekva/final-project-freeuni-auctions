@@ -104,11 +104,11 @@ public class ProductDAO extends DAO{
 
     private Product getSingleProduct(ResultSet rs) {
         try {
-            UUID product_id = UUID.fromString(rs.getString("id"));
+            long product_id = rs.getLong("id");
             String name = rs.getString("product_name");
-            UUID account_id = UUID.fromString(rs.getString("account_id"));
-            UUID category_id = UUID.fromString(rs.getString("category_id"));
-            UUID bid_id = UUID.fromString(rs.getString("bid_id"));
+            long account_id = rs.getLong("account_id");
+            long category_id = rs.getLong("category_id");
+            long bid_id = rs.getLong("bid_id");
             BigDecimal currPrice = BigDecimal.valueOf(rs.getDouble("price"));
             String description = rs.getString("description");
             Status status = Status.valueOf(rs.getString("status"));
