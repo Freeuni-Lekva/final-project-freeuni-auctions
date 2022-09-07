@@ -10,11 +10,15 @@ DROP TABLE IF EXISTS sales;
 
 CREATE TABLE users
 (
-    id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    username VARCHAR(30),
+    id BIGINT(20) NOT NULL AUTO_INCREMENT,
+    username VARCHAR(30) NOT NULL,
     password_hash VARCHAR(255),
-    user_role VARCHAR(6), /* "admin", "normal", "guest" ? */
-    email VARCHAR(255) NOT NULL
+    user_role VARCHAR(10), /* "admin", "normal", "guest" ? */
+    premium TINYINT(1),
+    email VARCHAR(255) NOT NULL,
+    image VARCHAR(255),
+    balance BIGINT(20),
+    PRIMARY KEY (id)
     /* premium or not? */
 );
 

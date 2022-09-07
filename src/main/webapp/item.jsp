@@ -38,7 +38,7 @@
     <button type='button'>logout</button>
 </div>
 </form>
-<a href="WEB-INF/homepage.jsp" style="float: right; margin-right: 10px">homepage</a>
+<a href="homepage.jsp" style="float: right; margin-right: 10px">homepage</a>
 <h1 style="text-align: left; color: #A67079; font-family: 'Times New Roman',serif"> <%=prod.getName()%> </h1>
 <img src="<%=prod.getImage()%>"  alt="<%=prod.getName()%>"  width="300" height="300" style="float: left; margin-right: 15px;"/>
 <p>Date Posted: <%=prod.getDatePosted()%> End Date: <%=prod.getEndDate()%></p>

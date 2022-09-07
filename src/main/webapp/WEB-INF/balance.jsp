@@ -57,7 +57,7 @@
     <div class="topnav">
         <a href="profile">My Profile</a>
         <div class="topnav-right">
-            <a href="homepage.jsp">Home</a>
+            <a href="../homepage.jsp">Home</a>
             <a href="logout">Log out</a>
         </div>
     </div>
