@@ -10,15 +10,17 @@ public abstract class User {
     private String password;
     private final String email;
     private String image;
+    private long balance;
 
     public static final String ATTRIBUTE = "User";
 
-    public User(long id, String username, String password, String email, String image) throws NoSuchAlgorithmException {
+    public User(long id, String username, String password, String email, String image, long balance) throws NoSuchAlgorithmException {
         this.id = id;
         this.username = username;
         this.password = hashPassword(password);
         this.email = email;
         this.image = image;
+        this.balance = balance;
     }
 
     private static String hexToString(byte[] bytes) {
@@ -62,9 +64,13 @@ public abstract class User {
         this.image = image;
     }
 
-    //TODO: user must have following two methods
-    public abstract long getBalance();
-    public abstract long setBalance();
+    public  long getBalance() {
+        return this.balance;
+    }
+    public  void setBalance(long amount) {
+        this.balance = amount;
+    }
+
     public abstract Role getRole();
     public abstract boolean isPremium();
     public abstract void makeChanges();

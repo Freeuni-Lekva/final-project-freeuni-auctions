@@ -2,13 +2,8 @@ package dao;
 
 import models.*;
 
-import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import javax.sql.DataSource;
-import java.util.UUID;
 
 public class UserDAO{
     private static final String TABLE_NAME = "users";
@@ -21,45 +16,49 @@ public class UserDAO{
     public UserDAO() {
 
     }
-    public User getUserByID(long id) throws SQLException, NoSuchAlgorithmException {
+    public User getUserByID(long id, boolean isForeign) throws SQLException, NoSuchAlgorithmException {
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE id = ?");
         stmt.setLong(1,id);
         ResultSet rs = stmt.executeQuery();
         rs.next();
         stmt.close();
-        return getUser(rs);
+        return getUser(rs, isForeign);
 
     }
-    private User getUser(ResultSet rs) throws SQLException, NoSuchAlgorithmException {
-        long id = Long.parseLong(rs.getString("id"));
+    private User getUser(ResultSet rs, boolean isForeign) throws SQLException, NoSuchAlgorithmException {
         String username = rs.getString("username");
-        String password = rs.getString("password");
         String email = rs.getString("email");
         String image = rs.getString("image");
+        if (isForeign) {
+            return new ForeignUser(username, email, image);
+        }
+        long id = Long.parseLong(rs.getString("id"));
+        String password = rs.getString("password");
         Role role = Role.valueOf(rs.getString("role"));
+        long balance = rs.getLong("balance");
         switch(role) {
             case Administator:
-                return new Administrator(id, username, password, email, image);
+                return new Administrator(id, username, password, email, image, balance);
             case Regular:
-                return new RegularUser(id, username, password, email, image);
+                return new RegularUser(id, username, password, email, image, balance);
         }
         return null;
     }
-    public User getUserByUsername(String username) throws SQLException, NoSuchAlgorithmException {
+    public User getUserByUsername(String username, boolean isForeign) throws SQLException, NoSuchAlgorithmException {
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE username = ?");
         stmt.setString(1,username);
         ResultSet rs = stmt.executeQuery();
         rs.next();
         stmt.close();
-        return getUser(rs);
+        return getUser(rs, isForeign);
     }
-    public User getUserByEmail(String email) throws SQLException, NoSuchAlgorithmException {
+    public User getUserByEmail(String email, boolean isForeign) throws SQLException, NoSuchAlgorithmException {
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE email = ?");
         stmt.setString(1,email);
         ResultSet rs = stmt.executeQuery();
         rs.next();
         stmt.close();
-        return getUser(rs);
+        return getUser(rs, isForeign);
     }
     //id, firstName, LastName, Passwrod, Role, Premium, Email
     public void addUser(User user) throws SQLException {
@@ -74,7 +73,7 @@ public class UserDAO{
         stmt.executeQuery();
         stmt.close();
     }
-    public boolean contains(String email) throws SQLException {
+    public boolean containsEmail(String email) throws SQLException {
         PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE email = ?");
         stmt.setString(1,email);
         ResultSet rs = stmt.executeQuery();

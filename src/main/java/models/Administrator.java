@@ -4,8 +4,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class Administrator extends User {
 
-    public Administrator(long id, String username, String password, String email, String image) throws NoSuchAlgorithmException {
-        super(id, username, password, email, image);
+    public Administrator(long id, String username, String password, String email, String image, long balance) throws NoSuchAlgorithmException {
+        super(id, username, password, email, image, balance);
     }
 
     @Override
@@ -21,15 +21,5 @@ public class Administrator extends User {
     @Override
     public void makeChanges() {
 
-    }
-
-    @Override
-    public long getBalance() {
-        return 0;
-    }
-
-    @Override
-    public long setBalance() {
-        return 0;
     }
 }

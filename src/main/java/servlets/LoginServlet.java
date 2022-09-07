@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
         try {
             if(users.correct(req.getParameter("email"), hashed)){
                 RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/homepage.jsp");
-                req.getSession().setAttribute(User.ATTRIBUTE, users.getUserByEmail(req.getParameter("email")));
+                req.getSession().setAttribute(User.ATTRIBUTE, users.getUserByEmail(req.getParameter("email"), false));
                 disp.forward(req,res);
             } else {
                 RequestDispatcher disp = req.getRequestDispatcher("tryAgain.jsp");
