@@ -4,8 +4,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class ForeignUser extends User {
 
-    public ForeignUser(String username, String password, String email, long id) throws NoSuchAlgorithmException {
-        super(username, password, email, id);
+    public ForeignUser(long id, String username, String password, String email, String image) throws NoSuchAlgorithmException {
+        super(id, username, password, email, image);
     }
 
     @Override
@@ -21,5 +21,15 @@ public class ForeignUser extends User {
     @Override
     public void makeChanges() {
 
+    }
+
+    @Override
+    public long getBalance() {
+        return 0;
+    }
+
+    @Override
+    public long setBalance() {
+        return 0;
     }
 }

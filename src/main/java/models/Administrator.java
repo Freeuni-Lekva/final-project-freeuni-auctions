@@ -22,4 +22,14 @@ public class Administrator extends User {
     public void makeChanges() {
 
     }
+
+    @Override
+    public long getBalance() {
+        return 0;
+    }
+
+    @Override
+    public long setBalance() {
+        return 0;
+    }
 }

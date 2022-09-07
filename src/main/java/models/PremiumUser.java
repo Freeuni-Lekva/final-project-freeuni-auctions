@@ -12,4 +12,14 @@ public class PremiumUser extends RegularUser {
     public boolean isPremium() {
         return true;
     }
+
+    @Override
+    public long getBalance() {
+        return super.getBalance();
+    }
+
+    @Override
+    public long setBalance() {
+        return super.setBalance();
+    }
 }

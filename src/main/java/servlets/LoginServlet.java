@@ -1,6 +1,7 @@
 package servlets;
 
 import dao.UserDAO;
+import models.RegularUser;
 import models.User;
 
 import javax.servlet.RequestDispatcher;

@@ -42,9 +42,6 @@ public abstract class User {
         return username;
     }
 
-    public String getPassword() {
-        return password;
-    }
     public long getId() {
         return id;
     }
@@ -61,6 +58,9 @@ public abstract class User {
         this.image = image;
     }
 
+    //TODO: user must have following two methods
+    public abstract long getBalance();
+    public abstract long setBalance();
     public abstract Role getRole();
     public abstract boolean isPremium();
     public abstract void makeChanges();
