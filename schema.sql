@@ -11,8 +11,7 @@ DROP TABLE IF EXISTS sales;
 CREATE TABLE users
 (
     id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(30),
-    last_name VARCHAR(30),
+    username VARCHAR(30),
     password_hash VARCHAR(255),
     user_role VARCHAR(6), /* "admin", "normal", "guest" ? */
     email VARCHAR(255) NOT NULL
