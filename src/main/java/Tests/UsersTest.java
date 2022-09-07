@@ -27,8 +27,11 @@ public class UsersTest {
         UserDAO users = new UserDAO();
         User us = new RegularUser(0, "X", "B", "X", "SMTHN", 0);
         users.addUser(us);
+        us.setId(users.getUserByUsername("X", false).getId());
         assertTrue(users.containsEmail("X"));
         assertTrue(users.containsUsername("X"));
-        assertEquals(users.getUserByEmail("X", false), us);
+        assertTrue(users.getUserByEmail("X", false).equals(us));
+        assertTrue(users.getUserByID(us.getId(), false).equals(us));
     }
+
 }

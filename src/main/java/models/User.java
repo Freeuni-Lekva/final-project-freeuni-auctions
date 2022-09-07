@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
 
 public abstract class User {
-    private final long id;
+    private long id;
     private String username;
     private String password;
     private final String email;
@@ -90,5 +90,9 @@ public abstract class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, username, password, email, image, balance);
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }
