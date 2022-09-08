@@ -43,7 +43,7 @@ public class SearchServlet extends HttpServlet {
             results = new ArrayList<>(productDAO.getProductsByCategory(category.getId()));
         }
         req.setAttribute("items_to_display", results);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("homepage.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/homepage.jsp");
         dispatcher.forward(req, resp);
     }
 }
