@@ -21,7 +21,7 @@
             <div class="home-container2">
                 <%
                     String file_name = (String) request.getParameter("filename");
-                    if (file_name == null) {
+                    if (file_name == null || file_name.equals("images/no-image-icon.png")) {
                         session.setAttribute("itemUploadImage", "images/no-image-icon.png");
                 %>
                 <br>
@@ -72,7 +72,7 @@
                                 id="itemPrice"
                                 name="itemPrice"
                                 type="number"
-                                placeholder="placeholder"
+                                placeholder="Price"
                                 class="home-price-input input"
                         />
                     </div>
@@ -83,7 +83,7 @@
                                 id="itemCategory"
                                 name="itemCategory"
                                 type="text"
-                                placeholder="placeholder"
+                                placeholder="Category"
                                 class="home-category-input input"
                         />
                     </div>

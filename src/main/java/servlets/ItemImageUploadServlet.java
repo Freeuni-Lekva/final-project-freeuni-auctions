@@ -22,7 +22,7 @@ public class ItemImageUploadServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String file_name = "";
+        String file_name = "images/no-image-icon.png";
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         boolean isMultipartContent = ServletFileUpload.isMultipartContent(request);
