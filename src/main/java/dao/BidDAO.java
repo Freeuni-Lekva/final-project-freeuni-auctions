@@ -9,7 +9,6 @@ import java.util.List;
 public class BidDAO extends DAO{
     public static final String ATTRIBUTE = "BidDAO";
     private static final String TABLE_NAME = "bids";
-    public static final String ATTRIBUTE = "bidDAO";
     private Connection conn;
 
     public BidDAO(Connection conn) {
