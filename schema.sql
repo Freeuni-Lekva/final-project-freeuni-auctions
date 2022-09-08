@@ -48,9 +48,6 @@ CREATE TABLE products
     CONSTRAINT categoryIdFK FOREIGN KEY (category_id)
         REFERENCES categories(id)
         ON DELETE CASCADE
-    /*CONSTRAINT bidIdFK FOREIGN KEY (bid_id)
-        REFERENCES bids(id)
-        ON DELETE CASCADE*/
 );
 
 CREATE TABLE bids

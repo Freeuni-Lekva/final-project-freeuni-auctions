@@ -81,7 +81,7 @@ public class ProductDAO extends DAO{
         }
     }
 
-    private void addProduct(Product p) {
+    public void addProduct(Product p) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
                     " VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -91,10 +91,10 @@ public class ProductDAO extends DAO{
             stmt.setString(4, p.getDescription());
             stmt.setLong(5, p.getCategoryId());
             stmt.setLong(6, p.getBidId());
-            stmt.setBigDecimal(7, p.getCurrPrice());
+            stmt.setLong(7, p.getCurrPrice());
             stmt.setString(8, p.getStatus().toString());
-            stmt.setDate(9, (Date) p.getDatePosted());
-            stmt.setDate(10, (Date) p.getEndDate());
+            stmt.setDate(9, new java.sql.Date(p.getDatePosted().getTime()));
+            stmt.setDate(10, new java.sql.Date(p.getEndDate().getTime()));
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException e) {
@@ -111,7 +111,7 @@ public class ProductDAO extends DAO{
             long account_id = rs.getLong("account_id");
             long category_id = rs.getLong("category_id");
             long bid_id = rs.getLong("bid_id");
-            BigDecimal currPrice = BigDecimal.valueOf(rs.getDouble("price"));
+            long currPrice = rs.getLong("price");
             String description = rs.getString("description");
             Status status = Status.valueOf(rs.getString("status"));
             Date datePosted = rs.getDate("date_posted");
@@ -139,5 +139,20 @@ public class ProductDAO extends DAO{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean containsProduct(String name) {
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE product_name = ?");
+            stmt.setString(1,name);
+            ResultSet rs = stmt.executeQuery();
+            boolean empty = rs.next();
+            stmt.close();
+            return empty;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

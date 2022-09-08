@@ -7,7 +7,7 @@ public class Product {
     private long id, account_id, category_id, bid_id;
     private String name;
     private String description;
-    private BigDecimal currPrice;
+    private long currPrice;
     private Status status;
     private Date datePosted;
     private Date endDate;
@@ -15,7 +15,7 @@ public class Product {
 
     // this constructor is used by productDAO only to get a product from a database.
     public Product(long id, long account_id, long category_id, String name,
-                   String description, long bid_id, BigDecimal currPrice, Status status,
+                   String description, long bid_id, long currPrice, Status status,
                    Date datePosted, Date endDate, String image) {
 
         this.id = id;
@@ -36,9 +36,10 @@ public class Product {
     }
 
     // used when creating a new product. CURRENT TIME of creating this constructor gets assigned to datePosted.
-    public Product(long account_id, long category_id, String name, BigDecimal price, Date endDate) {
+    public Product(long account_id, long category_id, String name, long price, Date endDate) {
         this.account_id = account_id;
         this.category_id = category_id;
+        this.bid_id = -1;
         this.name = name;
         this.currPrice = price;
         this.status = Status.valueOf("available");
@@ -80,7 +81,7 @@ public class Product {
         return description;
     }
 
-    public BigDecimal getCurrPrice() {
+    public long getCurrPrice() {
         return currPrice;
     }
 
