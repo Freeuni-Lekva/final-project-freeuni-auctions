@@ -22,7 +22,7 @@ public class CategoryDAO {
     }
 
     public void addNewCategory(String name) throws SQLException {
-        conn.createStatement().executeUpdate("INSERT INTO " + TABLE_NAME + " VALUES (" + name + ")");
+        conn.createStatement().executeUpdate("INSERT INTO " + TABLE_NAME + " (name) VALUES (" + name + ")");
     }
 
     public Category getFromName(String name) throws SQLException {

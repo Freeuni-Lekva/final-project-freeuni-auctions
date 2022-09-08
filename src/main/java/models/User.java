@@ -3,9 +3,10 @@ package models;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 public abstract class User {
-    private final long id;
+    private long id;
     private String username;
     private String password;
     private final String email;
@@ -77,4 +78,21 @@ public abstract class User {
     public abstract Role getRole();
     public abstract boolean isPremium();
     public abstract void makeChanges();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && balance == user.balance && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(email, user.email) && Objects.equals(image, user.image);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, password, email, image, balance);
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 }

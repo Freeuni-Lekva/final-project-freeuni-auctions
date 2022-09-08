@@ -9,7 +9,6 @@ import java.util.List;
 public class BidDAO extends DAO{
     public static final String ATTRIBUTE = "BidDAO";
     private static final String TABLE_NAME = "bids";
-    public static final String ATTRIBUTE = "bidDAO";
     private Connection conn;
 
     public BidDAO(Connection conn) {
@@ -51,6 +50,6 @@ public class BidDAO extends DAO{
     }
 
     public void addNewBid(long bidder_id, long product_id, BigDecimal amount) throws SQLException {
-        conn.createStatement().executeQuery("INSERT INTO " + TABLE_NAME + " VALUES (" + bidder_id + ", " + product_id + ", " + amount + ")");
+        conn.createStatement().executeQuery("INSERT INTO " + TABLE_NAME + " (bidder_id, product_id, amount, bid_time) VALUES (" + bidder_id + ", " + product_id + ", " + amount + ")");
     }
 }

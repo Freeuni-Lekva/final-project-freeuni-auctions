@@ -23,8 +23,9 @@ public class ProductDAO extends DAO{
             stmt.setLong(1, product_id);
             ResultSet rs = stmt.executeQuery();
             rs.next();
+            Product pr = getSingleProduct(rs);
             stmt.close();
-            return getSingleProduct(rs);
+            return pr;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

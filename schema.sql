@@ -7,15 +7,20 @@ DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS sales;
+DROP TABLE IF EXISTS reports;
+DROP TABLE IF EXISTS reviews;
 
 CREATE TABLE users
 (
-    id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    first_name VARCHAR(30),
-    last_name VARCHAR(30),
+    id BIGINT(20) NOT NULL AUTO_INCREMENT,
+    username VARCHAR(30) NOT NULL,
     password_hash VARCHAR(255),
-    user_role VARCHAR(6), /* "admin", "normal", "guest" ? */
-    email VARCHAR(255) NOT NULL
+    user_role VARCHAR(10), /* "admin", "normal", "guest" ? */
+    premium TINYINT(1),
+    email VARCHAR(255) NOT NULL,
+    image VARCHAR(255),
+    balance BIGINT(20),
+    PRIMARY KEY (id)
     /* premium or not? */
 );
 
@@ -69,5 +74,37 @@ CREATE TABLE sales
     id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     product_id  BIGINT(20) NOT NULL,
     user_id     BIGINT(20) NOT NULL
+    sale_date DATE,
+    price NUMERIC
+);
+CREATE TABLE reports
+(
+    id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    reporter_id BIGINT(20) NOT NULL,
+    reported_id BIGINT(20) NOT NULL,
+    comment VARCHAR(300)
+    CONSTRAINT reporterIDFK FOREIGN KEY (reported_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE,
+    CONSTRAINT reportedIDFK FOREIGN KEY (reported_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE
 );
 
+CREATE TABLE reviews
+(
+    id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    acount_id BIGINT(20) NOT NULL,
+    product_id BIGINT(20) NOT NULL,
+    costumer_id BIGINT(20) NOT NULL,
+    reviewText VARCHAR(300)
+    CONSTRAINT accIDFK FOREIGN KEY (account_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE,
+    CONSTRAINT prodIDFK FOREIGN KEY (product_id)
+        REFERENCES products(id)
+        ON DELETE CASCADE
+    CONSTRAINT costIDFK FOREIGN KEY (costumer_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE
+);
