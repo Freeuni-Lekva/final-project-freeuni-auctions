@@ -1,11 +1,13 @@
 package dao;
 
+import com.beust.ah.A;
 import models.Product;
 import models.Status;
 
 import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ProductDAO extends DAO{
@@ -93,7 +95,7 @@ public class ProductDAO extends DAO{
             stmt.setString(8, p.getStatus().toString());
             stmt.setDate(9, (Date) p.getDatePosted());
             stmt.setDate(10, (Date) p.getEndDate());
-            stmt.executeQuery();
+            stmt.executeUpdate();
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -124,7 +126,18 @@ public class ProductDAO extends DAO{
 
 
     public ArrayList<Product> getProductsByName(String phrase) {
-        //TODO
-        return new ArrayList<>();
+        ArrayList<Product> res = new ArrayList<>();
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE product_name LIKE ?");
+            stmt.setString(1, phrase);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                res.add(getSingleProduct(rs));
+            }
+            stmt.close();
+            return res;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
