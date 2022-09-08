@@ -40,6 +40,7 @@ CREATE TABLE products
     bid_id BIGINT DEFAULT NULL,
     price NUMERIC,
     status VARCHAR(30), /* "available", "sold" */
+    image VARCHAR(30),
     date_posted DATE,
     end_date DATE,
     CONSTRAINT accountIdFK FOREIGN KEY (account_id)
