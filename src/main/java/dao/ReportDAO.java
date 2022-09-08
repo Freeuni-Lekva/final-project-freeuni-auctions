@@ -21,8 +21,9 @@ public class ReportDAO extends DAO{
         stm.setLong(1, id);
         ResultSet rs = stm.executeQuery();
         if(rs.next()){
+            Report rep = createReport(rs);
             stm.close();
-            return createReport(rs);
+            return rep;
         } else {
             stm.close();
             return null;
