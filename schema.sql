@@ -68,6 +68,14 @@ CREATE TABLE sales
 (
     id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     product_id  BIGINT(20) NOT NULL,
-    user_id     BIGINT(20) NOT NULL
+    user_id     BIGINT(20) NOT NULL,
+    date TIMESTAMP DEFAULT NOW(),
+    price NUMERIC,
+    CONSTRAINT saleUserIdFK FOREIGN KEY (user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE,
+    CONSTRAINT saleProductIdFK FOREIGN KEY (product_id)
+        REFERENCES products(id)
+        ON DELETE CASCADE
 );
 
