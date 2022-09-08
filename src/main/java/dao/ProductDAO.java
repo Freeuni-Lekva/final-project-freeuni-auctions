@@ -84,7 +84,7 @@ public class ProductDAO extends DAO{
     public void addProduct(Product p) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
-                    " VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    " VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setLong(1, p.getId());
             stmt.setString(2, p.getName());
             stmt.setLong(3, p.getAccountId());
@@ -95,6 +95,7 @@ public class ProductDAO extends DAO{
             stmt.setString(8, p.getStatus().toString());
             stmt.setDate(9, new java.sql.Date(p.getDatePosted().getTime()));
             stmt.setDate(10, new java.sql.Date(p.getEndDate().getTime()));
+            stmt.setString(11, p.getImage());
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException e) {
