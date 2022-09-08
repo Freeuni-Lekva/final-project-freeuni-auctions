@@ -73,7 +73,7 @@ CREATE TABLE sales
 (
     id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     product_id  BIGINT(20) NOT NULL,
-    user_id     BIGINT(20) NOT NULL
+    user_id     BIGINT(20) NOT NULL,
     sale_date DATE,
     price NUMERIC
 );
@@ -82,7 +82,7 @@ CREATE TABLE reports
     id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     reporter_id BIGINT(20) NOT NULL,
     reported_id BIGINT(20) NOT NULL,
-    comment VARCHAR(300)
+    comment VARCHAR(300),
     CONSTRAINT reporterIDFK FOREIGN KEY (reported_id)
         REFERENCES users(id)
         ON DELETE CASCADE,
@@ -94,16 +94,16 @@ CREATE TABLE reports
 CREATE TABLE reviews
 (
     id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    acount_id BIGINT(20) NOT NULL,
+    account_id BIGINT(20) NOT NULL,
     product_id BIGINT(20) NOT NULL,
     costumer_id BIGINT(20) NOT NULL,
-    reviewText VARCHAR(300)
+    reviewText VARCHAR(300),
     CONSTRAINT accIDFK FOREIGN KEY (account_id)
         REFERENCES users(id)
         ON DELETE CASCADE,
     CONSTRAINT prodIDFK FOREIGN KEY (product_id)
         REFERENCES products(id)
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
     CONSTRAINT costIDFK FOREIGN KEY (costumer_id)
         REFERENCES users(id)
         ON DELETE CASCADE
