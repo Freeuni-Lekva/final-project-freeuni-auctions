@@ -82,18 +82,17 @@ public class ProductDAO extends DAO{
     private void addProduct(Product p) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
-                    " VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            stmt.setLong(1, p.getId());
-            stmt.setString(2, p.getName());
-            stmt.setLong(3, p.getAccountId());
-            stmt.setString(4, p.getDescription());
-            stmt.setLong(5, p.getCategoryId());
-            stmt.setLong(6, p.getBidId());
-            stmt.setBigDecimal(7, p.getCurrPrice());
-            stmt.setString(8, p.getStatus().toString());
-            stmt.setDate(9, (Date) p.getDatePosted());
-            stmt.setDate(10, (Date) p.getEndDate());
-            stmt.executeQuery();
+                    "(product_name, account_id, description, category_id, bid_id, price, status, date_posted, end_date) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            stmt.setString(1, p.getName());
+            stmt.setLong(2, p.getAccountId());
+            stmt.setString(3, p.getDescription());
+            stmt.setLong(4, p.getCategoryId());
+            stmt.setLong(5, p.getBidId());
+            stmt.setBigDecimal(6, p.getCurrPrice());
+            stmt.setString(7, p.getStatus().toString());
+            stmt.setDate(8, (Date) p.getDatePosted());
+            stmt.setDate(9, (Date) p.getEndDate());
+            stmt.executeUpdate();
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
