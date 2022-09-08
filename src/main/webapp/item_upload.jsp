@@ -22,6 +22,7 @@
                 <%
                     String file_name = (String) request.getParameter("filename");
                     if (file_name == null) {
+                        session.setAttribute("itemUploadImage", "images/no-image-icon.png");
                 %>
                 <br>
                 <img src="images/no-image-icon.png" width="250" height="250" alt="image" class="home-image">
@@ -30,10 +31,11 @@
                 %><br>
                 <img width="250" height="250" alt="image" class="home-image" src="images/itemImages/<%=file_name%>">
                 <%
-                        out.println(file_name + " File uploaded successfuly");
+                        session.setAttribute("itemUploadImage", "images/itemImages/"+file_name);
+                        out.println(file_name + " File uploaded successfully");
                     }
                 %>
-                <form action="itemUpload" enctype="multipart/form-data" method="post" class="home-form">
+                <form action="itemImageUpload" enctype="multipart/form-data" method="post" class="home-form">
                     Select <input style="text-align: left" type="file" name="file2"/><br>
                     <input type="submit" value="upload"/>
                 </form>

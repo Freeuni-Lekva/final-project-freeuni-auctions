@@ -14,10 +14,6 @@ public class ItemUploadSubmitServlet extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        Enumeration<String> parameterNames = request.getParameterNames();
-        if(parameterNames.hasMoreElements()){
-            parameterNames.nextElement();
-            System.out.println("dasda");
-        }
+
     }
 }
