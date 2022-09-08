@@ -14,7 +14,7 @@ public class ReviewDAO extends DAO{
     public ReviewDAO(Connection conn){
         this.conn = conn;
     }
-    
+
     public Review getReviewFromID(long id)  throws SQLException {
         PreparedStatement stm = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE id = ?");
         stm.setLong(1, id);
