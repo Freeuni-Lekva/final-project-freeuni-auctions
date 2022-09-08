@@ -57,18 +57,18 @@
     padding: 5px;
 }
 
-/* Clearfix (clear floats) */
+
 .row::after {
     content: "";
     clear: both;
     display: table;
 }
-/* Create a column layout with Flexbox */
+
 .row {
     display: flex;
 }
 
-/* Left column (menu) */
+
 .left {
     flex: 35%;
     padding: 15px 0;
