@@ -1,33 +1,40 @@
 package models;
 
+import java.util.Objects;
 import java.util.UUID;
 
 public class Review{
-    private long id, account_id, product_id, costumer_id;
+    private long id, user_id, product_id, costumer_id;
     private String reviewText;
 
-    /*
-    poor,
-    average,
-    good,
-    great,
-    excellent
-    */
+
     // to get a product from a database
-    public Review(long id, long account_id, long product_id, long costumer_id, String reviewText){
+    public Review(long id, long user_id, long product_id, long costumer_id, String reviewText){
         this.id = id;
-        this.account_id = account_id;
+        this.user_id = user_id;
         this.product_id = product_id;
         this.costumer_id = costumer_id;
         this.reviewText = reviewText;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Review review = (Review) o;
+        return id == review.id && user_id == review.user_id && product_id == review.product_id && costumer_id == review.costumer_id && reviewText.equals(review.reviewText);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, user_id, product_id, costumer_id, reviewText);
     }
 
     public void setId(long id) {
         this.id = id;
     }
 
-    public void setAccount_id(long account_id) {
-        this.account_id = account_id;
+    public void setAccount_id(long user_id) {
+        this.user_id = user_id;
     }
 
     public void setProduct_id(long product_id) {
@@ -46,8 +53,8 @@ public class Review{
         return id;
     }
 
-    public long getAccount_id() {
-        return account_id;
+    public long getUser_id() {
+        return user_id;
     }
 
     public long getProduct_id() {
