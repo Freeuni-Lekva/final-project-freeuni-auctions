@@ -23,7 +23,10 @@ public class ReportDAO extends DAO{
         if(rs.next()){
             stm.close();
             return createReport(rs);
-        } else return null;
+        } else {
+            stm.close();
+            return null;
+        }
     }
     public List<Report> getAllReportForAccount(long reported_id) throws SQLException {
         List<Report> res = new ArrayList<Report>();
@@ -33,6 +36,7 @@ public class ReportDAO extends DAO{
         while(rs.next()){
             res.add(createReport(rs));
         }
+        stm.close();
         return res;
     }
     public List<Report> getAllReportFromAccount(long reporter_id) throws SQLException {
@@ -41,9 +45,9 @@ public class ReportDAO extends DAO{
         stm.setLong(1, reporter_id);
         ResultSet rs = stm.executeQuery();
         while(rs.next()){
-            stm.close();
             res.add(createReport(rs));
         }
+        stm.close();
         return res;
     }
 
@@ -61,7 +65,7 @@ public class ReportDAO extends DAO{
         stm.setLong(1, rep.getReporterId());
         stm.setLong(2, rep.getReportedId());
         stm.setString(3, rep.getComment());
-        stm.executeQuery();
+        stm.executeUpdate();
         stm.close();
     }
 }

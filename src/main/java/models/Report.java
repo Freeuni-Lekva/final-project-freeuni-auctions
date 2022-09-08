@@ -1,4 +1,5 @@
 package models;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Report{
@@ -42,5 +43,18 @@ public class Report{
 
     public void setReportedId(long reported_id) {
         this.reported_id = reported_id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Report report = (Report) o;
+        return id == report.id && reporter_id == report.reporter_id && reported_id == report.reported_id && Objects.equals(comment, report.comment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, reporter_id, reported_id, comment);
     }
 }
