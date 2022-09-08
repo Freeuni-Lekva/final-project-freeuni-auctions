@@ -33,6 +33,7 @@ public class ReviewDAO extends DAO{
         while(rs.next()){
             res.add(createReview(rs));
         }
+        stm.close();
         return res;
     }
     public List<Review> getAllReviewsForProduct(long product_id) throws SQLException {
@@ -43,6 +44,7 @@ public class ReviewDAO extends DAO{
         while(rs.next()){
             res.add(createReview(rs));
         }
+        stm.close();
         return res;
     }
 
@@ -62,7 +64,7 @@ public class ReviewDAO extends DAO{
         stm.setLong(2, rev.getProduct_id());
         stm.setLong(3, rev.getCostumer_id());
         stm.setString(4, rev.getReviewText());
-        stm.executeQuery();
+        stm.executeUpdate();
         stm.close();
     }
 }
