@@ -79,7 +79,7 @@ public class ProductDAO extends DAO{
         }
     }
 
-    private void addProduct(Product p) {
+    public void addProduct(Product p) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
                     "(product_name, account_id, description, category_id, bid_id, price, status, date_posted, end_date) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)");
