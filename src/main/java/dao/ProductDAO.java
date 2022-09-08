@@ -1,13 +1,10 @@
 package dao;
 
-import com.beust.ah.A;
 import models.Product;
 import models.Status;
 
-import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class ProductDAO extends DAO{
@@ -90,7 +87,7 @@ public class ProductDAO extends DAO{
                     " VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setLong(1, p.getId());
             stmt.setString(2, p.getName());
-            stmt.setLong(3, p.getAccountId());
+            stmt.setLong(3, p.getUserId());
             stmt.setString(4, p.getDescription());
             stmt.setLong(5, p.getCategoryId());
             stmt.setLong(6, p.getBidId());
@@ -127,7 +124,7 @@ public class ProductDAO extends DAO{
         try {
             long product_id = rs.getLong("id");
             String name = rs.getString("product_name");
-            long account_id = rs.getLong("account_id");
+            long user_id = rs.getLong("user_id");
             long category_id = rs.getLong("category_id");
             long bid_id = rs.getLong("bid_id");
             long currPrice = rs.getLong("price");
@@ -136,7 +133,7 @@ public class ProductDAO extends DAO{
             Date datePosted = rs.getDate("date_posted");
             Date endDate = rs.getDate("end_date");
             String image = rs.getString("image");
-            return new Product(product_id, account_id, category_id, name,
+            return new Product(product_id, user_id, category_id, name,
                     description, bid_id, currPrice, status, datePosted, endDate, image);
         }   catch (SQLException e) {
             throw new RuntimeException(e);

@@ -34,7 +34,7 @@ CREATE TABLE products
 (
     id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     product_name VARCHAR(30),
-    account_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
     description VARCHAR(300),
     category_id BIGINT NOT NULL,
     bid_id BIGINT DEFAULT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE products
     image VARCHAR(30),
     date_posted DATE,
     end_date DATE,
-    CONSTRAINT accountIdFK FOREIGN KEY (account_id)
+    CONSTRAINT userIdFK FOREIGN KEY (user_id)
         REFERENCES users(id)
         ON DELETE CASCADE,
     CONSTRAINT categoryIdFK FOREIGN KEY (category_id)
@@ -91,11 +91,11 @@ CREATE TABLE reports
 CREATE TABLE reviews
 (
     id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    account_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
     product_id BIGINT NOT NULL,
     costumer_id BIGINT NOT NULL,
     reviewText VARCHAR(300),
-    CONSTRAINT accIDFK FOREIGN KEY (account_id)
+    CONSTRAINT userIDFK FOREIGN KEY (user_id)
         REFERENCES users(id)
         ON DELETE CASCADE,
     CONSTRAINT prodIDFK FOREIGN KEY (product_id)
