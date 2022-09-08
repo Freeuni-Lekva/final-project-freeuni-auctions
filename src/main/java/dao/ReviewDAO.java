@@ -19,10 +19,12 @@ public class ReviewDAO extends DAO{
         PreparedStatement stm = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE id = ?");
         stm.setLong(1, id);
         ResultSet rs = stm.executeQuery();
+        Review rw = null;
         if(rs.next()){
-            stm.close();
-            return createReview(rs);
-        } else return null;
+            rw = createReview(rs);
+        }
+        stm.close();
+        return rw;
     }
 
     public List<Review> getAllReviewsForAccount(long account_id) throws SQLException {
