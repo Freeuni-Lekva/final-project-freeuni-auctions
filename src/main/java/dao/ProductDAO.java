@@ -82,6 +82,9 @@ public class ProductDAO extends DAO{
     }
 
     public void addProduct(Product p) {
+        if (containsId(p.getId())) {
+            return;
+        }
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
                     " VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -102,6 +105,21 @@ public class ProductDAO extends DAO{
             throw new RuntimeException(e);
         }
 
+    }
+
+    private boolean containsId(long id) {
+        List<Long> res = new ArrayList<>();
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME);
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()) {
+                res.add(rs.getLong(1));
+            }
+            stmt.close();
+            return res.contains(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
