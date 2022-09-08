@@ -83,6 +83,7 @@ CREATE TABLE reports
     reporter_id BIGINT(20) NOT NULL,
     reported_id BIGINT(20) NOT NULL,
     comment VARCHAR(300),
+    resolved TINYINT(1),
     CONSTRAINT reporterIDFK FOREIGN KEY (reported_id)
         REFERENCES users(id)
         ON DELETE CASCADE,

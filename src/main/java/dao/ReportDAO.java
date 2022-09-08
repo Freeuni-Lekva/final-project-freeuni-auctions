@@ -51,22 +51,35 @@ public class ReportDAO extends DAO{
         stm.close();
         return res;
     }
+    public List<Report> getUnresolved() throws SQLException {
+        List<Report> res = new ArrayList<Report>();
+        PreparedStatement stm = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE resolved = ?");
+        stm.setBoolean(1,false);
+        ResultSet rs = stm.executeQuery();
+        while(rs.next()){
+            res.add(createReport(rs));
+        }
+        stm.close();
+        return res;
+    }
 
     private Report createReport(ResultSet rs) throws SQLException {
         long id = Long.parseLong(rs.getString("id"));
         long reporter_id = Long.parseLong(rs.getString("reporter_id"));
         long reported_id = Long.parseLong(rs.getString("reported_id"));
         String comment = rs.getString("comment");
-        return new Report(id, reporter_id, reported_id, comment);
+        return new Report(id, reporter_id, reported_id, comment, rs.getBoolean("resolved"));
     }
 
     public void addReport(Report rep) throws SQLException {
         PreparedStatement stm = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
-                " (reporter_id, reported_id, comment) VALUES ( ?, ?, ? )");
+                " (reporter_id, reported_id, comment, resolved) VALUES ( ?, ?, ?, ? )");
         stm.setLong(1, rep.getReporterId());
         stm.setLong(2, rep.getReportedId());
         stm.setString(3, rep.getComment());
+        stm.setBoolean(4, rep.isResolved());
         stm.executeUpdate();
         stm.close();
     }
+
 }
