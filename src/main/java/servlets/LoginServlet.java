@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
                 req.getSession().setAttribute(User.ATTRIBUTE, users.getUserByEmail(req.getParameter("email"), false));
                 disp.forward(req,res);
             } else {
-                RequestDispatcher disp = req.getRequestDispatcher("tryAgain.jsp");
+                RequestDispatcher disp = req.getRequestDispatcher("try_again.jsp");
                 disp.forward(req,res);
             }
         } catch (SQLException | NoSuchAlgorithmException e) {
