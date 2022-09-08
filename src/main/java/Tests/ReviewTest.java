@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -34,12 +35,21 @@ public class ReviewTest {
         assertTrue(revFin.equals(revSt));
     }
     @Test
-    public void testCorrect(){
-        
+    public void getForAccountTest() throws SQLException {
+        Review rev2 = new Review(2, 1,1, 2, "ANOTHER REVIEW1");
+        Review rev3 = new Review(3, 1,1,3, "ANOTHER REVIEW2");
+        reviews.addReview(rev2);
+        reviews.addReview(rev3);
+        List<Review> ls = reviews.getAllReviewsForAccount(1);
+        assertTrue(ls.get(1).equals(rev2));
+        assertTrue(ls.get(2).equals(rev3));
     }
     @Test
-    public void testContains(){
-
-
+    public void getForProductTest() throws SQLException {
+        Product pr = new Product(1, categories.getFromName("categ").getId(), "product1", new BigDecimal(100), new Date(1));
+        prods.addProduct(pr);
+        Review rev4 = new Review(4,1, pr.getId(), 2, "ANOTHER REVIEW3");
+        List<Review> ls = reviews.getAllReviewsForProduct(pr.getId());
+        assertTrue(ls.get(1).equals(rev4));
     }
 }
