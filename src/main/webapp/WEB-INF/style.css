@@ -1,0 +1,101 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    front-family: 'Poppins', sans-serif;
+}
+
+.container{
+    width: 100%;
+    min-height: 10vh;
+    padding: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.search-bar{
+    width: 50%;
+    max-width: 700px;
+    background: #f1f1f1;
+    display: flex;
+    align-items: center;
+    border-radius: 60px;
+    padding: 5px 10px;
+}
+
+.search-bar input{
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 12px 10px;
+    font-size: 15px;
+    color: #cac7ff;
+}
+
+::placeholder{
+    color: #cac7ff;
+}
+
+.search-bar button img{
+    width: 15px;
+}
+.search-bar button{
+    border: 0;
+    border-radius: 60%;
+    width:40px;
+    height:40px;
+    background: #cac7ff;
+    cursor: pointer;
+}
+
+
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+/* Create a column layout with Flexbox */
+.row {
+    display: flex;
+}
+
+/* Left column (menu) */
+.left {
+    flex: 35%;
+    padding: 15px 0;
+}
+
+.left h2 {
+    padding-left: 8px;
+}
+
+.right {
+    flex: 65%;
+    padding: 15px;
+}
+
+#myMenu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myMenu li a {
+    padding: 12px;
+    text-decoration: none;
+    color: black;
+    display: block
+}
+
+#myMenu li a:hover {
+    background-color: #eee;
+}
