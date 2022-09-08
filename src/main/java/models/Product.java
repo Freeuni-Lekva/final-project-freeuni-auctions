@@ -2,7 +2,6 @@ package models;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.UUID;
 
 public class Product {
     private long id, account_id, category_id, bid_id;
@@ -45,6 +44,8 @@ public class Product {
         this.status = Status.valueOf("available");
         this.datePosted = new Date();
         this.endDate = endDate;
+        this.description = null;
+        this.image = null;
     }
 
     public void setDescription(String description) {
