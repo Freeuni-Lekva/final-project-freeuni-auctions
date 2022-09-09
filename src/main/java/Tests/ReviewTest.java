@@ -6,8 +6,6 @@ import models.RegularUser;
 import models.Review;
 import models.User;
 import org.junit.jupiter.api.Test;
-//mport org.testng.Assert;
-//import org.testng.asserts.Assertion;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;

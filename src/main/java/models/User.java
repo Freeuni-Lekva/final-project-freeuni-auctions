@@ -13,6 +13,8 @@ public abstract class User {
     private String image;
     private long balance;
 
+    private boolean isSuspended;
+
     public static final String ATTRIBUTE = "User";
 
     public User(long id, String username, String password, String email, String image, long balance) throws NoSuchAlgorithmException {
@@ -22,6 +24,17 @@ public abstract class User {
         this.email = email;
         this.image = image;
         this.balance = balance;
+        isSuspended = false;
+    }
+
+    public User(long id, String username, String password, String email, String image, long balance, boolean isSuspended) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.image = image;
+        this.balance = balance;
+        this.isSuspended = isSuspended;
     }
 
     private static String hexToString(byte[] bytes) {
@@ -90,6 +103,14 @@ public abstract class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, username, password, email, image, balance);
+    }
+
+    public boolean isSuspended() {
+        return isSuspended;
+    }
+
+    public void setSuspended(boolean suspended) {
+        isSuspended = suspended;
     }
 
     public void setId(long id) {

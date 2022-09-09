@@ -22,7 +22,6 @@ public class UserDAO{
         stmt.setLong(1,id);
         ResultSet rs = stmt.executeQuery();
         rs.next();
-
         return getUser(rs, isForeign, stmt);
 
     }
@@ -37,11 +36,12 @@ public class UserDAO{
         String password = rs.getString("password_hash");
         Role role = Role.valueOf(rs.getString("user_role"));
         long balance = rs.getLong("balance");
+        boolean sus = rs.getBoolean("suspended");
         switch(role) {
             case Administator:
                 return new Administrator(id, username, password, email, image, balance);
             case Regular:
-                return new RegularUser(id, username, password, email, image, balance);
+                return new RegularUser(id, username, password, email, image, balance, sus);
         }
         stmt.close();
         return null;
@@ -99,5 +99,14 @@ public class UserDAO{
         boolean empty = rs.next();
         stmt.close();
         return empty;
+    }
+    public boolean isSuspended(String email) throws SQLException, NoSuchAlgorithmException {
+        return getUserByEmail(email, false).isSuspended();
+    }
+    public void setSuspended(String email) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET suspended = 1 WHERE email = ?");
+        stmt.setString(1, email);
+        stmt.executeUpdate();
+        stmt.close();
     }
 }

@@ -1,3 +1,4 @@
+DROP DATABASE auctions_db;
 CREATE DATABASE IF NOT EXISTS auctions_db;
 
 USE auctions_db;
@@ -20,9 +21,11 @@ CREATE TABLE users
     email VARCHAR(255) NOT NULL,
     image VARCHAR(255),
     balance BIGINT,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    suspended TINYINT
     /* premium or not? */
 );
+ALTER TABLE users CHANGE suspended suspended TINYINT(4) DEFAULT 0 NOT NULL;
 
 CREATE TABLE categories
 (
@@ -78,7 +81,7 @@ CREATE TABLE sales
         REFERENCES users(id)
         ON DELETE CASCADE,
     CONSTRAINT saleProductIdFK FOREIGN KEY (product_id)
-        REFERENCES products(id)
+        REFERENCES products(id),
     sale_date DATE,
     price NUMERIC
 );
@@ -104,7 +107,7 @@ CREATE TABLE reviews
     product_id BIGINT NOT NULL,
     costumer_id BIGINT NOT NULL,
     reviewText VARCHAR(300),
-    CONSTRAINT userIDFK FOREIGN KEY (user_id)
+    CONSTRAINT reviewUserIDFK FOREIGN KEY (user_id)
         REFERENCES users(id)
         ON DELETE CASCADE,
     CONSTRAINT prodIDFK FOREIGN KEY (product_id)
