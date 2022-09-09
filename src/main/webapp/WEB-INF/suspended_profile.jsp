@@ -24,7 +24,7 @@
 <body>
 <h1 class ="no-background" style="color: #A67079">this user was blocked</h1>
 
-<a href="homepage.jsp" >Sign Up</a><br>
+<a href="homepage.jsp" >homepage</a><br>
 
 </body>
 </html>
