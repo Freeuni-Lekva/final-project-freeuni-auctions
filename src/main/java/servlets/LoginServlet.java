@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
         try {
-            if(users.correct(req.getParameter("email"), hashed)){
+            if(users.correct(req.getParameter("email"), hashed) && !users.isSuspended("email")){
                 RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/homepage.jsp");
                 req.getSession().setAttribute(User.ATTRIBUTE, users.getUserByEmail(req.getParameter("email"), false));
                 disp.forward(req,res);

@@ -44,7 +44,7 @@ public class ItemUploadSubmitServlet extends HttpServlet {
         long userId = user.getId();
         String name = request.getParameter("itemTitle");
         String description = request.getParameter("itemDescription");
-        BigDecimal price = BigDecimal.valueOf(Double.parseDouble(request.getParameter("itemPrice")));
+        long price = Long.parseLong((request.getParameter("itemPrice")));
         Date datePosted = new Date(System.currentTimeMillis());
         Date endDate = Date.valueOf(request.getParameter("endDate"));
         String imagePath = String.valueOf(request.getSession().getAttribute("itemUploadImage"));

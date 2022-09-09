@@ -8,6 +8,10 @@ public class RegularUser extends User {
         super(id, username, password, email, image, balance);
     }
 
+    public RegularUser(long id, String username, String password, String email, String image, long balance, boolean isSuspended) {
+        super(id, username, password, email, image, balance, isSuspended);
+    }
+
     @Override
     public Role getRole() {
         return Role.Regular;
