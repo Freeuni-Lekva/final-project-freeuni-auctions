@@ -1,26 +1,24 @@
 package models;
 
-import java.math.BigDecimal;
 import java.util.Date;
-import java.util.UUID;
 
 public class Product {
-    private long id, account_id, category_id, bid_id;
+    private long id, user_id, category_id, bid_id;
     private String name;
     private String description;
-    private BigDecimal currPrice;
+    private long currPrice;
     private Status status;
     private Date datePosted;
     private Date endDate;
     private String image;
 
     // this constructor is used by productDAO only to get a product from a database.
-    public Product(long id, long account_id, long category_id, String name,
-                   String description, long bid_id, BigDecimal currPrice, Status status,
+    public Product(long id, long user_id, long category_id, String name,
+                   String description, long bid_id, long currPrice, Status status,
                    Date datePosted, Date endDate, String image) {
 
         this.id = id;
-        this.account_id = account_id;
+        this.user_id = user_id;
         this.category_id = category_id;
         this.name = name;
         this.description = description;
@@ -37,14 +35,17 @@ public class Product {
     }
 
     // used when creating a new product. CURRENT TIME of creating this constructor gets assigned to datePosted.
-    public Product(long account_id, long category_id, String name, BigDecimal price, Date endDate) {
-        this.account_id = account_id;
+    public Product(long user_id, long category_id, String name, long price, Date endDate) {
+        this.user_id = user_id;
         this.category_id = category_id;
+        this.bid_id = -1;
         this.name = name;
         this.currPrice = price;
         this.status = Status.valueOf("available");
         this.datePosted = new Date();
         this.endDate = endDate;
+        this.description = null;
+        this.image = null;
     }
 
     public void setDescription(String description) {
@@ -55,8 +56,9 @@ public class Product {
         return id;
     }
 
-    public long getAccountId() {
-        return account_id;
+
+    public long getUserId() {
+        return user_id;
     }
 
     public long getCategoryId() {
@@ -79,7 +81,7 @@ public class Product {
         return description;
     }
 
-    public BigDecimal getCurrPrice() {
+    public long getCurrPrice() {
         return currPrice;
     }
 

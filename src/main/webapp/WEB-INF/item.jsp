@@ -50,6 +50,6 @@
     <input type="text" id="bid" name="bid"><br>
 </form>
 <p>CURRENT STATUS: <%=prod.getStatus()%></p>
-<p>POSTED BY: <%=users.getUserByID(prod.getAccountId(), false).getUsername()%> </p>
+<p>POSTED BY: <%=users.getUserByID(prod.getUserId(), false).getUsername()%> </p>
 </body>
 </html>

@@ -12,53 +12,50 @@ DROP TABLE IF EXISTS reviews;
 
 CREATE TABLE users
 (
-    id BIGINT(20) NOT NULL AUTO_INCREMENT,
+    id BIGINT NOT NULL AUTO_INCREMENT,
     username VARCHAR(30) NOT NULL,
     password_hash VARCHAR(255),
     user_role VARCHAR(10), /* "admin", "normal", "guest" ? */
-    premium TINYINT(1),
+    premium TINYINT,
     email VARCHAR(255) NOT NULL,
     image VARCHAR(255),
-    balance BIGINT(20),
+    balance BIGINT,
     PRIMARY KEY (id)
     /* premium or not? */
 );
 
 CREATE TABLE categories
 (
-    id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(255)
 );
 
 CREATE TABLE products
 (
-    id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     product_name VARCHAR(30),
-    account_id BIGINT(20) NOT NULL,
+    user_id BIGINT NOT NULL,
     description VARCHAR(300),
-    category_id BIGINT(20) NOT NULL,
-    bid_id BIGINT(20) DEFAULT NULL,
+    category_id BIGINT NOT NULL,
+    bid_id BIGINT DEFAULT NULL,
     price NUMERIC,
     status VARCHAR(30), /* "available", "sold" */
+    image VARCHAR(30),
     date_posted DATE,
     end_date DATE,
-    CONSTRAINT accountIdFK FOREIGN KEY (account_id)
+    CONSTRAINT userIdFK FOREIGN KEY (user_id)
         REFERENCES users(id)
         ON DELETE CASCADE,
     CONSTRAINT categoryIdFK FOREIGN KEY (category_id)
         REFERENCES categories(id)
         ON DELETE CASCADE
-    /*CONSTRAINT bidIdFK FOREIGN KEY (bid_id)
-        REFERENCES bids(id)
-        ON DELETE CASCADE*/
 );
-
 
 CREATE TABLE bids
 (
-    id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    bidder_id BIGINT(20) NOT NULL,
-    product_id BIGINT(20) NOT NULL,
+    id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    bidder_id BIGINT NOT NULL,
+    product_id BIGINT NOT NULL,
     amount DECIMAL(10, 2),
     bid_time TIMESTAMP DEFAULT NOW(),
     CONSTRAINT bidderIdFK FOREIGN KEY (bidder_id)
@@ -71,9 +68,10 @@ CREATE TABLE bids
 
 CREATE TABLE sales
 (
-    id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    product_id  BIGINT(20) NOT NULL,
-    user_id     BIGINT(20) NOT NULL,
+
+    id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    product_id  BIGINT NOT NULL,
+    user_id     BIGINT NOT NULL,
     date TIMESTAMP DEFAULT NOW(),
     price NUMERIC,
     CONSTRAINT saleUserIdFK FOREIGN KEY (user_id)
@@ -86,11 +84,11 @@ CREATE TABLE sales
 );
 CREATE TABLE reports
 (
-    id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    reporter_id BIGINT(20) NOT NULL,
-    reported_id BIGINT(20) NOT NULL,
+    id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    reporter_id BIGINT NOT NULL,
+    reported_id BIGINT NOT NULL,
     comment VARCHAR(300),
-    resolved TINYINT(1),
+    resolved TINYINT,
     CONSTRAINT reporterIDFK FOREIGN KEY (reported_id)
         REFERENCES users(id)
         ON DELETE CASCADE,
@@ -101,12 +99,12 @@ CREATE TABLE reports
 
 CREATE TABLE reviews
 (
-    id BIGINT(20) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    account_id BIGINT(20) NOT NULL,
-    product_id BIGINT(20) NOT NULL,
-    costumer_id BIGINT(20) NOT NULL,
+    id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    user_id BIGINT NOT NULL,
+    product_id BIGINT NOT NULL,
+    costumer_id BIGINT NOT NULL,
     reviewText VARCHAR(300),
-    CONSTRAINT accIDFK FOREIGN KEY (account_id)
+    CONSTRAINT userIDFK FOREIGN KEY (user_id)
         REFERENCES users(id)
         ON DELETE CASCADE,
     CONSTRAINT prodIDFK FOREIGN KEY (product_id)
