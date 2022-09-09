@@ -89,7 +89,7 @@ public class ProductDAO extends DAO{
                 stmt = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET "
                         + "product_name = ?, user_id = ?, description = ?, category_id = ?, bid_id = ?,"
                         + " price = ?, status = ?, image = ?, date_posted = ?, end_date = ?"
-                        + "WHERE id = ?)");
+                        + " WHERE id = ?)");
                 stmt.setLong(11, p.getId());
             }   else {
                 stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME
