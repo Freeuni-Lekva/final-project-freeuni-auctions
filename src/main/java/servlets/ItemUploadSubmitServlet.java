@@ -48,7 +48,7 @@ public class ItemUploadSubmitServlet extends HttpServlet {
         Date datePosted = new Date(System.currentTimeMillis());
         Date endDate = Date.valueOf(request.getParameter("endDate"));
         String imagePath = String.valueOf(request.getSession().getAttribute("itemUploadImage"));
-        Product product = new Product(0, userId,categoryId,name,description,null,
+        Product product = new Product(0, userId,categoryId,name,description,-1,
                                 price,Status.available,datePosted,endDate,imagePath);
         productDAO.addProduct(product);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("my_profile.jsp");
