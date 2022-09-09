@@ -8,6 +8,10 @@ public class PremiumUser extends RegularUser {
         super(id, username, password, email, image, balance);
     }
 
+    public PremiumUser(long id, String username, String password, String email, String image, long balance, boolean isSuspended) {
+        super(id, username, password, email, image, balance, isSuspended);
+    }
+
     @Override
     public boolean isPremium() {
         return true;

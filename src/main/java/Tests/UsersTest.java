@@ -33,5 +33,13 @@ public class UsersTest {
         assertTrue(users.getUserByEmail("X", false).equals(us));
         assertTrue(users.getUserByID(us.getId(), false).equals(us));
     }
-
+    @Test
+    public void testInvalidUsers() throws SQLException, NoSuchAlgorithmException {
+        UserDAO users = new UserDAO();
+        User us = new RegularUser(0, "XA", "B", "XA", "SMTHN", 0);
+        users.addUser(us);
+        assertFalse(users.isSuspended("XA"));
+        users.setSuspended("XA");
+        assertTrue(users.isSuspended("XA"));
+    }
 }

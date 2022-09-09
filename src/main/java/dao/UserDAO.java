@@ -17,6 +17,7 @@ public class UserDAO{
     public UserDAO() {
         conn = DBConnection.getInstance();
     }
+
     public User getUserByID(long id, boolean isForeign) {
         PreparedStatement stmt = null;
         try {
@@ -31,6 +32,7 @@ public class UserDAO{
         }
 
     }
+    
     private User getUser(ResultSet rs, boolean isForeign, PreparedStatement stmt) {
         String username = null;
         try {
@@ -47,7 +49,8 @@ public class UserDAO{
             long id = Long.parseLong(rs.getString("id"));
             String password = rs.getString("password_hash");
             Role role = Role.valueOf(rs.getString("user_role"));
-            long balance = rs.getLong("balance");
+            long balance = rs.getLong("balance"); 
+            boolean sus = rs.getBoolean("suspended");
             switch(role) {
                 case Administator:
                     try {
@@ -57,7 +60,7 @@ public class UserDAO{
                     }
                 case Regular:
                     try {
-                        return new RegularUser(id, username, password, email, image, balance);
+                        return new RegularUser(id, username, password, email, image, balance, sus);
                     } catch (NoSuchAlgorithmException e) {
                         throw new RuntimeException(e);
                     }
@@ -174,5 +177,14 @@ public class UserDAO{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    public boolean isSuspended(String email) throws SQLException, NoSuchAlgorithmException {
+        return getUserByEmail(email, false).isSuspended();
+    }
+    public void setSuspended(String email) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET suspended = 1 WHERE email = ?");
+        stmt.setString(1, email);
+        stmt.executeUpdate();
+        stmt.close();
     }
 }

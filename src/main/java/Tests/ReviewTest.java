@@ -6,8 +6,6 @@ import models.RegularUser;
 import models.Review;
 import models.User;
 import org.junit.jupiter.api.Test;
-//mport org.testng.Assert;
-//import org.testng.asserts.Assertion;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
@@ -27,7 +25,7 @@ public class ReviewTest {
         users.addUser(new RegularUser(2, "C", "B", "D", "M", 0));
         users.addUser(new RegularUser(3, "G", "B", "G", "M", 0));
         categories.addNewCategory("categ");
-        prods.addProduct(new Product(1, categories.getFromName("categ").getId(), "product", 100, new Date(1)));
+        prods.addProduct(new Product(1, categories.getFromName("categ").getId(), "product", 100, new Date()));
         Review revSt = new Review(1, 1, 1, 2, "REVIEW TEXT");
         reviews.addReview(revSt);
         Review revFin = reviews.getReviewFromID(1);
@@ -45,7 +43,7 @@ public class ReviewTest {
     }
     @Test
     public void getForProductTest() throws SQLException {
-        Product pr = new Product(1, categories.getFromName("categ").getId(), "product1", 100, new Date(1));
+        Product pr = new Product(1, categories.getFromName("categ").getId(), "product1", 100, new Date());
         prods.addProduct(pr);
         Review rev4 = new Review(4,1, pr.getId(), 2, "ANOTHER REVIEW3");
         List<Review> ls = reviews.getAllReviewsForProduct(pr.getId());
