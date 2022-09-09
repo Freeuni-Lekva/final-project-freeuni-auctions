@@ -1,4 +1,6 @@
 models\PremiumUser.class
+servlets\ItemImageUploadServlet.class
+servlets\SearchServlet.class
 servlets\GetMyProfileServlet.class
 models\User.class
 dao\CategoryDAO.class
@@ -13,6 +15,7 @@ servlets\CreateAccountServlet.class
 dao\UserDAO$1.class
 models\Sale.class
 servlets\GetForeignProfileServlet.class
+dao\ReviewDAO.class
 dao\DAO.class
 servlets\LoginServlet.class
 models\Administrator.class
@@ -20,9 +23,17 @@ dao\SaleDAO.class
 models\Role.class
 servlets\makeBidServlet.class
 servlets\ProductServlet.class
+Tests\ProductsTest.class
 Tests\UsersTest.class
+dao\ReportDAO.class
+dao\DBConnection.class
 models\ForeignUser.class
 models\Product.class
 servlets\LogoutServlet.class
+Tests\ReportsTest.class
+models\Report.class
 dao\BidDAO.class
+Tests\ReviewTest.class
+servlets\ItemUploadSubmitServlet.class
 dao\ProductDAO.class
+models\Review.class
