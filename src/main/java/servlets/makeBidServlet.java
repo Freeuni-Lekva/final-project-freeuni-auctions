@@ -21,11 +21,13 @@ public class makeBidServlet extends HttpServlet {
         Product product = (Product)req.getAttribute(Product.ATTRIBUTE);
         long bid = Long.parseLong(req.getParameter("bid"));
         long price = product.getCurrPrice();
+        String errorMessage = "";
         if (bid <= price) {
-
+            errorMessage = "Your bid must be higher than the price.";
         } else if (balance < bid) {
-
+            errorMessage = "You don't have that amount on your balance.";
         } else {
+            //update price and balance in the objects and in the databases.
             product.setPrice(bid);
             loggedInUser.setBalance(balance - bid);
             ProductDAO productDAO = (ProductDAO) getServletContext().getAttribute(ProductDAO.ATTRIBUTE);
@@ -33,5 +35,7 @@ public class makeBidServlet extends HttpServlet {
             UserDAO userDAO = (UserDAO)getServletContext().getAttribute(UserDAO.ATTRIBUTE);
             userDAO.addUser(loggedInUser);
         }
+        req.setAttribute("ERROR", errorMessage);
+        req.getRequestDispatcher("/WEB-INF/item.jsp").forward(req, res);
     }
 }
