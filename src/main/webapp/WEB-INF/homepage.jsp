@@ -35,18 +35,41 @@
     clear: both;
     display: table;
     }
+
 </head>
 <body>
-<img src="../images/img_1.png" alt="sch.com" width="104" height="142">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<img src="../images/logo.png" alt="img" width="70" height="30" style="float: left; margin-right: 15px;"/>
+<link rel="stylesheet" href="style.css">
+<div class="container">
+    <form action="post" class="search-bar">
+        <input type="text" placeholder="Search.." name="search" style="float: left; ">
+        <button type="submit"><img src="images/search-icon.png"></button>
+    </form>
+</div>
+<div class="container-2">
+    <form action="post" class="cart-bar">
+        <button type="submit" style="float: left;"><img src="images/img_1.png"></button>
+    </form>
+</div>
+<div class="container-3">
+    <form action="post" class="authorization-bar">
+        <button type="submit" style="float: left;">Authorization</button>
+    </form>
+</div>
+<div class="container-4">
+    <form action="post" class="login-bar">
+        <button type="submit">Log In</button>
+    </form>
+</div>
 
-<form class="search" action="post">
-    <input type="text" placeholder="Search.." name="search">
-    <button type="submit"><i class="fa fa-search"></i></button>
-</form>
-
-<p>Products:</p>
 <div class="row">
+    <div class="left" style = "background-color: #bbb;">
+        <h2>Categories</h2>
+        <ul id="myMenu">
+            <li><a href="#">category 1</a></li>
+            <li><a href="#">category 2</a></li>
+        </ul>
+    </div>
     <%
         List<Product> prods;
         prods = products.getProductsByStatus(Status.available);
