@@ -20,6 +20,7 @@ dao\SaleDAO.class
 models\Role.class
 servlets\makeBidServlet.class
 servlets\ProductServlet.class
+Tests\UsersTest.class
 models\ForeignUser.class
 models\Product.class
 servlets\LogoutServlet.class

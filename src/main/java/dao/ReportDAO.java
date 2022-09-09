@@ -21,9 +21,13 @@ public class ReportDAO extends DAO{
         stm.setLong(1, id);
         ResultSet rs = stm.executeQuery();
         if(rs.next()){
+            Report rep = createReport(rs);
             stm.close();
-            return createReport(rs);
-        } else return null;
+            return rep;
+        } else {
+            stm.close();
+            return null;
+        }
     }
     public List<Report> getAllReportForAccount(long reported_id) throws SQLException {
         List<Report> res = new ArrayList<Report>();
@@ -33,6 +37,7 @@ public class ReportDAO extends DAO{
         while(rs.next()){
             res.add(createReport(rs));
         }
+        stm.close();
         return res;
     }
     public List<Report> getAllReportFromAccount(long reporter_id) throws SQLException {
@@ -41,9 +46,20 @@ public class ReportDAO extends DAO{
         stm.setLong(1, reporter_id);
         ResultSet rs = stm.executeQuery();
         while(rs.next()){
-            stm.close();
             res.add(createReport(rs));
         }
+        stm.close();
+        return res;
+    }
+    public List<Report> getUnresolved() throws SQLException {
+        List<Report> res = new ArrayList<Report>();
+        PreparedStatement stm = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE resolved = ?");
+        stm.setBoolean(1,false);
+        ResultSet rs = stm.executeQuery();
+        while(rs.next()){
+            res.add(createReport(rs));
+        }
+        stm.close();
         return res;
     }
 
@@ -52,16 +68,18 @@ public class ReportDAO extends DAO{
         long reporter_id = Long.parseLong(rs.getString("reporter_id"));
         long reported_id = Long.parseLong(rs.getString("reported_id"));
         String comment = rs.getString("comment");
-        return new Report(id, reporter_id, reported_id, comment);
+        return new Report(id, reporter_id, reported_id, comment, rs.getBoolean("resolved"));
     }
 
     public void addReport(Report rep) throws SQLException {
         PreparedStatement stm = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
-                " VALUES ( ?, ?, ? )");
+                " (reporter_id, reported_id, comment, resolved) VALUES ( ?, ?, ?, ? )");
         stm.setLong(1, rep.getReporterId());
         stm.setLong(2, rep.getReportedId());
         stm.setString(3, rep.getComment());
-        stm.executeQuery();
+        stm.setBoolean(4, rep.isResolved());
+        stm.executeUpdate();
         stm.close();
     }
+
 }

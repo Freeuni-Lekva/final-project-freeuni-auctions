@@ -22,7 +22,7 @@
     <title> <%=prod.getName()%></title>
     <style>
         body {
-            background-image: url("images/bg.jpg");
+            background-image: url("../images/bg.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             height: 100vh;
@@ -50,6 +50,6 @@
     <input type="text" id="bid" name="bid"><br>
 </form>
 <p>CURRENT STATUS: <%=prod.getStatus()%></p>
-<p>POSTED BY: <%=users.getUserByID(prod.getAccountId()).getUsername()%> </p>
+<p>POSTED BY: <%=users.getUserByID(prod.getAccountId(), false).getUsername()%> </p>
 </body>
 </html>

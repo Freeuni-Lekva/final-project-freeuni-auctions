@@ -30,6 +30,14 @@
     <servlet-name>itemImageUpload</servlet-name>
     <servlet-class>servlets.ItemImageUploadServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>balance</servlet-name>
+    <servlet-class>servlets.BalanceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>balance</servlet-name>
+    <url-pattern>/balance</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>profile</servlet-name>
     <url-pattern>/profile</url-pattern>

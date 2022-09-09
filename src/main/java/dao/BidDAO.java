@@ -50,6 +50,6 @@ public class BidDAO extends DAO{
     }
 
     public void addNewBid(long bidder_id, long product_id, BigDecimal amount) throws SQLException {
-        conn.createStatement().executeQuery("INSERT INTO " + TABLE_NAME + " VALUES (" + bidder_id + ", " + product_id + ", " + amount + ")");
+        conn.createStatement().executeQuery("INSERT INTO " + TABLE_NAME + " (bidder_id, product_id, amount, bid_time) VALUES (" + bidder_id + ", " + product_id + ", " + amount + ")");
     }
 }
