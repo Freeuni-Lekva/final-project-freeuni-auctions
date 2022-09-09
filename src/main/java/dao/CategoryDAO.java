@@ -13,22 +13,37 @@ public class CategoryDAO {
         this.conn = conn;
     }
 
-    public Category getFromID(long category_id) throws SQLException {
-        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = " + category_id);
-        if (rs.next()) {
-            return new Category(rs.getLong("id"), rs.getString("name"));
+    public Category getFromID(long category_id) {
+        ResultSet rs = null;
+        try {
+            rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE id = " + category_id);
+            if (rs.next()) {
+                return new Category(rs.getLong("id"), rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+
         return null;
     }
 
-    public void addNewCategory(String name) throws SQLException {
-        conn.createStatement().executeUpdate("INSERT INTO " + TABLE_NAME + " (name) VALUES (" + name + ")");
+    public void addNewCategory(String name) {
+        try {
+            conn.createStatement().executeUpdate("INSERT INTO " + TABLE_NAME + " (name) VALUES (" + name + ")");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public Category getFromName(String name) throws SQLException {
-        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE name = " + name);
-        if (rs.next()) {
-            return new Category(rs.getLong("id"), rs.getString("name"));
+    public Category getFromName(String name) {
+        ResultSet rs = null;
+        try {
+            rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE name = " + name);
+            if (rs.next()) {
+                return new Category(rs.getLong("id"), rs.getString("name"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
         return null;
     }
