@@ -23,6 +23,7 @@ public class ProductsTest extends TestCase {
         pr2 = new Product(2, 1, "foo bar", 20, new Date());
         pr3 = new Product(3, 2, "bar", 20, new Date());
         pr4 = new Product(2, 3, "boo", 30, new Date());
+        pr4.setStatus(Status.sold);
 
     }
 
@@ -30,9 +31,11 @@ public class ProductsTest extends TestCase {
         productDAO.addProduct(pr1);
         productDAO.addProduct(pr2);
         productDAO.addProduct(pr3);
+        productDAO.addProduct(pr4);
         assertTrue(productDAO.containsProduct("foo"));
         assertTrue(productDAO.containsProduct("foo bar"));
         assertTrue(productDAO.containsProduct("bar"));
+        assertTrue(productDAO.containsProduct("boo"));
         assertFalse(productDAO.containsProduct("foo foo"));
 
     }
@@ -55,7 +58,17 @@ public class ProductsTest extends TestCase {
     }
     public void testGetByUser() {
         List<Product> res = productDAO.getProductsByUser(2);
+        assertEquals("foo", res.get(0).getName());
+        assertEquals("foo bar", res.get(1).getName());
+    }
+
+    public void testGetByStatus() {
+        List<Product> res = productDAO.getProductsByStatus(Status.available);
         assertEquals("foo bar", res.get(0).getName());
         assertEquals("boo", res.get(1).getName());
+        assertEquals("bar", res.get(2).getName());
+        assertEquals("boo", res.get(3).getName());
+
     }
+
 }
