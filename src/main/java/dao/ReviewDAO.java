@@ -19,12 +19,10 @@ public class ReviewDAO extends DAO{
         PreparedStatement stm = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE id = ?");
         stm.setLong(1, id);
         ResultSet rs = stm.executeQuery();
-        Review rw = null;
         if(rs.next()){
-            rw = createReview(rs);
-        }
-        stm.close();
-        return rw;
+            stm.close();
+            return createReview(rs);
+        } else return null;
     }
 
     public List<Review> getAllReviewsForAccount(long user_id) throws SQLException {
@@ -35,7 +33,6 @@ public class ReviewDAO extends DAO{
         while(rs.next()){
             res.add(createReview(rs));
         }
-        stm.close();
         return res;
     }
     public List<Review> getAllReviewsForProduct(long product_id) throws SQLException {
@@ -46,7 +43,6 @@ public class ReviewDAO extends DAO{
         while(rs.next()){
             res.add(createReview(rs));
         }
-        stm.close();
         return res;
     }
 
@@ -66,7 +62,7 @@ public class ReviewDAO extends DAO{
         stm.setLong(2, rev.getProduct_id());
         stm.setLong(3, rev.getCostumer_id());
         stm.setString(4, rev.getReviewText());
-        stm.executeUpdate();
+        stm.executeQuery();
         stm.close();
     }
 }
