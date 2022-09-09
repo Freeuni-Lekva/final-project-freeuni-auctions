@@ -36,13 +36,14 @@ public abstract class User {
         this.balance = balance;
         this.isSuspended = isSuspended;
     }
-    public User(String username, String password, String email, String image, long balance) throws NoSuchAlgorithmException {
+    public User(String username, String password, String email, String image, long balance, boolean isSuspended) throws NoSuchAlgorithmException {
         this.id = 0;
         this.username = username;
         this.password = hashPassword(password);
         this.email = email;
         this.image = image;
         this.balance = balance;
+        this.isSuspended = isSuspended;
     }
 
     private static String hexToString(byte[] bytes) {

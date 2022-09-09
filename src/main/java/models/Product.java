@@ -42,11 +42,14 @@ public class Product {
         this.datePosted = new Date();
         this.endDate = endDate;
         this.description = null;
-        this.image = null;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public long getId() {

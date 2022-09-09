@@ -40,11 +40,11 @@ public class ItemUploadSubmitServlet extends HttpServlet {
         String name = request.getParameter("itemTitle");
         String description = request.getParameter("itemDescription");
         long price = Long.parseLong((request.getParameter("itemPrice")));
-        Date datePosted = new Date(System.currentTimeMillis());
         Date endDate = Date.valueOf(request.getParameter("endDate"));
         String imagePath = String.valueOf(request.getSession().getAttribute("itemUploadImage"));
-        Product product = new Product(0, userId,categoryId,name,description,-1,
-                                price,Status.available,datePosted,endDate,imagePath);
+        Product product = new Product(userId,categoryId,name, price,endDate);
+        product.setDescription(description);
+        product.setImage(imagePath);
         productDAO.addProduct(product);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("my_profile.jsp");
         dispatcher.forward(request, response);
