@@ -68,9 +68,17 @@ CREATE TABLE bids
 
 CREATE TABLE sales
 (
+
     id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     product_id  BIGINT NOT NULL,
     user_id     BIGINT NOT NULL,
+    date TIMESTAMP DEFAULT NOW(),
+    price NUMERIC,
+    CONSTRAINT saleUserIdFK FOREIGN KEY (user_id)
+        REFERENCES users(id)
+        ON DELETE CASCADE,
+    CONSTRAINT saleProductIdFK FOREIGN KEY (product_id)
+        REFERENCES products(id)
     sale_date DATE,
     price NUMERIC
 );
@@ -80,6 +88,7 @@ CREATE TABLE reports
     reporter_id BIGINT NOT NULL,
     reported_id BIGINT NOT NULL,
     comment VARCHAR(300),
+    resolved TINYINT,
     CONSTRAINT reporterIDFK FOREIGN KEY (reported_id)
         REFERENCES users(id)
         ON DELETE CASCADE,

@@ -27,6 +27,10 @@
     <servlet-class>servlets.GetMyProfileServlet</servlet-class>
   </servlet>
   <servlet>
+    <servlet-name>itemImageUpload</servlet-name>
+    <servlet-class>servlets.ItemImageUploadServlet</servlet-class>
+  </servlet>
+  <servlet>
     <servlet-name>balance</servlet-name>
     <servlet-class>servlets.BalanceServlet</servlet-class>
   </servlet>
@@ -53,6 +57,10 @@
   <servlet-mapping>
     <servlet-name>Create</servlet-name>
     <url-pattern>/create_acc</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>itemImageUpload</servlet-name>
+    <url-pattern>/itemImageUpload</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>frontpage.jsp</welcome-file>
