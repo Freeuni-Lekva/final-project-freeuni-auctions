@@ -96,8 +96,17 @@ public class UserDAO{
     public void addUser(User user) {
         PreparedStatement stmt = null;
         try {
-            stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME + " (username, password_hash, user_role, premium, email, image, balance)" +
-                    " VALUES ( ?, ?, ?, ?, ?, ?, ?)");
+            if (containsId(user.getId())) {
+                stmt = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET "
+                        + "username = ?, password_hash = ?, user_role = ?,"
+                        + " premium = ?, email = ?, image = ?, balance = ?"
+                        + " WHERE id = ?");
+
+                stmt.setLong(8, user.getId());
+            }   else {
+                stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME + " (username, password_hash, user_role, premium, email, image, balance)" +
+                        " VALUES ( ?, ?, ?, ?, ?, ?, ?)");
+            }
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getPassword());
             stmt.setString(3, user.getRole().toString());
@@ -107,6 +116,20 @@ public class UserDAO{
             stmt.setLong(7, user.getBalance());
             stmt.executeUpdate();
             stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean containsId(long id) {
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE id = ?");
+            stmt.setLong(1,id);
+            ResultSet rs = stmt.executeQuery();
+            boolean empty = rs.next();
+            stmt.close();
+            return empty;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

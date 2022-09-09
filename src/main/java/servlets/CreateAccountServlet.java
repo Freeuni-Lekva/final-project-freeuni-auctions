@@ -34,7 +34,7 @@ public class CreateAccountServlet extends HttpServlet {
                 RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/homepage.jsp");
                 disp.forward(req,resp);
             }
-        } catch (SQLException | NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
     }

@@ -23,6 +23,14 @@ public abstract class User {
         this.image = image;
         this.balance = balance;
     }
+    public User(String username, String password, String email, String image, long balance) throws NoSuchAlgorithmException {
+        this.id = 0;
+        this.username = username;
+        this.password = hashPassword(password);
+        this.email = email;
+        this.image = image;
+        this.balance = balance;
+    }
 
     private static String hexToString(byte[] bytes) {
         StringBuilder buff = new StringBuilder();

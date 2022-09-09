@@ -11,6 +11,7 @@ public class Product {
     private Date datePosted;
     private Date endDate;
     private String image;
+    public static final String ATTRIBUTE = "product";
 
     // this constructor is used by productDAO only to get a product from a database.
     public Product(long id, long user_id, long category_id, String name,
@@ -28,10 +29,6 @@ public class Product {
         this.datePosted = datePosted;
         this.endDate = endDate;
         this.image = image;
-    }
-
-    public String getImage() {
-        return image;
     }
 
     // used when creating a new product. CURRENT TIME of creating this constructor gets assigned to datePosted.
@@ -83,6 +80,14 @@ public class Product {
 
     public long getCurrPrice() {
         return currPrice;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setPrice(long amount) {
+        currPrice = amount;
     }
 
     public Status getStatus() {

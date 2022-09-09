@@ -8,6 +8,10 @@ public class RegularUser extends User {
         super(id, username, password, email, image, balance);
     }
 
+    public RegularUser(String username, String password, String email, String image, long balance) throws NoSuchAlgorithmException {
+        super(username, password, email, image, balance);
+    }
+
     @Override
     public Role getRole() {
         return Role.Regular;

@@ -13,13 +13,13 @@ public class UsersTest {
     @Test
     public void testAdd() throws NoSuchAlgorithmException, SQLException {
         UserDAO users = new UserDAO();
-        users.addUser(new RegularUser(0, "A", "B", "C", "SMTHN", 0));
+        users.addUser(new RegularUser(3, "A", "B", "C", "SMTHN", 0));
         assertTrue(users.containsUsername("A"));
     }
     @Test
     public void testCorrect() throws NoSuchAlgorithmException, SQLException {
         UserDAO users = new UserDAO();
-        users.addUser(new RegularUser(0, "B", "B", "D", "SMTHN", 0));
+        users.addUser(new RegularUser(2, "B", "B", "D", "SMTHN", 0));
         assertTrue(users.correct("D", User.hashPassword("B")));
     }
     @Test

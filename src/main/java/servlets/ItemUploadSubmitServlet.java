@@ -30,15 +30,11 @@ public class ItemUploadSubmitServlet extends HttpServlet {
         String categoryName = request.getParameter("itemCategory");
         long categoryId ;
         Category category ;
-        try {
-             category = categoryDAO.getFromName(categoryName);
-             if(category == null){
-                 categoryDAO.addNewCategory(categoryName);
-             }
-            categoryId = categoryDAO.getFromName(categoryName).getId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+         category = categoryDAO.getFromName(categoryName);
+         if(category == null){
+             categoryDAO.addNewCategory(categoryName);
+         }
+        categoryId = categoryDAO.getFromName(categoryName).getId();
 
         long userId = user.getId();
         String name = request.getParameter("itemTitle");
