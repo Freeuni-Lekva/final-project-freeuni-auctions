@@ -1,5 +1,6 @@
 package servlets;
 
+import dao.UserDAO;
 import models.User;
 
 import javax.servlet.ServletException;
@@ -21,6 +22,8 @@ public class BalanceServlet extends HttpServlet {
         long newBalance = Long.parseLong(req.getParameter("amount"));
         User user = (User)(req.getSession().getAttribute(User.ATTRIBUTE));
         user.setBalance(newBalance);
+        UserDAO userDAO = (UserDAO)getServletContext().getAttribute(UserDAO.ATTRIBUTE);
+        userDAO.addUser(user);
         req.getRequestDispatcher("/WEB-INF/balance.jsp").forward(req, res);
     }
 }
