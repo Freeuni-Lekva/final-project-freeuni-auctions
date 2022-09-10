@@ -17,9 +17,9 @@ public class ReportsTest {
     private final UserDAO users = new UserDAO(TestDBConnection.getInstance());
     @Test
     public void addTest() throws SQLException, NoSuchAlgorithmException {
-        users.addUser(new RegularUser(1, "A", "B", "C", "M", 0));
-        users.addUser(new RegularUser(2, "C", "B", "D", "M", 0));
-        users.addUser(new RegularUser(3, "G", "B", "G", "M", 0));
+        users.addUser(new RegularUser("A", "B", "C", "M", 0));
+        users.addUser(new RegularUser("C", "B", "D", "M", 0));
+        users.addUser(new RegularUser("G", "B", "G", "M", 0));
         Report rep = new Report(1, 1, 2, "comment about report, why, when, what, how, first", false);
         reports.addReport(rep);
         Report resultRep = reports.getReportFromID(1);
