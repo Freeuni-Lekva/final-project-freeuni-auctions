@@ -63,6 +63,18 @@ public class SaleDAO extends DAO {
         }
         return result;
     }
+    public List<Sale> getAll(){
+        List<Sale> result = new ArrayList<>();
+        try {
+            ResultSet resultSet = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME);
+            while (resultSet.next()) {
+                result.add(buildSaleFromRS(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
 
     private Sale buildSaleFromRS(ResultSet resultSet) {
         try {

@@ -1,7 +1,9 @@
 <%@ page import="models.ForeignUser" %>
 <%@ page import="dao.ProductDAO" %>
 <%@ page import="models.Product" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="models.User" %>
+<%@ page import="models.Role" %><%--
   Created by IntelliJ IDEA.
   User: admin
   Date: 07.09.2022
@@ -140,5 +142,11 @@
             evt.currentTarget.className += " active";
         }
     </script>
+    <%
+        if(((User)request.getSession().getAttribute(User.ATTRIBUTE)).getRole() == Role.Administator)
+            out.println("<form action=\"suspend\" method=\"post\">\n" +
+                    "        <input type=\"submit\" value=\"suspend\"><br><br>\n" +
+                    "    </form>");
+    %>
 </body>
 </html>

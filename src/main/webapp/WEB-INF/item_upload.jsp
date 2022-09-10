@@ -5,7 +5,7 @@
     <title>Item upload</title>
     <style>
         body {
-            background-image: url("images/img.png");
+            background-image: url("../images/img.png");
             background-size: cover;
             background-repeat: no-repeat;
             height: 100vh;
@@ -14,7 +14,7 @@
 </head>
 <body>
 <div>
-    <link href="styles/item_upload.css" rel="stylesheet"/>
+    <link href="../styles/item_upload.css" rel="stylesheet"/>
     <div class="home-container">
         <h1 class="home-heading">Upload item form</h1>
         <div class="home-container1">
@@ -25,7 +25,7 @@
                         session.setAttribute("itemUploadImage", "images/no-image-icon.png");
                 %>
                 <br>
-                <img src="images/no-image-icon.png" width="250" height="250" alt="image" class="home-image">
+                <img src="../images/no-image-icon.png" width="250" height="250" alt="image" class="home-image">
                 <%
                 } else {
                 %><br>
