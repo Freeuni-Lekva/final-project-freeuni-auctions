@@ -82,8 +82,7 @@ CREATE TABLE sales
         ON DELETE CASCADE,
     CONSTRAINT saleProductIdFK FOREIGN KEY (product_id)
         REFERENCES products(id),
-    sale_date DATE,
-    price NUMERIC
+    sale_date DATE
 );
 CREATE TABLE reports
 (
