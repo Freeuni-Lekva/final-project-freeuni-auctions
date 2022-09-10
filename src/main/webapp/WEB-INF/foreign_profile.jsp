@@ -145,7 +145,7 @@
     <%
         if(((User)request.getSession().getAttribute(User.ATTRIBUTE)).getRole() == Role.Administator)
             out.println("<form action=\"suspend\" method=\"post\">\n" +
-                    "        <input type=\"submit\" value=\"Login\"><br><br>\n" +
+                    "        <input type=\"submit\" value=\"suspend\"><br><br>\n" +
                     "    </form>");
     %>
 </body>
