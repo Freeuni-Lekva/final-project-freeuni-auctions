@@ -169,6 +169,32 @@ public class ProductDAO extends DAO{
         }
     }
 
+    public void refresh() {
+        Statement stmt = null;
+        try {
+            stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE TABLE " + TABLE_NAME + " SET status = timed_out"
+                    + " WHERE end_date < GETDATE()"
+                    );
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void setSold(Product product) {
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement("UPDATE TABLE " + TABLE_NAME + " SET status = sold"
+                    + " WHERE id = ?");
+            stmt.setLong(1, product.getId());
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean containsProduct(String name) {
         PreparedStatement stmt = null;
         try {

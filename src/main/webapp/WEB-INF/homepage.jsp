@@ -4,7 +4,8 @@
 <%@ page import="models.Status" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page import="java.io.PrintWriter" %><%--
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="models.User" %><%--
   Created by IntelliJ IDEA.
   User: admin
   Date: 06.09.2022
@@ -14,7 +15,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     ProductDAO products = (ProductDAO) application.getAttribute(ProductDAO.ATTRIBUTE);
-
+    products.refresh();
 %>
 <html>
 <head>
