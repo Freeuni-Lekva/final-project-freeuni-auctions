@@ -44,7 +44,7 @@ public class InitListener implements ServletContextListener, HttpSessionListener
     public void sessionCreated(HttpSessionEvent httpSessionEvent) {
         // FOLLOWING BLOCK FOR TESTING(creates a user object as main profile user)
         try {
-            httpSessionEvent.getSession().setAttribute(User.ATTRIBUTE, new RegularUser(9, "sandro", "sandro", "sandro@gm.com", "sandro", 12));
+            httpSessionEvent.getSession().setAttribute(User.ATTRIBUTE, new RegularUser("sandro", "sandro", "sandro@gm.com", "sandro", 12));
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }

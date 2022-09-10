@@ -27,11 +27,7 @@ public class SearchServlet extends HttpServlet {
         Category category = null;
         ArrayList<Product> results = new ArrayList<>();
         if (category_name != null) {
-            try {
-                category = categoryDAO.getFromName(category_name);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            category = categoryDAO.getFromName(category_name);
         }
         if (phrase != null) {
             results = productDAO.getProductsByName(phrase);

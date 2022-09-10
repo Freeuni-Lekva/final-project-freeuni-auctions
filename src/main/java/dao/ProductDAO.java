@@ -78,24 +78,36 @@ public class ProductDAO extends DAO{
         }
     }
 
+    /**
+     * adds product if its id is not in the table, and updates the product otherwise.
+     * @param p
+     */
     public void addProduct(Product p) {
-        if (containsId(p.getId())) {
-            return;
-        }
         try {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
-                    " VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            stmt.setLong(1, p.getId());
-            stmt.setString(2, p.getName());
-            stmt.setLong(3, p.getUserId());
-            stmt.setString(4, p.getDescription());
-            stmt.setLong(5, p.getCategoryId());
-            stmt.setLong(6, p.getBidId());
-            stmt.setLong(7, p.getCurrPrice());
-            stmt.setString(8, p.getStatus().toString());
+            PreparedStatement stmt;
+            if (containsId(p.getId())) {
+                stmt = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET "
+                        + "product_name = ?, user_id = ?, description = ?, category_id = ?, bid_id = ?,"
+                        + " price = ?, status = ?, image = ?, date_posted = ?, end_date = ?"
+                        + " WHERE id = ?)");
+                stmt.setLong(11, p.getId());
+            }   else {
+                stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME
+                        + " (product_name, user_id, description, category_id, bid_id,"
+                        + " price, status, image, date_posted, end_date)"
+                        + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            }
+            stmt.setString(1, p.getName());
+            stmt.setLong(2, p.getUserId());
+            stmt.setString(3, p.getDescription());
+            stmt.setLong(4, p.getCategoryId());
+            stmt.setLong(5, p.getBidId());
+            stmt.setLong(6, p.getCurrPrice());
+            stmt.setString(7, p.getStatus().toString());
+            stmt.setString(8, p.getImage());
             stmt.setDate(9, new java.sql.Date(p.getDatePosted().getTime()));
             stmt.setDate(10, new java.sql.Date(p.getEndDate().getTime()));
-            stmt.setString(11, p.getImage());
+
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException e) {

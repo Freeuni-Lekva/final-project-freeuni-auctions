@@ -30,25 +30,21 @@ public class ItemUploadSubmitServlet extends HttpServlet {
         String categoryName = request.getParameter("itemCategory");
         long categoryId ;
         Category category ;
-        try {
-             category = categoryDAO.getFromName(categoryName);
-             if(category == null){
-                 categoryDAO.addNewCategory(categoryName);
-             }
-            categoryId = categoryDAO.getFromName(categoryName).getId();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+         category = categoryDAO.getFromName(categoryName);
+         if(category == null){
+             categoryDAO.addNewCategory(categoryName);
+         }
+        categoryId = categoryDAO.getFromName(categoryName).getId();
 
         long userId = user.getId();
         String name = request.getParameter("itemTitle");
         String description = request.getParameter("itemDescription");
         long price = Long.parseLong((request.getParameter("itemPrice")));
-        Date datePosted = new Date(System.currentTimeMillis());
         Date endDate = Date.valueOf(request.getParameter("endDate"));
         String imagePath = String.valueOf(request.getSession().getAttribute("itemUploadImage"));
-        Product product = new Product(0, userId,categoryId,name,description,-1,
-                                price,Status.available,datePosted,endDate,imagePath);
+        Product product = new Product(userId,categoryId,name, price,endDate);
+        product.setDescription(description);
+        product.setImage(imagePath);
         productDAO.addProduct(product);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("my_profile.jsp");
         dispatcher.forward(request, response);

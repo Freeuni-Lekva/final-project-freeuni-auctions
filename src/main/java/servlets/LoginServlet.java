@@ -27,17 +27,13 @@ public class LoginServlet extends HttpServlet {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
-        try {
-            if(users.correct(req.getParameter("email"), hashed) && !users.isSuspended("email")){
-                RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/homepage.jsp");
-                req.getSession().setAttribute(User.ATTRIBUTE, users.getUserByEmail(req.getParameter("email"), false));
-                disp.forward(req,res);
-            } else {
-                RequestDispatcher disp = req.getRequestDispatcher("try_again.jsp");
-                disp.forward(req,res);
-            }
-        } catch (SQLException | NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+        if(users.correct(req.getParameter("email"), hashed && !users.isSuspended("email")){
+            RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/homepage.jsp");
+            req.getSession().setAttribute(User.ATTRIBUTE, users.getUserByEmail(req.getParameter("email"), false));
+            disp.forward(req,res);
+        } else {
+            RequestDispatcher disp = req.getRequestDispatcher("try_again.jsp");
+            disp.forward(req,res);
         }
     }
 }

@@ -13,19 +13,19 @@ public class UsersTest {
     @Test
     public void testAdd() throws NoSuchAlgorithmException, SQLException {
         UserDAO users = new UserDAO();
-        users.addUser(new RegularUser(0, "A", "B", "C", "SMTHN", 0));
+        users.addUser(new RegularUser(3, "A", "B", "C", "SMTHN", 0, false));
         assertTrue(users.containsUsername("A"));
     }
     @Test
     public void testCorrect() throws NoSuchAlgorithmException, SQLException {
         UserDAO users = new UserDAO();
-        users.addUser(new RegularUser(0, "B", "B", "D", "SMTHN", 0));
+        users.addUser(new RegularUser(2, "B", "B", "D", "SMTHN", 0, false));
         assertTrue(users.correct("D", User.hashPassword("B")));
     }
     @Test
     public void testContains() throws NoSuchAlgorithmException, SQLException {
         UserDAO users = new UserDAO();
-        User us = new RegularUser(0, "X", "B", "X", "SMTHN", 0);
+        User us = new RegularUser(0, "X", "B", "X", "SMTHN", 0, false);
         users.addUser(us);
         us.setId(users.getUserByUsername("X", false).getId());
         assertTrue(users.containsEmail("X"));
@@ -36,7 +36,7 @@ public class UsersTest {
     @Test
     public void testInvalidUsers() throws SQLException, NoSuchAlgorithmException {
         UserDAO users = new UserDAO();
-        User us = new RegularUser(0, "XA", "B", "XA", "SMTHN", 0);
+        User us = new RegularUser(0, "XA", "B", "XA", "SMTHN", 0, false);
         users.addUser(us);
         assertFalse(users.isSuspended("XA"));
         users.setSuspended("XA");
