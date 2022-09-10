@@ -36,7 +36,9 @@ public class LoginServlet extends HttpServlet {
                 RequestDispatcher disp = req.getRequestDispatcher("try_again.jsp");
                 disp.forward(req,res);
             }
-        } catch (SQLException | NoSuchAlgorithmException e) {
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
     }
