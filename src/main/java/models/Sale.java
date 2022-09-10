@@ -1,6 +1,7 @@
 package models;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class Sale {
     private final long id, product_id, user_id;
@@ -33,5 +34,18 @@ public class Sale {
 
     public double getPrice() {
         return price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sale sale = (Sale) o;
+        return id == sale.id && product_id == sale.product_id && user_id == sale.user_id && Double.compare(sale.price, price) == 0 && date.equals(sale.date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, product_id, user_id, date, price);
     }
 }
