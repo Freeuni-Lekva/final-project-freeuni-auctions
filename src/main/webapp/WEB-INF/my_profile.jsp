@@ -1,12 +1,9 @@
-<%@ page import="models.User" %>
 <%@ page import="dao.ProductDAO" %>
-<%@ page import="models.Product" %>
 <%@ page import="java.util.List" %>
-<%@ page import="models.RegularUser" %>
 <%@ page import="java.security.NoSuchAlgorithmException" %>
 <%@ page import="dao.ReviewDAO" %>
-<%@ page import="models.Review" %>
-<%@ page import="java.sql.SQLException" %><%--
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="models.*" %><%--
   Created by IntelliJ IDEA.
   User: admin
   Date: 04.09.2022
@@ -150,5 +147,8 @@
     </script>
 
 <a href="item_upload.jsp">UPLOAD YOUR ITEM</a><br>
+<%
+    ((User) request.getSession().getAttribute(User.ATTRIBUTE)).makeChanges();
+%>
 </body>
 </html>

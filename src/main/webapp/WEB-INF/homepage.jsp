@@ -83,6 +83,7 @@
     </style>
 </head>
 <body>
+<a href="my_profile.jsp" style= "float: right"> My Profile <a>
 <form action="search" method="post">
     <label for="selected_category">Choose a Category:</label>
     <select id="selected_category" name="selected_category">

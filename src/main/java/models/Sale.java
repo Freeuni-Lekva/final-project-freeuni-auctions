@@ -34,4 +34,15 @@ public class Sale {
     public double getPrice() {
         return price;
     }
+
+    @Override
+    public String toString() {
+        return "Sale{" +
+                "id=" + id +
+                ", product_id=" + product_id +
+                ", user_id=" + user_id +
+                ", date=" + date +
+                ", price=" + price +
+                '}';
+    }
 }

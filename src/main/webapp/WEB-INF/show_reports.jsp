@@ -25,19 +25,15 @@
     <%
         for(Report report : actives){
             out.println("<hr>");
-            try {
-                out.println("<hr>\n" +
-                        "<a href=\"profile.jsp\" style=\"float: right\">Reported: </a>\n" + users.getUserByID(report.getReportedId(), true).getUsername()+
-                        "\n" +
-                        "<p>" + report.getComment() +
-                        "</p>\n" +
-                        "\n" +
-                        "<a href=\"profile.jsp\" style=\"float: left\">Reporter: </a><br>\n" + users.getUserByID(report.getReporterId(), true).getUsername()+
-                        "\n" +
-                        "<hr>");
-            } catch (SQLException | NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
-            }
+            out.println("<hr>\n" +
+                    "<a href=\"foreign_profile.jsp\" style=\"float: right\">Reported: </a>\n" + users.getUserByID(report.getReportedId(), true).getUsername()+
+                    "\n" +
+                    "<p>" + report.getComment() +
+                    "</p>\n" +
+                    "\n" +
+                    "<a href=\"foreign_profile.jsp\" style=\"float: left\">Reporter: </a><br>\n" + users.getUserByID(report.getReporterId(), true).getUsername()+
+                    "\n" +
+                    "<hr>");
             out.println("<hr>");
         }
     %>
