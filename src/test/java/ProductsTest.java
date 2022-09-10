@@ -1,8 +1,10 @@
 import dao.ProductDAO;
+import junit.framework.Test;
 import junit.framework.TestCase;
 import models.Product;
 import models.Status;
 
+import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +17,8 @@ public class ProductsTest extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
-        productDAO = new ProductDAO(TestDBConnection.getInstance());
+        Connection con = TestDBConnection.getInstance();
+        productDAO = new ProductDAO(con);
         pr1 = new Product(1, 1, "foo", 20, new Date());
         pr2 = new Product(2, 1, "foo bar", 20, new Date());
         pr3 = new Product(3, 2, "bar", 20, new Date());
@@ -37,7 +40,7 @@ public class ProductsTest extends TestCase {
 
     }
     public void testGetFromID() {
-        Product p = productDAO.getFromID(5);
+        Product p = productDAO.getFromID(1);
         assertEquals(p.getName(), "foo");
         assertEquals(p.getUserId(), 1);
         assertNull(p.getDescription());
@@ -50,22 +53,20 @@ public class ProductsTest extends TestCase {
 
     public void testGetByCategory() {
         List<Product> res = productDAO.getProductsByCategory(1);
-        assertEquals(5, res.get(0).getId());    // 5 and 6 as IDs are IDs on my sql server.
-        assertEquals(6, res.get(1).getId());
+        assertEquals("foo", res.get(0).getName());
+        assertEquals("foo bar", res.get(1).getName());
     }
     public void testGetByUser() {
         List<Product> res = productDAO.getProductsByUser(2);
-        assertEquals("foo", res.get(0).getName());
-        assertEquals("foo bar", res.get(1).getName());
+        assertEquals("foo bar", res.get(0).getName());
+        assertEquals("boo", res.get(1).getName());
     }
 
     public void testGetByStatus() {
         List<Product> res = productDAO.getProductsByStatus(Status.available);
-        assertEquals("foo bar", res.get(0).getName());
-        assertEquals("boo", res.get(1).getName());
+        assertEquals("foo", res.get(0).getName());
+        assertEquals("foo bar", res.get(1).getName());
         assertEquals("bar", res.get(2).getName());
-        assertEquals("boo", res.get(3).getName());
-
     }
 
 }
