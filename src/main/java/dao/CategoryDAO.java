@@ -21,12 +21,12 @@ public class CategoryDAO {
         return null;
     }
 
-    public void addNewCategory(String name) throws SQLException {
-        conn.createStatement().executeUpdate("INSERT INTO " + TABLE_NAME + " (name) VALUES (" + name + ")");
+    public void addNewCategory(String category_name) throws SQLException {
+        conn.createStatement().executeUpdate("INSERT INTO " + TABLE_NAME + " c (name) VALUES (" + category_name + ")");
     }
 
-    public Category getFromName(String name) throws SQLException {
-        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE name = " + name);
+    public Category getFromName(String category_name) throws SQLException {
+        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " c WHERE c.name = " + category_name);
         if (rs.next()) {
             return new Category(rs.getLong("id"), rs.getString("name"));
         }
