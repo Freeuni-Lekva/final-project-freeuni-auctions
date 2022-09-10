@@ -14,10 +14,10 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ReviewTest {
-    private final ReviewDAO reviews = new ReviewDAO(DBConnection.getInstance());
-    private final UserDAO users = new UserDAO(DBConnection.getInstance());
-    private final ProductDAO prods = new ProductDAO(DBConnection.getInstance());
-    private final CategoryDAO categories = new CategoryDAO(DBConnection.getInstance());
+    private final ReviewDAO reviews = new ReviewDAO(TestDBConnection.getInstance());
+    private final UserDAO users = new UserDAO(TestDBConnection.getInstance());
+    private final ProductDAO prods = new ProductDAO(TestDBConnection.getInstance());
+    private final CategoryDAO categories = new CategoryDAO(TestDBConnection.getInstance());
     @Test
     public void testAdd() throws SQLException, NoSuchAlgorithmException {
         users.addUser(new RegularUser(1, "A", "B", "C", "M", 0));
