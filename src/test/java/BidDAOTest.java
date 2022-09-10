@@ -1,6 +1,7 @@
 import dao.BidDAO;
 import dao.DBConnection;
 import models.Bid;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -13,10 +14,13 @@ import java.util.UUID;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BidDAOTest  {
-
-
     private Connection con = TestDBConnection.getInstance();
     private BidDAO dao = new BidDAO(con);
+
+    @BeforeClass
+    public static void setUpClass() {
+        TestDBConnection.resetDatabase();
+    }
 
     @Test
     public void testInsertGet() throws SQLException {

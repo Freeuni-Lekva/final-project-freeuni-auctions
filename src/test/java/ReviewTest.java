@@ -3,6 +3,7 @@ import models.Product;
 import models.RegularUser;
 import models.Review;
 import models.User;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 import java.security.NoSuchAlgorithmException;
@@ -19,6 +20,11 @@ public class ReviewTest {
     private final UserDAO users = new UserDAO(TestDBConnection.getInstance());
     private final ProductDAO prods = new ProductDAO(TestDBConnection.getInstance());
     private final CategoryDAO categories = new CategoryDAO(TestDBConnection.getInstance());
+
+    @BeforeClass
+    public static void setUpClass() {
+        TestDBConnection.resetDatabase();
+    }
     @Test
     public void testAdd() throws SQLException, NoSuchAlgorithmException {
         users.addUser(new RegularUser("A", "B", "C", "M", 0));

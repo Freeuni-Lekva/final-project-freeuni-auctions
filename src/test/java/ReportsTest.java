@@ -3,6 +3,7 @@ import dao.ReportDAO;
 import dao.UserDAO;
 import models.RegularUser;
 import models.Report;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 import java.security.NoSuchAlgorithmException;
@@ -15,6 +16,11 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ReportsTest {
     private final ReportDAO reports = new ReportDAO(TestDBConnection.getInstance());
     private final UserDAO users = new UserDAO(TestDBConnection.getInstance());
+
+    @BeforeClass
+    public static void setUpClass() {
+        TestDBConnection.resetDatabase();
+    }
     @Test
     public void addTest() throws SQLException, NoSuchAlgorithmException {
         users.addUser(new RegularUser("A", "B", "C", "M", 0));

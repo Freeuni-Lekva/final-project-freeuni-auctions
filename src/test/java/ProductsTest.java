@@ -3,6 +3,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import models.Product;
 import models.Status;
+import org.junit.BeforeClass;
 
 import java.sql.Connection;
 import java.util.Date;
@@ -15,10 +16,14 @@ public class ProductsTest extends TestCase {
     private Product pr3;
     private Product pr4;
 
+    @BeforeClass
+    public static void setUpClass() {
+        TestDBConnection.resetDatabase();
+    }
+
     @Override
     protected void setUp() throws Exception {
-        Connection con = TestDBConnection.getInstance();
-        productDAO = new ProductDAO(con);
+        productDAO = new ProductDAO(TestDBConnection.getInstance());
         pr1 = new Product(1, 1, "foo", 20, new Date());
         pr2 = new Product(2, 1, "foo bar", 20, new Date());
         pr3 = new Product(3, 2, "bar", 20, new Date());
