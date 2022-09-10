@@ -24,7 +24,7 @@ public class BidDAOTest  {
         assertNotNull(con);
         con.createStatement().executeUpdate("INSERT INTO users(id, username, email) VALUES (" + dummyID + ", 'bla', 'bla@mail.com')");
         con.createStatement().executeUpdate("INSERT INTO categories(id, name) VALUES (" + dummyID + ", 'categ')");
-        con.createStatement().executeUpdate("INSERT INTO products(account_id, category_id) VALUES (" + dummyID + ", " + dummyID + ")");
+        con.createStatement().executeUpdate("INSERT INTO products(user_id, category_id) VALUES (" + dummyID + ", " + dummyID + ")");
 
         dao.addNewBid(dummyID, dummyID, new BigDecimal(100.00));
         List<Bid> bids = dao.getAllForUser(dummyID);
