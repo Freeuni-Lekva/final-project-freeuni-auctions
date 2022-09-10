@@ -20,7 +20,7 @@ public class ReviewDAO extends DAO{
         stm.setLong(1, id);
         ResultSet rs = stm.executeQuery();
         if(rs.next()){
-            stm.close();
+            //stm.close();
             return createReview(rs);
         } else return null;
     }
