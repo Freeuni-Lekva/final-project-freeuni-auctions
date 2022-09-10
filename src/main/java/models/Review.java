@@ -21,7 +21,7 @@ public class Review{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Review review = (Review) o;
-        return id == review.id && user_id == review.user_id && product_id == review.product_id && costumer_id == review.costumer_id && reviewText.equals(review.reviewText);
+        return user_id == review.user_id && product_id == review.product_id && costumer_id == review.costumer_id && reviewText.equals(review.reviewText);
     }
 
     @Override
