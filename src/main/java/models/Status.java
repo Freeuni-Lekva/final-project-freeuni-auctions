@@ -2,5 +2,6 @@ package models;
 
 public enum Status {
     available,
-    sold
+    sold,
+    timed_out
 }

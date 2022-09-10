@@ -42,7 +42,7 @@ CREATE TABLE products
     category_id BIGINT NOT NULL,
     bid_id BIGINT DEFAULT NULL,
     price NUMERIC,
-    status VARCHAR(30), /* "available", "sold" */
+    status VARCHAR(30), /* "available", "sold", "timed_out" */
     image VARCHAR(30),
     date_posted DATE,
     end_date DATE,

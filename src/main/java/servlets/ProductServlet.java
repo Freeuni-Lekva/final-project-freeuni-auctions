@@ -2,6 +2,7 @@ package servlets;
 
 import dao.ProductDAO;
 import models.Product;
+import models.Status;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +18,18 @@ public class ProductServlet extends HttpServlet {
         long productId = Long.parseLong(req.getParameter("productId"));
         ProductDAO dao = (ProductDAO)getServletContext().getAttribute(ProductDAO.ATTRIBUTE);
         Product product = dao.getFromID(productId);
-        req.setAttribute(Product.ATTRIBUTE, product);
-        req.getRequestDispatcher("/WEB-INF/item.jsp").forward(req, res);
+        Status status = product.getStatus();
+        switch (status) {
+            case available:
+                req.setAttribute(Product.ATTRIBUTE, product);
+                req.getRequestDispatcher("/WEB-INF/item.jsp").forward(req, res);
+                break;
+            case sold:
+                req.getRequestDispatcher("/WEB-INF/sold.jsp").forward(req, res);
+                break;
+            case timed_out:
+                req.getRequestDispatcher("/WEB-INF/timed_out.jsp").forward(req, res);
+                break;
+        }
     }
 }
