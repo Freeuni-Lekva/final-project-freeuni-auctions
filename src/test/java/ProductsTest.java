@@ -1,5 +1,3 @@
-package Tests;
-
 import dao.DBConnection;
 import dao.ProductDAO;
 import junit.framework.TestCase;

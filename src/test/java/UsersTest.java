@@ -1,6 +1,3 @@
-package Tests;
-
-
 import dao.UserDAO;
 import models.RegularUser;
 import models.User;

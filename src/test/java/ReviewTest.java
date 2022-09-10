@@ -1,5 +1,3 @@
-package Tests;
-
 import dao.*;
 import models.Product;
 import models.RegularUser;
