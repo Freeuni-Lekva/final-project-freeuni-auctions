@@ -19,9 +19,17 @@
 <html>
 <head>
     <title>reports</title>
+    <style>
+        body {
+            background-image: url("images/bg.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+    </style>
 </head>
 <body>
-    <h1>Active Reports</h1>
+    <h1 style="color: #A67079">Active Reports</h1>
     <%
         for(Report report : actives){
             out.println("<hr>");

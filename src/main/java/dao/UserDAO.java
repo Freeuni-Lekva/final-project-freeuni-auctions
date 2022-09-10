@@ -186,4 +186,32 @@ public class UserDAO{
         stmt.executeUpdate();
         stmt.close();
     }
+
+    public void addAdmin(Administrator user) {
+        PreparedStatement stmt = null;
+        try {
+            if (containsId(user.getId())) {
+                stmt = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET "
+                        + "username = ?, password_hash = ?, user_role = ?,"
+                        + " premium = ?, email = ?, image = ?, balance = ?"
+                        + " WHERE id = ?");
+
+                stmt.setLong(8, user.getId());
+            }   else {
+                stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME + " (username, password_hash, user_role, premium, email, image, balance)" +
+                        " VALUES ( ?, ?, ?, ?, ?, ?, ?)");
+            }
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getPassword());
+            stmt.setString(3, Role.Administator.toString());
+            stmt.setBoolean(4, user.isPremium());
+            stmt.setString(5, user.getEmail());
+            stmt.setString(6, user.getImage());
+            stmt.setLong(7, user.getBalance());
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

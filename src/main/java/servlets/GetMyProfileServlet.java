@@ -11,6 +11,6 @@ import java.io.IOException;
 public class GetMyProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/my_profile.jsp").forward(req, res);
+        req.getRequestDispatcher("my_profile.jsp").forward(req, res);
     }
 }

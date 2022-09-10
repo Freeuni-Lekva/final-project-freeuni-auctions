@@ -20,9 +20,12 @@ public class ProductDAO extends DAO{
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE id = ?");
             stmt.setLong(1, product_id);
+            System.out.println("ID " + product_id);
             ResultSet rs = stmt.executeQuery();
             rs.next();
             Product pr = getSingleProduct(rs);
+            if(pr == null)
+                System.out.println("null");
             stmt.close();
             return pr;
         } catch (SQLException e) {

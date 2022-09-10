@@ -14,10 +14,18 @@
 %>
 <html>
 <head>
-    <title>reports</title>
+    <title>Sales</title>
+    <style>
+        body {
+            background-image: url("images/bg.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100vh;
+        }
+    </style>
 </head>
 <body>
-<h1>Active Reports</h1>
+<h1 style="color: #A67079">All Sales</h1>
 <%
     for(Sale sale : sales){
         out.println("<hr>");

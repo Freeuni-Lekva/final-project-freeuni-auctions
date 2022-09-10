@@ -16,7 +16,7 @@ CREATE TABLE users
     id BIGINT NOT NULL AUTO_INCREMENT,
     username VARCHAR(30) NOT NULL,
     password_hash VARCHAR(255),
-    user_role VARCHAR(10), /* "admin", "normal", "guest" ? */
+    user_role VARCHAR(20), /* "admin", "normal", "guest" ? */
     premium TINYINT,
     email VARCHAR(255) NOT NULL,
     image VARCHAR(255),
@@ -43,7 +43,7 @@ CREATE TABLE products
     bid_id BIGINT DEFAULT NULL,
     price NUMERIC,
     status VARCHAR(30), /* "available", "sold", "timed_out" */
-    image VARCHAR(30),
+    image VARCHAR(255),
     date_posted DATE,
     end_date DATE,
     CONSTRAINT userIdFK FOREIGN KEY (user_id)

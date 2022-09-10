@@ -99,7 +99,7 @@ public abstract class User {
 
     public abstract Role getRole();
     public abstract boolean isPremium();
-    public abstract void makeChanges();
+    public abstract boolean makeChanges();
 
     @Override
     public boolean equals(Object o) {

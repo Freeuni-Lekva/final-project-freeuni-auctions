@@ -46,7 +46,7 @@ public class ItemUploadSubmitServlet extends HttpServlet {
         product.setDescription(description);
         product.setImage(imagePath);
         productDAO.addProduct(product);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("my_profile.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/my_profile.jsp");
         dispatcher.forward(request, response);
     }
 }

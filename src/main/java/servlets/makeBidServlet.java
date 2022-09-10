@@ -18,7 +18,11 @@ public class makeBidServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         User loggedInUser = (User)req.getSession().getAttribute(User.ATTRIBUTE);
         long balance = loggedInUser.getBalance();
-        Product product = (Product)req.getAttribute(Product.ATTRIBUTE);
+        ProductDAO prods = (ProductDAO) getServletContext().getAttribute(ProductDAO.ATTRIBUTE);
+        if(prods == null)
+            System.out.println("null on prods");
+        Product product = prods.getFromID(Long.parseLong(req.getParameter("prId")));
+        System.out.println(product.getName());
         long bid = Long.parseLong(req.getParameter("bid"));
         long price = product.getCurrPrice();
         String errorMessage = "";
@@ -36,6 +40,7 @@ public class makeBidServlet extends HttpServlet {
             userDAO.addUser(loggedInUser);
         }
         req.setAttribute("ERROR", errorMessage);
-        req.getRequestDispatcher("/WEB-INF/item.jsp").forward(req, res);
+        req.setAttribute(Product.ATTRIBUTE, product);
+        req.getRequestDispatcher("item.jsp").forward(req, res);
     }
 }

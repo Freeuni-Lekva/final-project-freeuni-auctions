@@ -1,6 +1,7 @@
 package servlets;
 
 import dao.*;
+import models.Administrator;
 import models.RegularUser;
 import models.User;
 
@@ -33,6 +34,12 @@ public class InitListener implements ServletContextListener, HttpSessionListener
         sce.getServletContext().setAttribute(ReviewDAO.ATTRIBUTE, new ReviewDAO(con));
         sce.getServletContext().setAttribute(SaleDAO.ATTRIBUTE, new SaleDAO(con));
         sce.getServletContext().setAttribute(BidDAO.ATTRIBUTE, new BidDAO(con));
+        UserDAO users = (UserDAO)  sce.getServletContext().getAttribute(UserDAO.ATTRIBUTE);
+        try {
+            users.addAdmin(new Administrator(0, "admin", "admin", "admin", "blank-profile-picture,png", 0));
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
