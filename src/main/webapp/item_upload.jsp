@@ -5,7 +5,7 @@
     <title>Item upload</title>
     <style>
         body {
-            background-image: url("../images/img.png");
+            background-image: url("images/img.png");
             background-size: cover;
             background-repeat: no-repeat;
             height: 100vh;
@@ -14,7 +14,7 @@
 </head>
 <body>
 <div>
-    <link href="../styles/item_upload.css" rel="stylesheet"/>
+    <link href="styles/item_upload.css" rel="stylesheet"/>
     <div class="home-container">
         <h1 class="home-heading">Upload item form</h1>
         <div class="home-container1">
@@ -22,16 +22,16 @@
                 <%
                     String file_name = (String) request.getParameter("filename");
                     if (file_name == null || file_name.equals("images/no-image-icon.png")) {
-                        session.setAttribute("itemUploadImage", "images/no-image-icon.png");
+                        session.setAttribute("itemUploadImage", "../images/no-image-icon.png");
                 %>
                 <br>
-                <img src="../images/no-image-icon.png" width="250" height="250" alt="image" class="home-image">
+                <img src="images/no-image-icon.png" width="250" height="250" alt="image" class="home-image">
                 <%
                 } else {
                 %><br>
                 <img width="250" height="250" alt="image" class="home-image" src="images/itemImages/<%=file_name%>">
                 <%
-                        session.setAttribute("itemUploadImage", "images/itemImages/"+file_name);
+                        session.setAttribute("itemUploadImage", "../images/itemImages/"+file_name);
                         out.println(file_name + " File uploaded successfully");
                     }
                 %>

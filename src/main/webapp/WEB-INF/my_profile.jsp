@@ -146,7 +146,7 @@
         }
     </script>
 
-<a href="item_upload.jsp">UPLOAD YOUR ITEM</a><br>
+<a href="../item_upload.jsp">UPLOAD YOUR ITEM</a><br>
 <%
     ((User) request.getSession().getAttribute(User.ATTRIBUTE)).makeChanges();
 %>
