@@ -25,7 +25,6 @@ public class UserDAO{
             stmt.setLong(1,id);
             ResultSet rs = stmt.executeQuery();
             rs.next();
-
             return getUser(rs, isForeign, stmt);
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -17,7 +17,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     ProductDAO products = (ProductDAO) application.getAttribute(ProductDAO.ATTRIBUTE);
- //   products.refresh();
+    products.refresh();
     Product prod;
     List<Product> prods = (ArrayList<Product>) request.getAttribute("items_to_display");
     CategoryDAO categories = (CategoryDAO) application.getAttribute(CategoryDAO.ATTRIBUTE);
@@ -83,6 +83,7 @@
     </style>
 </head>
 <body>
+<a href="my_profile.jsp" style= "float: right"> My Profile <a>
 <form action="search" method="post">
     <label for="selected_category">Choose a Category:</label>
     <select id="selected_category" name="selected_category">

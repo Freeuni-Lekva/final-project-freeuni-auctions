@@ -37,6 +37,7 @@ public class Sale {
     }
 
     @Override
+
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -47,5 +48,14 @@ public class Sale {
     @Override
     public int hashCode() {
         return Objects.hash(id, product_id, user_id, date, price);
+    }
+    public String toString() {
+        return "Sale{" +
+                "id=" + id +
+                ", product_id=" + product_id +
+                ", user_id=" + user_id +
+                ", date=" + date +
+                ", price=" + price +
+                '}';
     }
 }
