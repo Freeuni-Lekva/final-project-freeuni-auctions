@@ -1,24 +1,30 @@
-package Tests;
-
 import dao.*;
 import models.Product;
 import models.RegularUser;
 import models.Review;
 import models.User;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 
 import java.security.NoSuchAlgorithmException;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ReviewTest {
-    private final ReviewDAO reviews = new ReviewDAO(DBConnection.getInstance());
-    private final UserDAO users = new UserDAO(DBConnection.getInstance());
-    private final ProductDAO prods = new ProductDAO(DBConnection.getInstance());
-    private final CategoryDAO categories = new CategoryDAO(DBConnection.getInstance());
+    private final ReviewDAO reviews = new ReviewDAO(TestDBConnection.getInstance());
+    private final UserDAO users = new UserDAO(TestDBConnection.getInstance());
+    private final ProductDAO prods = new ProductDAO(TestDBConnection.getInstance());
+    private final CategoryDAO categories = new CategoryDAO(TestDBConnection.getInstance());
+
+    @BeforeClass
+    public static void setUpClass() {
+        TestDBConnection.resetDatabase();
+    }
     @Test
     public void testAdd() throws SQLException, NoSuchAlgorithmException {
         users.addUser(new RegularUser("A", "B", "C", "M", 0));
@@ -38,15 +44,19 @@ public class ReviewTest {
         reviews.addReview(rev2);
         reviews.addReview(rev3);
         List<Review> ls = reviews.getAllReviewsForAccount(1);
-        assertTrue(ls.get(1).equals(rev2));
-        assertTrue(ls.get(2).equals(rev3));
+        assertEquals(rev2, ls.get(2));
+        assertEquals(rev3, ls.get(3));
     }
     @Test
     public void getForProductTest() throws SQLException {
         Product pr = new Product(1, categories.getFromName("categ").getId(), "product1", 100, new Date(1));
         prods.addProduct(pr);
-        Review rev4 = new Review(4,1, pr.getId(), 2, "ANOTHER REVIEW3");
-        List<Review> ls = reviews.getAllReviewsForProduct(pr.getId());
-        assertTrue(ls.get(1).equals(rev4));
+        long pr_id = prods.getProductsByName(pr.getName()).get(0).getId();
+        Review rev4 = new Review(4,1, prods.getProductsByName("product1").get(0).getId(), 2, "ANOTHER REVIEW3");
+        reviews.addReview(rev4);
+        List<Review> ls = reviews.getAllReviewsForProduct(prods.getProductsByName("product1").get(0).getId());
+        assertEquals(rev4.getUser_id(), ls.get(0).getUser_id());
+        assertEquals(rev4.getProduct_id(), ls.get(0).getProduct_id());
+        assertEquals(ls.get(0).getReviewText(), rev4.getReviewText());
     }
 }

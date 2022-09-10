@@ -27,18 +27,22 @@ public class CategoryDAO {
         return null;
     }
 
-    public void addNewCategory(String name) {
+    public void addNewCategory(String category_name) {
         try {
-            conn.createStatement().executeUpdate("INSERT INTO " + TABLE_NAME + " (name) VALUES (" + name + ")");
+            PreparedStatement st = conn.prepareStatement("INSERT INTO " + TABLE_NAME + " (name) VALUES (?)");
+            st.setString(1, category_name);
+            st.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public Category getFromName(String name) {
+    public Category getFromName(String category_name) {
         ResultSet rs = null;
         try {
-            rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE name = " + name);
+            PreparedStatement st = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE name = ?");
+            st.setString(1, category_name);
+            rs = st.executeQuery();
             if (rs.next()) {
                 return new Category(rs.getLong("id"), rs.getString("name"));
             }

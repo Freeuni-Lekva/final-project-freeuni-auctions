@@ -33,7 +33,7 @@ public class ProductDAO extends DAO{
     public List<Product> getProductsByCategory(long category_id) {
         List<Product> res = new ArrayList<>();
         try {
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE category_id = ? ORDER BY date_posted desc");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE category_id = ? ORDER BY date_posted DESC");
             stmt.setLong(1, category_id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
@@ -49,7 +49,7 @@ public class ProductDAO extends DAO{
     public List<Product> getProductsByUser(long user_id) {
         List<Product> res = new ArrayList<>();
         try {
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE user_id = ? ORDER BY date_posted desc");
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE user_id = ? ORDER BY date_posted DESC");
             stmt.setLong(1, user_id);
             ResultSet rs = stmt.executeQuery();
             while(rs.next()) {
@@ -89,7 +89,7 @@ public class ProductDAO extends DAO{
                 stmt = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET "
                         + "product_name = ?, user_id = ?, description = ?, category_id = ?, bid_id = ?,"
                         + " price = ?, status = ?, image = ?, date_posted = ?, end_date = ?"
-                        + " WHERE id = ?)");
+                        + " WHERE id = ?");
                 stmt.setLong(11, p.getId());
             }   else {
                 stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME

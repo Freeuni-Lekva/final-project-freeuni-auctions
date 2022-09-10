@@ -23,7 +23,7 @@ public class BidDAO extends DAO{
     }
 
     public List<Bid> getAllForUser(long user_id) throws SQLException {
-        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE bidder_id = " + user_id + " ORDER BY time DESC");
+        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE bidder_id = " + user_id + " ORDER BY bid_time DESC");
         List<Bid> result = new ArrayList<Bid>();
         while (rs.next()) {
             result.add(createBidFromRow(rs));
@@ -32,7 +32,7 @@ public class BidDAO extends DAO{
     }
 
     public List<Bid> getAllForProduct(long product_id) throws SQLException {
-        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE product_id = " + product_id + " ORDER BY time DESC");
+        ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM " + TABLE_NAME + " WHERE product_id = " + product_id + " ORDER BY bid_time DESC");
         List<Bid> result = new ArrayList<Bid>();
         while (rs.next()) {
             result.add(createBidFromRow(rs));
@@ -50,6 +50,6 @@ public class BidDAO extends DAO{
     }
 
     public void addNewBid(long bidder_id, long product_id, BigDecimal amount) throws SQLException {
-        conn.createStatement().executeQuery("INSERT INTO " + TABLE_NAME + " (bidder_id, product_id, amount, bid_time) VALUES (" + bidder_id + ", " + product_id + ", " + amount + ")");
+        conn.createStatement().executeUpdate("INSERT INTO " + TABLE_NAME + " (bidder_id, product_id, amount) VALUES (" + bidder_id + ", " + product_id + ", " + amount + ")");
     }
 }

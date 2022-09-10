@@ -20,14 +20,14 @@ public class ReviewDAO extends DAO{
         stm.setLong(1, id);
         ResultSet rs = stm.executeQuery();
         if(rs.next()){
-            stm.close();
+            //stm.close();
             return createReview(rs);
         } else return null;
     }
 
     public List<Review> getAllReviewsForAccount(long user_id) throws SQLException {
         List<Review> res = new ArrayList<Review>();
-        PreparedStatement stm = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE account_id = ?");
+        PreparedStatement stm = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE user_id = ?");
         stm.setLong(1, user_id);
         ResultSet rs = stm.executeQuery();
         while(rs.next()){
@@ -57,12 +57,12 @@ public class ReviewDAO extends DAO{
 
     public void addReview(Review rev) throws SQLException {
         PreparedStatement stm = conn.prepareStatement("INSERT INTO " + TABLE_NAME +
-                " (user_id, producy_id, costumer_id, reviewText) VALUES ( ?, ?, ?, ? )");
+                " (user_id, product_id, costumer_id, reviewText) VALUES ( ?, ?, ?, ? )");
         stm.setLong(1, rev.getUser_id());
         stm.setLong(2, rev.getProduct_id());
         stm.setLong(3, rev.getCostumer_id());
         stm.setString(4, rev.getReviewText());
-        stm.executeQuery();
+        stm.executeUpdate();
         stm.close();
     }
 }

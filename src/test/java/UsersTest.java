@@ -1,15 +1,17 @@
-package Tests;
-
-
 import dao.UserDAO;
 import models.RegularUser;
 import models.User;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.Test;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class UsersTest {
+    @BeforeClass
+    public static void setUpClass() {
+        TestDBConnection.resetDatabase();
+    }
     @Test
     public void testAdd() throws NoSuchAlgorithmException, SQLException {
         UserDAO users = new UserDAO();

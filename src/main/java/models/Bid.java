@@ -1,9 +1,7 @@
 package models;
 
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.UUID;
 
 public class Bid {
     private final long id, bidder_id, product_id;
@@ -22,11 +20,11 @@ public class Bid {
         return id;
     }
 
-    public long getBidder_id() {
+    public long getBidderId() {
         return bidder_id;
     }
 
-    public long getItem_id() {
+    public long getItemId() {
         return product_id;
     }
 
