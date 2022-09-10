@@ -1,4 +1,3 @@
-import dao.DBConnection;
 import dao.ProductDAO;
 import junit.framework.TestCase;
 import models.Product;
@@ -16,7 +15,7 @@ public class ProductsTest extends TestCase {
 
     @Override
     protected void setUp() throws Exception {
-        productDAO = new ProductDAO(DBConnection.getInstance());
+        productDAO = new ProductDAO(TestDBConnection.getInstance());
         pr1 = new Product(1, 1, "foo", 20, new Date());
         pr2 = new Product(2, 1, "foo bar", 20, new Date());
         pr3 = new Product(3, 2, "bar", 20, new Date());

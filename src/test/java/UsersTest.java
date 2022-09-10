@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UsersTest {
     @Test
     public void testAdd() throws NoSuchAlgorithmException, SQLException {
-        UserDAO users = new UserDAO();
+        UserDAO users = new UserDAO(TestDBConnection.getInstance());
         users.addUser(new RegularUser(0, "A", "B", "C", "SMTHN", 0));
         assertTrue(users.containsUsername("A"));
     }
