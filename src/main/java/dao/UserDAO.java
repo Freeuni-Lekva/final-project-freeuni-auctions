@@ -35,17 +35,17 @@ public class UserDAO{
     private User getUser(ResultSet rs, boolean isForeign, PreparedStatement stmt) {
         String username = null;
         try {
+            long id = Long.parseLong(rs.getString("id"));
             username = rs.getString("username");
             String email = rs.getString("email");
             String image = rs.getString("image");
             if (isForeign) {
                 try {
-                    return new ForeignUser(username, email, image);
+                    return new ForeignUser(id,username, email, image);
                 } catch (NoSuchAlgorithmException e) {
                     throw new RuntimeException(e);
                 }
             }
-            long id = Long.parseLong(rs.getString("id"));
             String password = rs.getString("password_hash");
             Role role = Role.valueOf(rs.getString("user_role"));
             long balance = rs.getLong("balance"); 

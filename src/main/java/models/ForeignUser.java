@@ -4,8 +4,8 @@ import java.security.NoSuchAlgorithmException;
 
 public class ForeignUser extends User {
     public static final String ATTRIBUTE = "foreignUser";
-    public ForeignUser(String username, String email, String image) throws NoSuchAlgorithmException {
-        super(-1, username, null, email, image, -1);
+    public ForeignUser(long id, String username, String email, String image) throws NoSuchAlgorithmException {
+        super(id, username, null, email, image, -1);
     }
 
 
@@ -21,11 +21,6 @@ public class ForeignUser extends User {
         return "";
     }
 
-    @Override
-    @Deprecated
-    public long getId() {
-        return -1;
-    }
 
     @Deprecated
     public boolean isPremium() {
