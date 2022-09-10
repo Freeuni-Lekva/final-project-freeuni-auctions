@@ -15,8 +15,9 @@ import java.io.IOException;
 public class ItemServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        ProductDAO prods = (ProductDAO) req.getAttribute(ProductDAO.ATTRIBUTE);
+        ProductDAO prods = (ProductDAO) getServletContext().getAttribute(ProductDAO.ATTRIBUTE);
         req.setAttribute(Product.ATTRIBUTE, prods.getFromID((Long) req.getAttribute("prodID")));
+        System.out.println("here");
         RequestDispatcher disp = req.getRequestDispatcher("item.jsp");
         disp.forward(req,res);
     }

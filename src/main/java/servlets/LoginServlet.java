@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
         }
         try {
             if(users.correct(req.getParameter("email"), hashed) && !users.isSuspended(req.getParameter("email"))){
-                RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/homepage.jsp");
+                RequestDispatcher disp = req.getRequestDispatcher("homepage.jsp");
                 req.getSession().setAttribute(User.ATTRIBUTE, users.getUserByEmail(req.getParameter("email"), false));
                 disp.forward(req,res);
             } else {

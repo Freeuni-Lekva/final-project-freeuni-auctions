@@ -34,7 +34,7 @@ public class SaleTest {
         for (final Sale s : sales){
             saleDAO.addSale(s);
         }
-        List<Sale> dbSales = saleDAO.getAllSale();
+        List<Sale> dbSales = saleDAO.getAll();
         assertEquals(5,dbSales.size());
         assertTrue(sales.containsAll(dbSales));
     }

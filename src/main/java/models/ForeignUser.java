@@ -33,8 +33,8 @@ public class ForeignUser extends User {
     }
 
     @Override
-    public void makeChanges() {
-
+    public boolean makeChanges() {
+        return false;
     }
 
     @Deprecated

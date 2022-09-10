@@ -14,7 +14,7 @@ import java.io.IOException;
 public class BalanceServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/balance.jsp").forward(req, res);
+        req.getRequestDispatcher("balance.jsp").forward(req, res);
     }
 
     @Override
@@ -24,6 +24,6 @@ public class BalanceServlet extends HttpServlet {
         user.setBalance(newBalance);
         UserDAO userDAO = (UserDAO)getServletContext().getAttribute(UserDAO.ATTRIBUTE);
         userDAO.addUser(user);
-        req.getRequestDispatcher("/WEB-INF/balance.jsp").forward(req, res);
+        req.getRequestDispatcher("balance.jsp").forward(req, res);
     }
 }

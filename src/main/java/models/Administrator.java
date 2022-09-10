@@ -21,9 +21,8 @@ public class Administrator extends User {
     }
 
     @Override
-    public void makeChanges() {
-        out.println("<a href=\"show_reports.jsp\">SHOW REPORTS</a><br>");
-        out.println("<a href=\"show_sales.jsp\">SHOW REPORTS</a><br>");
+    public boolean makeChanges() {
+        return true;
 
     }
 }
