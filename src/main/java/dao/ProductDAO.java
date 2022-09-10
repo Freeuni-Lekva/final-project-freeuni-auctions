@@ -174,7 +174,7 @@ public class ProductDAO extends DAO{
         try {
             stmt = conn.createStatement();
             stmt.executeUpdate("UPDATE TABLE " + TABLE_NAME + " SET status = timed_out"
-                    + " WHERE end_date < GETDATE()"
+                    + " WHERE end_date < CURDATE()"
                     );
             stmt.close();
         } catch (SQLException e) {
