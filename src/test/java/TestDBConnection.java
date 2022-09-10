@@ -1,0 +1,22 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class TestDBConnection {
+    private static final String url = "jdbc:mysql://127.0.0.1:3306/test_db";
+    private static final String user = "root";
+    private static final String password = "";
+    private static Connection instance;
+
+
+    public static Connection getInstance() {
+        if (instance == null) {
+            try {
+                instance = DriverManager.getConnection(url, user, password);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return instance;
+    }
+}
