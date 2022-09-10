@@ -13,8 +13,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ReportsTest {
-    private final ReportDAO reports = new ReportDAO(DBConnection.getInstance());
-    private final UserDAO users = new UserDAO(DBConnection.getInstance());
+    private final ReportDAO reports = new ReportDAO(TestDBConnection.getInstance());
+    private final UserDAO users = new UserDAO(TestDBConnection.getInstance());
     @Test
     public void addTest() throws SQLException, NoSuchAlgorithmException {
         users.addUser(new RegularUser(1, "A", "B", "C", "M", 0));
