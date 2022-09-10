@@ -149,6 +149,6 @@
         }
     </script>
 
-
+<a href="item_upload.jsp">UPLOAD YOUR ITEM</a><br>
 </body>
 </html>
