@@ -17,7 +17,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     ProductDAO products = (ProductDAO) application.getAttribute(ProductDAO.ATTRIBUTE);
- //   products.refresh();
+    products.refresh();
     Product prod;
     List<Product> prods = (ArrayList<Product>) request.getAttribute("items_to_display");
     CategoryDAO categories = (CategoryDAO) application.getAttribute(CategoryDAO.ATTRIBUTE);
