@@ -1,7 +1,10 @@
 <%@ page import="models.ForeignUser" %>
 <%@ page import="dao.ProductDAO" %>
 <%@ page import="models.Product" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="dao.ReviewDAO" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="models.Review" %><%--
   Created by IntelliJ IDEA.
   User: admin
   Date: 07.09.2022
@@ -120,7 +123,23 @@
         </ul>
     </div>
     <div id="Reviews" class="tabcontent">
-        <h3>Reviews</h3>
+        <ul>
+            <h3>Reviews</h3>
+            <%
+
+                ReviewDAO reviewDAO = (ReviewDAO)application.getAttribute(ReviewDAO.ATTRIBUTE);
+                try {
+                    List<Review> reviews = reviewDAO.getAllReviewsForAccount(user.getId());
+                    for(Review r : reviews) {
+                        %>
+                            <li><a> <%=r.getReviewText()%></a></li>
+                        <%
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            %>
+        </ul>
     </div>
 
 
