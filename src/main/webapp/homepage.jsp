@@ -37,8 +37,10 @@
         }
 
         .column {
+            position: relative;
             float: left;
             width: 33.33%;
+            height: 0;
             padding: 5px;
         }
 
@@ -115,7 +117,7 @@
             prod = product;
            %>
     <div class="column">
-        <img src="<%=prod.getImage()%>", alt=<%=prod.getName()%>, style="width:80%">
+        <img src="<%=prod.getImage()%>" alt=<%=prod.getName()%> width=250px height=250px">
         <form action="item" method="post">
             <input type="hidden" id="prodId" name="prodId" value=<%=prod.getId()%>>
             <input type="submit" id="item" name="item" value=<%=prod.getName()%>>

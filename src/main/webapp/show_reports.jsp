@@ -31,18 +31,18 @@
 <body>
     <h1 style="color: #A67079">Active Reports</h1>
     <%
-        for(Report report : actives){
+        for(Report report : actives) {
             out.println("<hr>");
             out.println("<hr>\n" +
-                    "<a href=\"foreign_profile?id="+users.getUserByID(report.getReportedId(), true).getId()+ "\" style=\"float: left\">Reported: </a>\n" + users.getUserByID(report.getReportedId(), true).getUsername()+
+                    "<a href=\"foreign_profile?id=" + users.getUserByID(report.getReportedId(), true).getId() + "\" style=\"float: left\">Reported: </a>\n" + users.getUserByID(report.getReportedId(), true).getUsername() +
                     "\n" +
                     "<p>" + report.getComment() +
                     "</p>\n" +
                     "\n" +
-                    "<a href=\"foreign_profile?id="+users.getUserByID(report.getReporterId(), true).getId()+ "\" style=\"float: left\">Reporter: </a><br>\n" + users.getUserByID(report.getReporterId(), true).getUsername()+
+                    "<a href=\"foreign_profile?id=" + users.getUserByID(report.getReporterId(), true).getId() + "\" style=\"float: left\">Reporter: </a><br>\n" + users.getUserByID(report.getReporterId(), true).getUsername() +
                     "\n" +
                     "<hr>");
             out.println("<hr>");
-    %>
+        } %>
 </body>
 </html>
