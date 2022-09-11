@@ -27,10 +27,10 @@ public abstract class User {
         isSuspended = false;
     }
 
-    public User(long id, String username, String password, String email, String image, long balance, boolean isSuspended) {
+    public User(long id, String username, String password, String email, String image, long balance, boolean isSuspended) throws NoSuchAlgorithmException {
         this.id = id;
         this.username = username;
-        this.password = password;
+        this.password = hashPassword(password);
         this.email = email;
         this.image = image;
         this.balance = balance;
