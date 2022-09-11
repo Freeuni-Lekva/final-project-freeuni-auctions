@@ -148,7 +148,6 @@
             }
 
         %>
-        <h3>Reviews</h3>
         <ul>
             <h3>Reviews</h3>
             <%
