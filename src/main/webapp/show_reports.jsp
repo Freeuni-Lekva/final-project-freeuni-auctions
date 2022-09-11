@@ -43,6 +43,7 @@
                     "\n" +
                     "<hr>");
             out.println("<hr>");
-        } %>
+        }
+    %>
 </body>
 </html>
