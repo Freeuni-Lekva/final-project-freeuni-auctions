@@ -30,7 +30,7 @@
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" style="background-color:#FFE7EB; margin: 10px"><br>
         <label for="password">Password:</label>
-        <input type="text" id="password" name="password" style="background-color:#FFE7EB; margin: 10px">
+        <input type="password" id="password" name="password" style="background-color:#FFE7EB; margin: 10px">
         <input type="submit" value="Login"><br><br>
     </form>
 
