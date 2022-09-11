@@ -22,8 +22,8 @@ public class SearchServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ProductDAO productDAO = (ProductDAO) getServletContext().getAttribute(ProductDAO.ATTRIBUTE);
         CategoryDAO categoryDAO = (CategoryDAO) getServletContext().getAttribute(CategoryDAO.ATTRIBUTE);
-        String phrase = (String) req.getAttribute("search_phrase");
-        String category_name = (String) req.getAttribute("selected_category");
+        String phrase = req.getParameter("search_phrase");
+        String category_name = req.getParameter("selected_category");
         Category category = null;
         ArrayList<Product> results = new ArrayList<>();
         if (category_name != null) {
@@ -39,7 +39,7 @@ public class SearchServlet extends HttpServlet {
             results = new ArrayList<>(productDAO.getProductsByCategory(category.getId()));
         }
         req.setAttribute("items_to_display", results);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/homepage.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/homepage.jsp");
         dispatcher.forward(req, resp);
     }
 }

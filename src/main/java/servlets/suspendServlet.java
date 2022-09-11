@@ -16,14 +16,14 @@ import java.sql.SQLException;
 public class suspendServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        ForeignUser user = (ForeignUser) req.getAttribute(ForeignUser.ATTRIBUTE);
-        UserDAO users = (UserDAO) req.getAttribute(UserDAO.ATTRIBUTE);
+        ForeignUser user = (ForeignUser) getServletContext().getAttribute(ForeignUser.ATTRIBUTE);
+        UserDAO users = (UserDAO) getServletContext().getAttribute(UserDAO.ATTRIBUTE);
         try {
             users.setSuspended(user.getEmail());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        RequestDispatcher disp = req.getRequestDispatcher("/WEB-INF/suspended_profile.jsp");
+        RequestDispatcher disp = req.getRequestDispatcher("suspended_profile.jsp");
         disp.forward(req,res);
     }
 }

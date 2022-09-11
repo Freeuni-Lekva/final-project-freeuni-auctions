@@ -2,9 +2,8 @@
 <%@ page import="dao.ProductDAO" %>
 <%@ page import="models.Product" %>
 <%@ page import="java.util.List" %>
-<%@ page import="dao.ReviewDAO" %>
-<%@ page import="java.sql.SQLException" %>
-<%@ page import="models.Review" %><%--
+<%@ page import="models.User" %>
+<%@ page import="models.Role" %><%--
   Created by IntelliJ IDEA.
   User: admin
   Date: 07.09.2022
@@ -17,7 +16,7 @@
     <title>${username}</title>
     <style>
         body {
-            background-image: url("../images/bg.jpg");
+            background-image: url("images/bg.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             height: 100vh;
@@ -25,7 +24,7 @@
             font-family: Arial, Helvetica, sans-serif;
         }
         .no-background {
-            background-image: url("../images/bg.jpg");
+            background-image: url("images/bg.jpg");
         }
         .topnav {
             overflow: hidden;
@@ -90,6 +89,7 @@
             border-top: none;
         }
     </style>
+    <link href="styles/report.css" rel="stylesheet"/>
 </head>
 <body>
     <div class="topnav">
@@ -101,7 +101,7 @@
     </div>
     <% ForeignUser user = (ForeignUser) request.getAttribute(ForeignUser.ATTRIBUTE); %>
     <h1><%=user.getUsername()%></h1>
-    <img src="../images/blank-profile-picture.png" alt="profile picture" width="150" height="200">
+    <img src="images/blank-profile-picture.png" alt="profile picture" width="150" height="200">
     <h3><%=user.getEmail()%></h3>
     <div class="tab">
         <button class="tablinks" onclick="openTab('Products')">Products</button>
@@ -123,23 +123,7 @@
         </ul>
     </div>
     <div id="Reviews" class="tabcontent">
-        <ul>
-            <h3>Reviews</h3>
-            <%
-
-                ReviewDAO reviewDAO = (ReviewDAO)application.getAttribute(ReviewDAO.ATTRIBUTE);
-                try {
-                    List<Review> reviews = reviewDAO.getAllReviewsForAccount(user.getId());
-                    for(Review r : reviews) {
-                        %>
-                            <li><a> <%=r.getReviewText()%></a></li>
-                        <%
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            %>
-        </ul>
+        <h3>Reviews</h3>
     </div>
 
 
@@ -159,5 +143,38 @@
             evt.currentTarget.className += " active";
         }
     </script>
+    <%
+        if(((User)request.getSession().getAttribute(User.ATTRIBUTE)).getRole() == Role.Administator) {
+            out.println("<form action=\"suspend\" method=\"post\">\n" +
+                    "        <input type=\"submit\" value=\"suspend\"><br><br>\n" +
+                    "    </form>");
+        }else{
+    %>
+    <button class="open-button" onclick="openForm()">Report User</button>
+
+    <div class="form-popup" id="myForm">
+        <form action="/report" method="post" class="form-container">
+            <h1>Report</h1>
+
+            <input type="hidden" id="reportedId" name="reportedId" value="<%=user.getId()%>">
+
+            <label for="message"><b>Message</b></label>
+            <input type="text" placeholder="Enter report reason" id="message" name="message" required>
+
+            <button type="submit" class="btn">Submit</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
+
+    <script>
+        function openForm() {
+            document.getElementById("myForm").style.display = "block";
+        }
+
+        function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+        }
+    </script>
+    <% }%>
 </body>
 </html>

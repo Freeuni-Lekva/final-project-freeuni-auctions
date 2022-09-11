@@ -22,7 +22,7 @@
                 <%
                     String file_name = (String) request.getParameter("filename");
                     if (file_name == null || file_name.equals("images/no-image-icon.png")) {
-                        session.setAttribute("itemUploadImage", "images/no-image-icon.png");
+                        session.setAttribute("itemUploadImage", "../images/no-image-icon.png");
                 %>
                 <br>
                 <img src="images/no-image-icon.png" width="250" height="250" alt="image" class="home-image">
@@ -31,7 +31,7 @@
                 %><br>
                 <img width="250" height="250" alt="image" class="home-image" src="images/itemImages/<%=file_name%>">
                 <%
-                        session.setAttribute("itemUploadImage", "images/itemImages/"+file_name);
+                        session.setAttribute("itemUploadImage", "../images/itemImages/"+file_name);
                         out.println(file_name + " File uploaded successfully");
                     }
                 %>

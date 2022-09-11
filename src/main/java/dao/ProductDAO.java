@@ -20,9 +20,12 @@ public class ProductDAO extends DAO{
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT * FROM " + TABLE_NAME + " WHERE id = ?");
             stmt.setLong(1, product_id);
+            System.out.println("ID " + product_id);
             ResultSet rs = stmt.executeQuery();
             rs.next();
             Product pr = getSingleProduct(rs);
+            if(pr == null)
+                System.out.println("null");
             stmt.close();
             return pr;
         } catch (SQLException e) {
@@ -170,12 +173,10 @@ public class ProductDAO extends DAO{
     }
 
     public void refresh() {
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         try {
-            stmt = conn.createStatement();
-            stmt.executeUpdate("UPDATE TABLE " + TABLE_NAME + " SET status = timed_out"
-                    + " WHERE end_date < GETDATE()"
-                    );
+            stmt = conn.prepareStatement("UPDATE TABLE " + TABLE_NAME + " SET status = ?" + " WHERE end_date < CURDATE()");
+            stmt.setString(1, "timed_out");
             stmt.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -185,9 +186,10 @@ public class ProductDAO extends DAO{
     public void setSold(Product product) {
         PreparedStatement stmt = null;
         try {
-            stmt = conn.prepareStatement("UPDATE TABLE " + TABLE_NAME + " SET status = sold"
+            stmt = conn.prepareStatement("UPDATE TABLE " + TABLE_NAME + " SET status = ?"
                     + " WHERE id = ?");
-            stmt.setLong(1, product.getId());
+            stmt.setString(1, "sold");
+            stmt.setLong(2, product.getId());
             stmt.executeUpdate();
             stmt.close();
         } catch (SQLException e) {

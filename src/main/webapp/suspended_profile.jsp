@@ -11,13 +11,13 @@
     <title>Suspended</title>
     <style>
         body {
-            background-image: url("../images/bg.jpg");
+            background-image: url("images/bg.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             height: 100vh;
         }
         .no-background {
-            background-image: url("../images/bg.jpg");
+            background-image: url("images/bg.jpg");
         }
     </style>
 </head>

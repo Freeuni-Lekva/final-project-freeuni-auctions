@@ -16,7 +16,7 @@ CREATE TABLE users
     id BIGINT NOT NULL AUTO_INCREMENT,
     username VARCHAR(30) NOT NULL,
     password_hash VARCHAR(255),
-    user_role VARCHAR(10), /* "admin", "normal", "guest" ? */
+    user_role VARCHAR(20), /* "admin", "normal", "guest" ? */
     premium TINYINT,
     email VARCHAR(255) NOT NULL,
     image VARCHAR(255),
@@ -43,7 +43,7 @@ CREATE TABLE products
     bid_id BIGINT DEFAULT NULL,
     price NUMERIC,
     status VARCHAR(30), /* "available", "sold", "timed_out" */
-    image VARCHAR(30),
+    image VARCHAR(255),
     date_posted DATE,
     end_date DATE,
     CONSTRAINT userIdFK FOREIGN KEY (user_id)
@@ -75,14 +75,13 @@ CREATE TABLE sales
     id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     product_id  BIGINT NOT NULL,
     user_id     BIGINT NOT NULL,
-    date TIMESTAMP DEFAULT NOW(),
+    sale_date TIMESTAMP DEFAULT NOW(),
     price NUMERIC,
     CONSTRAINT saleUserIdFK FOREIGN KEY (user_id)
         REFERENCES users(id)
         ON DELETE CASCADE,
     CONSTRAINT saleProductIdFK FOREIGN KEY (product_id)
-        REFERENCES products(id),
-    sale_date DATE
+        REFERENCES products(id)
 );
 CREATE TABLE reports
 (

@@ -1,7 +1,10 @@
 package dao;
 import models.Category;
+import models.Report;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class CategoryDAO {
@@ -50,5 +53,16 @@ public class CategoryDAO {
             throw new RuntimeException(e);
         }
         return null;
+    }
+
+    public List<Category> getAll() throws SQLException {
+        List<Category> res = new ArrayList<>();
+        PreparedStatement stm = conn.prepareStatement("SELECT * FROM " + TABLE_NAME);
+        ResultSet rs = stm.executeQuery();
+        while(rs.next()){
+            res.add(new Category(rs.getLong("id"), rs.getString("name")));
+        }
+        stm.close();
+        return res;
     }
 }

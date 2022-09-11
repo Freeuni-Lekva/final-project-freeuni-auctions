@@ -25,7 +25,6 @@ public class UserDAO{
             stmt.setLong(1,id);
             ResultSet rs = stmt.executeQuery();
             rs.next();
-
             return getUser(rs, isForeign, stmt);
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -36,17 +35,17 @@ public class UserDAO{
     private User getUser(ResultSet rs, boolean isForeign, PreparedStatement stmt) {
         String username = null;
         try {
+            long id = Long.parseLong(rs.getString("id"));
             username = rs.getString("username");
             String email = rs.getString("email");
             String image = rs.getString("image");
             if (isForeign) {
                 try {
-                    return new ForeignUser(username, email, image);
+                    return new ForeignUser(id,username, email, image);
                 } catch (NoSuchAlgorithmException e) {
                     throw new RuntimeException(e);
                 }
             }
-            long id = Long.parseLong(rs.getString("id"));
             String password = rs.getString("password_hash");
             Role role = Role.valueOf(rs.getString("user_role"));
             long balance = rs.getLong("balance"); 
@@ -186,5 +185,33 @@ public class UserDAO{
         stmt.setString(1, email);
         stmt.executeUpdate();
         stmt.close();
+    }
+
+    public void addAdmin(Administrator user) {
+        PreparedStatement stmt = null;
+        try {
+            if (containsId(user.getId())) {
+                stmt = conn.prepareStatement("UPDATE " + TABLE_NAME + " SET "
+                        + "username = ?, password_hash = ?, user_role = ?,"
+                        + " premium = ?, email = ?, image = ?, balance = ?"
+                        + " WHERE id = ?");
+
+                stmt.setLong(8, user.getId());
+            }   else {
+                stmt = conn.prepareStatement("INSERT INTO " + TABLE_NAME + " (username, password_hash, user_role, premium, email, image, balance)" +
+                        " VALUES ( ?, ?, ?, ?, ?, ?, ?)");
+            }
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getPassword());
+            stmt.setString(3, Role.Administator.toString());
+            stmt.setBoolean(4, user.isPremium());
+            stmt.setString(5, user.getEmail());
+            stmt.setString(6, user.getImage());
+            stmt.setLong(7, user.getBalance());
+            stmt.executeUpdate();
+            stmt.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

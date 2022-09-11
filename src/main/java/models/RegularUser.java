@@ -26,7 +26,7 @@ public class RegularUser extends User {
     }
 
     @Override
-    public void makeChanges() {
-
+    public boolean makeChanges() {
+        return false;
     }
 }

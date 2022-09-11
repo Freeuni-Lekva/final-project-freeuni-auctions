@@ -1,12 +1,11 @@
-<%@ page import="models.User" %>
 <%@ page import="dao.ProductDAO" %>
-<%@ page import="models.Product" %>
 <%@ page import="java.util.List" %>
-<%@ page import="models.RegularUser" %>
 <%@ page import="java.security.NoSuchAlgorithmException" %>
 <%@ page import="dao.ReviewDAO" %>
-<%@ page import="models.Review" %>
-<%@ page import="java.sql.SQLException" %><%--
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="models.*" %>
+<%@ page import="static java.lang.System.out" %>
+<%@ page import="static java.lang.System.out" %><%--
   Created by IntelliJ IDEA.
   User: admin
   Date: 04.09.2022
@@ -19,7 +18,7 @@
     <title>My Profile</title>
     <style>
         body {
-            background-image: url("../images/bg.jpg");
+            background-image: url("images/bg.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             height: 100vh;
@@ -27,7 +26,7 @@
             font-family: Arial, Helvetica, sans-serif;
         }
         .no-background {
-            background-image: url("../images/bg.jpg");
+            background-image: url("images/bg.jpg");
         }
         .topnav {
             overflow: hidden;
@@ -103,7 +102,7 @@
     <% User user = (User) request.getSession().getAttribute(User.ATTRIBUTE); %>
 
     <h1><%=user.getUsername()%></h1>
-    <img src="../images/blank-profile-picture.png" alt="profile picture" width="150" height="200">
+    <img src="images/blank-profile-picture.png" alt="profile picture" width="150" height="200">
     <h3><%=user.getEmail()%></h3>
     <h2>Balance: $<%=user.getBalance()%></h2>
     <form action="balance" method="get">
@@ -149,6 +148,12 @@
         }
     </script>
 
-
+<a href="item_upload.jsp">UPLOAD YOUR ITEM</a><br>
+<%
+   if(((User) request.getSession().getAttribute(User.ATTRIBUTE)).makeChanges()){
+       out.println("<a href=\"show_reports.jsp\">SHOW REPORTS</a><br>");
+       out.println("<a href=\"show_sales.jsp\">SHOW SALES</a><br>");
+   }
+%>
 </body>
 </html>

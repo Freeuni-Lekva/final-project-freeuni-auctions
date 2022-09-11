@@ -20,7 +20,7 @@
     <title> <%=prod.getName()%></title>
     <style>
         body {
-            background-image: url("../images/bg.jpg");
+            background-image: url("images/bg.jpg");
             background-size: cover;
             background-repeat: no-repeat;
             height: 100vh;
@@ -31,11 +31,6 @@
     </style>
 </head>
 <body>
-    <form action="logout" method="get">
-        <div>
-            <button type='button'>logout</button>
-        </div>
-    </form>
     <a href="homepage.jsp" style="float: right; margin-right: 10px">homepage</a>
     <h1 style="text-align: left; color: #A67079; font-family: 'Times New Roman',serif"> <%=prod.getName()%> </h1>
     <img src="<%=prod.getImage()%>"  alt="<%=prod.getName()%>"  width="300" height="300" style="float: left; margin-right: 15px;"/>
@@ -43,17 +38,19 @@
     <p>category: <%=categories.getFromID(prod.getCategoryId()).getName()%></p>
     <p><%=prod.getDescription()%></p>
     <p style="font-size: 140%">Current bidding price: <%=prod.getCurrPrice()%>$</p>
-
-    <% request.setAttribute(Product.ATTRIBUTE, prod); %>
-    <%  String error = (String)request.getAttribute("ERROR");
-        if (!error.equals("")) { %>
-            <h3><%=error%></h3>
-       <% } %>
+    <% request.setAttribute(Product.ATTRIBUTE, prod);
+        System.out.println(prod.getId());%>
+<%--    <%  String error = (String)request.getAttribute("ERROR");--%>
+<%--        if (!error.equals("")) { %>--%>
+<%--            <h3><%=error%></h3>--%>
+<%--       <% } %>--%>
     <form action="makeBid" method="post">
         <label for="bid">MAKE BID:</label>
+        <input type="hidden" id="prId" name="prId" value=<%=prod.getId()%>>
         <input type="text" id="bid" name="bid"><br>
     </form>
     <p>CURRENT STATUS: <%=prod.getStatus()%></p>
-    <p>POSTED BY: <%=users.getUserByID(prod.getUserId(), false).getUsername()%> </p>
+
+    <a href="foreign_profile?id=<%=users.getUserByID(prod.getUserId(), false).getId()%>"> POSTED BY: <%=users.getUserByID(prod.getUserId(), false).getUsername()%> </a>
 </body>
 </html>

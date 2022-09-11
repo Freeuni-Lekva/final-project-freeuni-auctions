@@ -22,13 +22,13 @@ public class ProductServlet extends HttpServlet {
         switch (status) {
             case available:
                 req.setAttribute(Product.ATTRIBUTE, product);
-                req.getRequestDispatcher("/WEB-INF/item.jsp").forward(req, res);
+                req.getRequestDispatcher("item.jsp").forward(req, res);
                 break;
             case sold:
-                req.getRequestDispatcher("/WEB-INF/sold.jsp").forward(req, res);
+                req.getRequestDispatcher("sold.jsp").forward(req, res);
                 break;
             case timed_out:
-                req.getRequestDispatcher("/WEB-INF/timed_out.jsp").forward(req, res);
+                req.getRequestDispatcher("timed_out.jsp").forward(req, res);
                 break;
         }
     }
