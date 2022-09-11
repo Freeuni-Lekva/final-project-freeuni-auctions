@@ -22,7 +22,7 @@ public class GetForeignProfileServlet extends HttpServlet {
         UserDAO users = (UserDAO) getServletContext().getAttribute(UserDAO.ATTRIBUTE);
         User us = users.getUserByID(Long.parseLong(req.getParameter("id")), true);
         try {
-            if(users.isSuspended(us.getEmail())){
+            if (users.isSuspended(us.getEmail())) {
                 req.setAttribute(ForeignUser.ATTRIBUTE, us);
                 req.getRequestDispatcher("suspended_profile.jsp").forward(req, res);
             } else {
@@ -32,5 +32,10 @@ public class GetForeignProfileServlet extends HttpServlet {
         } catch (SQLException | NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        doGet(req, res);
     }
 }

@@ -89,6 +89,7 @@
             border-top: none;
         }
     </style>
+    <link href="styles/report.css" rel="stylesheet"/>
 </head>
 <body>
     <div class="topnav">
@@ -143,10 +144,37 @@
         }
     </script>
     <%
-        if(((User)request.getSession().getAttribute(User.ATTRIBUTE)).getRole() == Role.Administator)
+        if(((User)request.getSession().getAttribute(User.ATTRIBUTE)).getRole() == Role.Administator) {
             out.println("<form action=\"suspend\" method=\"post\">\n" +
                     "        <input type=\"submit\" value=\"suspend\"><br><br>\n" +
                     "    </form>");
+        }else{
     %>
+    <button class="open-button" onclick="openForm()">Report User</button>
+
+    <div class="form-popup" id="myForm">
+        <form action="/report" method="post" class="form-container">
+            <h1>Report</h1>
+
+            <input type="hidden" id="reportedId" name="reportedId" value="<%=user.getId()%>">
+
+            <label for="message"><b>Message</b></label>
+            <input type="text" placeholder="Enter report reason" id="message" name="message" required>
+
+            <button type="submit" class="btn">Submit</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
+
+    <script>
+        function openForm() {
+            document.getElementById("myForm").style.display = "block";
+        }
+
+        function closeForm() {
+            document.getElementById("myForm").style.display = "none";
+        }
+    </script>
+    <% }%>
 </body>
 </html>
