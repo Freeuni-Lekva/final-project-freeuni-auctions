@@ -1,11 +1,13 @@
 import dao.CategoryDAO;
+import junit.framework.TestCase;
 import models.Category;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.fail;
 
-public class CategoryDAOTest {
+
+public class CategoryDAOTest extends TestCase {
     private final CategoryDAO categoryDAO = new CategoryDAO(TestDBConnection.getInstance());
 
     @BeforeClass
@@ -13,7 +15,6 @@ public class CategoryDAOTest {
         TestDBConnection.resetDatabase();
     }
 
-    @Test
     public void testInsertGet() {
         categoryDAO.addNewCategory("cat1");
         long id = categoryDAO.getFromName("cat1").getId();
@@ -25,7 +26,6 @@ public class CategoryDAOTest {
         assertEquals("cat2", c.getName());
     }
 
-    @Test
     public void negativeTest() {
         try {
             Category c = categoryDAO.getFromName("asdasd");

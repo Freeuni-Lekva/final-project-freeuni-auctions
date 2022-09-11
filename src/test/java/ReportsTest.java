@@ -1,19 +1,18 @@
 import dao.DBConnection;
 import dao.ReportDAO;
 import dao.UserDAO;
+import junit.framework.TestCase;
 import models.RegularUser;
 import models.Report;
 import org.junit.BeforeClass;
-import org.junit.jupiter.api.Test;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 
-public class ReportsTest {
+public class ReportsTest extends TestCase {
     private final ReportDAO reports = new ReportDAO(TestDBConnection.getInstance());
     private final UserDAO users = new UserDAO(TestDBConnection.getInstance());
 
@@ -21,8 +20,8 @@ public class ReportsTest {
     public static void setUpClass() {
         TestDBConnection.resetDatabase();
     }
-    @Test
-    public void addTest() throws SQLException, NoSuchAlgorithmException {
+
+    public void testAdd() throws SQLException, NoSuchAlgorithmException {
         users.addUser(new RegularUser("A", "B", "C", "M", 0));
         users.addUser(new RegularUser("C", "B", "D", "M", 0));
         users.addUser(new RegularUser("G", "B", "G", "M", 0));
@@ -31,8 +30,8 @@ public class ReportsTest {
         Report resultRep = reports.getReportFromID(1);
         assertTrue(resultRep.equals(rep));
     }
-    @Test
-    public void getTest() throws NoSuchAlgorithmException, SQLException {
+
+    public void testGet() throws NoSuchAlgorithmException, SQLException {
         Report rep = new Report(2, 1, 2, "comment about report, why, when, what, how, second", false);
         Report rep2 = new Report(3, 1, 2, "comment about report, why, when, what, how, third", false);
         reports.addReport(rep);
@@ -41,8 +40,8 @@ public class ReportsTest {
         assertTrue(lst.get(2).equals(rep2));
         assertTrue(lst.get(1).equals(rep));
     }
-    @Test
-    public void getByAccountTest() throws SQLException {
+
+    public void testGetByAccount() throws SQLException {
         Report rep = new Report(4, 1, 2, "comment about report, why, when, what, how, fourth", false);
         Report rep2 = new Report(5, 1, 2, "comment about report, why, when, what, how, fifth", false);
         reports.addReport(rep);
@@ -51,8 +50,8 @@ public class ReportsTest {
         assertTrue(lst.get(4).equals(rep2));
         assertTrue(lst.get(3).equals(rep));
     }
-    @Test
-    public void getActiveTest() throws SQLException {
+
+    public void testGetActive() throws SQLException {
         Report rep = new Report(6, 1, 2, "comment about report, why, when, what, how, fourth", false);
         Report rep2 = new Report(7, 1, 2, "comment about report, why, when, what, how, fifth", false);
         reports.addReport(rep);
