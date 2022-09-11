@@ -34,16 +34,15 @@
         for(Report report : actives){
             out.println("<hr>");
             out.println("<hr>\n" +
-                    "<a href=\" <a href=\"foreign_profile?id="+users.getUserByID(report.getReportedId(), true).getId()+ ">\" style=\"float: right\">Reported: </a>\n" + users.getUserByID(report.getReportedId(), true).getUsername()+
+                    "<a href=\"foreign_profile?id="+users.getUserByID(report.getReportedId(), true).getId()+ "\" style=\"float: left\">Reported: </a>\n" + users.getUserByID(report.getReportedId(), true).getUsername()+
                     "\n" +
                     "<p>" + report.getComment() +
                     "</p>\n" +
                     "\n" +
-                    "<a href=\"foreign_profile?id="+users.getUserByID(report.getReporterId(), true).getId()+ ">\" style=\"float: left\">Reporter: </a><br>\n" + users.getUserByID(report.getReporterId(), true).getUsername()+
+                    "<a href=\"foreign_profile?id="+users.getUserByID(report.getReporterId(), true).getId()+ "\" style=\"float: left\">Reporter: </a><br>\n" + users.getUserByID(report.getReporterId(), true).getUsername()+
                     "\n" +
                     "<hr>");
             out.println("<hr>");
-        }
     %>
 </body>
 </html>
