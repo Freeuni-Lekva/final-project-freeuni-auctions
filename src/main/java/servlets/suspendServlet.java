@@ -2,6 +2,7 @@ package servlets;
 
 import dao.UserDAO;
 import models.ForeignUser;
+import models.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,8 +17,8 @@ import java.sql.SQLException;
 public class suspendServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        ForeignUser user = (ForeignUser) getServletContext().getAttribute(ForeignUser.ATTRIBUTE);
         UserDAO users = (UserDAO) getServletContext().getAttribute(UserDAO.ATTRIBUTE);
+        User user = users.getUserByID(Long.parseLong(req.getParameter("id")), true);
         try {
             users.setSuspended(user.getEmail());
         } catch (SQLException e) {

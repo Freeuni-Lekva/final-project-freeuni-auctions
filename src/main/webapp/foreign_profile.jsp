@@ -188,6 +188,7 @@
         if(((User)request.getSession().getAttribute(User.ATTRIBUTE)).getRole() == Role.Administator) {
             out.println("<form action=\"suspend\" method=\"post\">\n" +
                     "        <input type=\"submit\" value=\"suspend\"><br><br>\n" +
+                    " <input type=\"hidden\" id=\"id\" name=\"id\" value="+user.getId()+">" +
                     "    </form>");
         }else{
     %>
