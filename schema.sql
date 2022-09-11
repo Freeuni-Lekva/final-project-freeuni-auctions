@@ -22,10 +22,10 @@ CREATE TABLE users
     image VARCHAR(255),
     balance BIGINT,
     PRIMARY KEY (id),
-    suspended TINYINT
+    suspended TINYINT(4)
     /* premium or not? */
 );
-ALTER TABLE users CHANGE suspended suspended TINYINT(4) DEFAULT 0 NOT NULL;
+ALTER TABLE users ALTER suspended SET DEFAULT 0;
 
 CREATE TABLE categories
 (
