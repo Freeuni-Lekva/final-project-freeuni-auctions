@@ -1,9 +1,10 @@
-<%@ page import="models.ForeignUser" %>
 <%@ page import="dao.ProductDAO" %>
-<%@ page import="models.Product" %>
 <%@ page import="java.util.List" %>
-<%@ page import="models.User" %>
-<%@ page import="models.Role" %><%--
+<%@ page import="dao.ReviewDAO" %>
+<%@ page import="models.*" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="dao.SaleDAO" %>
+<%@ page import="dao.UserDAO" %><%--
   Created by IntelliJ IDEA.
   User: admin
   Date: 07.09.2022
@@ -99,7 +100,8 @@
             <a href="logout">Log out</a>
         </div>
     </div>
-    <% ForeignUser user = (ForeignUser) request.getAttribute(ForeignUser.ATTRIBUTE); %>
+    <%  UserDAO userDAO = (UserDAO)application.getAttribute(UserDAO.ATTRIBUTE);
+        ForeignUser user = (ForeignUser) userDAO.getUserByID(Long.parseLong(request.getParameter("id")), true); %>
     <h1><%=user.getUsername()%></h1>
     <img src="images/blank-profile-picture.png" alt="profile picture" width="150" height="200">
     <h3><%=user.getEmail()%></h3>
@@ -123,7 +125,47 @@
         </ul>
     </div>
     <div id="Reviews" class="tabcontent">
+        <%
+            User signed_in = (User)request.getSession().getAttribute(User.ATTRIBUTE);
+            long signed_in_id = signed_in.getId();
+            long foreign_id = user.getId();
+            SaleDAO sales = (SaleDAO)application.getAttribute(SaleDAO.ATTRIBUTE);
+            List<Sale> saleList = sales.getSalesByUserID(signed_in_id);
+            boolean hasReviewRights = false;
+            for (Sale s : saleList) {
+                if (productDAO.getFromID(s.getProduct_id()).getUserId() == foreign_id)
+                    hasReviewRights = true;
+            }
+            if (true) {
+        %>
+            <form action="add_review" method="post">
+                <textarea name="reviewText" id="review" rows="10" tabindex="4"  required="required"></textarea>
+                <input type="hidden" name="userId" value="<%=foreign_id%>">
+                <input type="hidden" name="reviewerId" value="<%=signed_in_id%>">
+            <input name="submit" type="submit" value="Submit Review"/>
+            </form>
+        <%
+            }
+
+        %>
         <h3>Reviews</h3>
+        <ul>
+            <h3>Reviews</h3>
+            <%
+
+                ReviewDAO reviewDAO = (ReviewDAO)application.getAttribute(ReviewDAO.ATTRIBUTE);
+                try {
+                    List<Review> reviews = reviewDAO.getAllReviewsForAccount(user.getId());
+                    for(Review r : reviews) {
+            %>
+            <li><a> <%=r.getReviewText()%></a></li>
+            <%
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            %>
+        </ul>
     </div>
 
 
