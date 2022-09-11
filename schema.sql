@@ -103,14 +103,11 @@ CREATE TABLE reviews
 (
     id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     user_id BIGINT NOT NULL,
-    product_id BIGINT NOT NULL,
+    product_id BIGINT DEFAULT NULL,
     costumer_id BIGINT NOT NULL,
     reviewText VARCHAR(300),
     CONSTRAINT reviewUserIDFK FOREIGN KEY (user_id)
         REFERENCES users(id)
-        ON DELETE CASCADE,
-    CONSTRAINT prodIDFK FOREIGN KEY (product_id)
-        REFERENCES products(id)
         ON DELETE CASCADE,
     CONSTRAINT costIDFK FOREIGN KEY (costumer_id)
         REFERENCES users(id)
