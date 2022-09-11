@@ -115,7 +115,7 @@
             prod = product;
            %>
     <div class="column">
-        <img src="<%=prod.getImage()%>", alt=<%=prod.getName()%>, style="width:100%">
+        <img src="<%=prod.getImage()%>", alt=<%=prod.getName()%>, style="width:100px">
         <form action="item" method="post">
             <input type="hidden" id="prodId" name="prodId" value=<%=prod.getId()%>>
             <input type="submit" id="item" name="item" value=<%=prod.getName()%>>
