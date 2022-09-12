@@ -1,5 +1,4 @@
 import dao.ProductDAO;
-import junit.framework.Test;
 import junit.framework.TestCase;
 import models.Product;
 import models.Status;
@@ -29,7 +28,6 @@ public class ProductsTest extends TestCase {
         pr3 = new Product(3, 2, "bar", 20, new Date());
         pr4 = new Product(2, 3, "boo", 30, new Date());
         pr4.setStatus(Status.sold);
-
     }
 
     public void testAdd() {
@@ -44,8 +42,12 @@ public class ProductsTest extends TestCase {
         assertFalse(productDAO.containsProduct("foo foo"));
 
     }
-    public void testGetFromID() {
-        Product p = productDAO.getFromID(1);
+
+    public void testGetByCategoryGetFromID() {
+        List<Product> res = productDAO.getProductsByCategory(1);
+        assertEquals("foo", res.get(0).getName());
+        long id = res.get(0).getId();
+        Product p = productDAO.getFromID(id);
         assertEquals(p.getName(), "foo");
         assertEquals(p.getUserId(), 1);
         assertNull(p.getDescription());
@@ -54,13 +56,9 @@ public class ProductsTest extends TestCase {
         assertEquals(p.getCurrPrice(), 20);
         assertEquals(p.getStatus(), Status.available);
         assertNull(p.getImage());
-    }
-
-    public void testGetByCategory() {
-        List<Product> res = productDAO.getProductsByCategory(1);
-        assertEquals("foo", res.get(0).getName());
         assertEquals("foo bar", res.get(1).getName());
     }
+
     public void testGetByUser() {
         List<Product> res = productDAO.getProductsByUser(2);
         assertEquals("foo bar", res.get(0).getName());

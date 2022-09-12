@@ -1,8 +1,8 @@
 import dao.DBConnection;
 import dao.SaleDAO;
+import junit.framework.TestCase;
 import models.Sale;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.BeforeClass;
 
 
 import java.sql.Timestamp;
@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SaleTest {
+public class SaleTest extends TestCase {
     SaleDAO saleDAO;
     Sale sale1, sale2, sale3, sale4, sale5;
     List<Sale> sales, sales1, sales2;
 
     {
-        saleDAO = new SaleDAO(DBConnection.getInstance());
+        saleDAO = new SaleDAO(TestDBConnection.getInstance());
 
         sale1 = new Sale(1,1,1,Timestamp.valueOf("1983-07-12 21:30:56"),120);
         sale2 = new Sale(2,2,1,Timestamp.valueOf("1983-07-12 21:30:56"),220);
@@ -29,8 +29,11 @@ public class SaleTest {
         sales2  = new ArrayList<>(Arrays.asList(sale3,sale4,sale5));
     }
 
-    @Test
-    public void addTest(){
+    @BeforeClass
+    public static void setUpClass() {
+        TestDBConnection.resetDatabase();
+    }
+    public void testAdd(){
         for (final Sale s : sales){
             saleDAO.addSale(s);
         }
@@ -39,8 +42,7 @@ public class SaleTest {
         assertTrue(sales.containsAll(dbSales));
     }
 
-    @Test
-    public void getBySaleIdTest(){
+    public void testGetBySaleId(){
         assertEquals(sale1,saleDAO.getSaleBySaleID(1));
         assertEquals(sale2,saleDAO.getSaleBySaleID(2));
         assertEquals(sale3,saleDAO.getSaleBySaleID(3));
@@ -48,8 +50,7 @@ public class SaleTest {
         assertEquals(sale5,saleDAO.getSaleBySaleID(5));
     }
 
-    @Test
-    public void getByProductIdTest(){
+    public void testGetByProductId(){
         assertEquals(sale1,saleDAO.getSaleByProductID(1));
         assertEquals(sale2,saleDAO.getSaleByProductID(2));
         assertEquals(sale3,saleDAO.getSaleByProductID(3));
@@ -57,8 +58,7 @@ public class SaleTest {
         assertEquals(sale5,saleDAO.getSaleByProductID(5));
     }
 
-    @Test
-    public void getByUserIdTest(){
+    public void testGetByUserId(){
         assertTrue(sales1.containsAll(saleDAO.getSalesByUserID(1)));
         assertTrue(sales2.containsAll(saleDAO.getSalesByUserID(2)));
     }

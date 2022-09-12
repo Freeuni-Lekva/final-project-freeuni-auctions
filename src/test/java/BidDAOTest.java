@@ -1,19 +1,16 @@
 import dao.BidDAO;
 import dao.DBConnection;
+import junit.framework.TestCase;
 import models.Bid;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
-import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-public class BidDAOTest  {
+public class BidDAOTest extends TestCase {
     private Connection con = TestDBConnection.getInstance();
     private BidDAO dao = new BidDAO(con);
 
@@ -22,7 +19,6 @@ public class BidDAOTest  {
         TestDBConnection.resetDatabase();
     }
 
-    @Test
     public void testInsertGet() throws SQLException {
         long dummyID = new Random().nextLong();
         assertNotNull(con);

@@ -4,8 +4,9 @@
 <%@ page import="dao.ReviewDAO" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="models.*" %>
+<%--
 <%@ page import="static java.lang.System.out" %>
-<%@ page import="static java.lang.System.out" %><%--
+<%@ page import="static java.lang.System.out" %>
   Created by IntelliJ IDEA.
   User: admin
   Date: 04.09.2022

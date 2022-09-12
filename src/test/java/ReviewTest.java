@@ -1,10 +1,10 @@
 import dao.*;
+import junit.framework.TestCase;
 import models.Product;
 import models.RegularUser;
 import models.Review;
 import models.User;
 import org.junit.BeforeClass;
-import org.junit.jupiter.api.Test;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -12,10 +12,8 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ReviewTest {
+public class ReviewTest extends TestCase {
     private final ReviewDAO reviews = new ReviewDAO(TestDBConnection.getInstance());
     private final UserDAO users = new UserDAO(TestDBConnection.getInstance());
     private final ProductDAO prods = new ProductDAO(TestDBConnection.getInstance());
@@ -25,7 +23,7 @@ public class ReviewTest {
     public static void setUpClass() {
         TestDBConnection.resetDatabase();
     }
-    @Test
+
     public void testAdd() throws SQLException, NoSuchAlgorithmException {
         users.addUser(new RegularUser("A", "B", "C", "M", 0));
         users.addUser(new RegularUser("C", "B", "D", "M", 0));
@@ -37,7 +35,7 @@ public class ReviewTest {
         Review revFin = reviews.getReviewFromID(1);
         assertTrue(revFin.equals(revSt));
     }
-    @Test
+
     public void getForAccountTest() throws SQLException {
         Review rev2 = new Review(2, 1,1, 2, "ANOTHER REVIEW1");
         Review rev3 = new Review(3, 1,1,3, "ANOTHER REVIEW2");
@@ -47,7 +45,7 @@ public class ReviewTest {
         assertEquals(rev2, ls.get(2));
         assertEquals(rev3, ls.get(3));
     }
-    @Test
+
     public void getForProductTest() throws SQLException {
         Product pr = new Product(1, categories.getFromName("categ").getId(), "product1", 100, new Date(1));
         prods.addProduct(pr);

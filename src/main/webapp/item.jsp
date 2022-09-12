@@ -39,7 +39,7 @@
     <p><%=prod.getDescription()%></p>
     <p style="font-size: 140%">Current bidding price: <%=prod.getCurrPrice()%>$</p>
     <% request.setAttribute(Product.ATTRIBUTE, prod);
-        System.out.println(prod.getId());%>
+        //System.out.println(prod.getId());%>
 <%--    <%  String error = (String)request.getAttribute("ERROR");--%>
 <%--        if (!error.equals("")) { %>--%>
 <%--            <h3><%=error%></h3>--%>

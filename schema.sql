@@ -22,10 +22,10 @@ CREATE TABLE users
     image VARCHAR(255),
     balance BIGINT,
     PRIMARY KEY (id),
-    suspended TINYINT
+    suspended TINYINT(4)
     /* premium or not? */
 );
-ALTER TABLE users CHANGE suspended suspended TINYINT(4) DEFAULT 0 NOT NULL;
+ALTER TABLE users ALTER suspended SET DEFAULT 0;
 
 CREATE TABLE categories
 (
@@ -102,14 +102,11 @@ CREATE TABLE reviews
 (
     id BIGINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     user_id BIGINT NOT NULL,
-    product_id BIGINT NOT NULL,
+    product_id BIGINT DEFAULT NULL,
     costumer_id BIGINT NOT NULL,
     reviewText VARCHAR(300),
     CONSTRAINT reviewUserIDFK FOREIGN KEY (user_id)
         REFERENCES users(id)
-        ON DELETE CASCADE,
-    CONSTRAINT prodIDFK FOREIGN KEY (product_id)
-        REFERENCES products(id)
         ON DELETE CASCADE,
     CONSTRAINT costIDFK FOREIGN KEY (costumer_id)
         REFERENCES users(id)
