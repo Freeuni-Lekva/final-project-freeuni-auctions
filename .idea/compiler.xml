@@ -9,5 +9,8 @@
         <module name="auctions-maven" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="final-project-freeuni-auctions" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
